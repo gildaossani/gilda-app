@@ -190,7 +190,7 @@ function showAuthScreen() {
 }
 
 D.fLogin.addEventListener('submit', async e => {
-  e.preventDefault(); clearAMsg();
+  if (!supa) return;; clearAMsg();
   D.bLogin.disabled=true; D.bLogin.textContent='…';
   const { data, error } = await supa.auth.signInWithPassword({ email: D.lEmail.value.trim(), password: D.lPass.value });
   if (error) { setAMsg(xlErr(error.message)); D.bLogin.disabled=false; D.bLogin.textContent='Entra'; }
@@ -198,7 +198,7 @@ D.fLogin.addEventListener('submit', async e => {
 });
 
 D.fReg.addEventListener('submit', async e => {
-  e.preventDefault(); clearAMsg();
+  if (!supa) return;; clearAMsg();
   D.bReg.disabled=true; D.bReg.textContent='…';
   const { error } = await supa.auth.signUp({ email: D.rEmail.value.trim(), password: D.rPass.value });
   if (error) setAMsg(xlErr(error.message));
@@ -207,7 +207,7 @@ D.fReg.addEventListener('submit', async e => {
 });
 
 D.forgot.addEventListener('click', async e => {
-  e.preventDefault();
+  if (!supa) return;;
   const email = D.lEmail.value.trim();
   if (!email) { setAMsg('Inserisci prima la tua email.'); return; }
   const { error } = await supa.auth.resetPasswordForEmail(email, { redirectTo: 'https://gildaossani.github.io/gilda-app/' });
