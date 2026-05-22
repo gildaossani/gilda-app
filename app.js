@@ -189,16 +189,31 @@ function showAuthScreen() {
   D.sApp.classList.remove('active');
 }
 
-D.fLogin.addEventListener('submit', async e => {
-  if (!supa) return;; clearAMsg();
+D.fLogin.addEventListener('submit', e => e.preventDefault());
+
+D.bLogin.addEventListener('click', async () => {
+  const email = D.lEmail.value.trim();
+  const password = D.lPass.value;
+  if (!email || !password) { setAMsg('Inserisci email e password.'); return; }
+  clearAMsg();
   D.bLogin.disabled=true; D.bLogin.textContent='…';
-  const { data, error } = await supa.auth.signInWithPassword({ email: D.lEmail.value.trim(), password: D.lPass.value });
-  if (error) { setAMsg(xlErr(error.message)); D.bLogin.disabled=false; D.bLogin.textContent='Entra'; }
-  else if (data?.user) { await signIn(data.user); }
+  try {
+    const { data, error } = await supa.auth.signInWithPassword({ email, password });
+    if (error) {
+      setAMsg(xlErr(error.message));
+      D.bLogin.disabled=false; D.bLogin.textContent='Entra';
+    } else if (data?.user) {
+      await signIn(data.user);
+    }
+  } catch(e) {
+    console.error('login error:', e);
+    setAMsg('Errore di connessione. Riprova.');
+    D.bLogin.disabled=false; D.bLogin.textContent='Entra';
+  }
 });
 
 D.fReg.addEventListener('submit', async e => {
-  if (!supa) return;; clearAMsg();
+  e.preventDefault(); clearAMsg();
   D.bReg.disabled=true; D.bReg.textContent='…';
   const { error } = await supa.auth.signUp({ email: D.rEmail.value.trim(), password: D.rPass.value });
   if (error) setAMsg(xlErr(error.message));
@@ -207,7 +222,7 @@ D.fReg.addEventListener('submit', async e => {
 });
 
 D.forgot.addEventListener('click', async e => {
-  if (!supa) return;;
+  e.preventDefault();
   const email = D.lEmail.value.trim();
   if (!email) { setAMsg('Inserisci prima la tua email.'); return; }
   const { error } = await supa.auth.resetPasswordForEmail(email, { redirectTo: 'https://gildaossani.github.io/gilda-app/' });
