@@ -138,6 +138,12 @@ D.prof.addEventListener('click', () => {
 });
 
 async function boot() {
+  // Reset button states in case browser triggered form submit
+  document.getElementById('btn-login').disabled = false;
+  document.getElementById('btn-login').textContent = 'Entra';
+  document.getElementById('btn-register').disabled = false;
+  document.getElementById('btn-register').textContent = 'Crea account';
+
   showLoad();
   if (!initSupa()) { showAuthScreen(); hideLoad(); return; }
 
