@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#2D2D2D" />
+  <meta name="description" content="Gilda Ossani — Da donna che funziona a donna che vive." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Gilda" />
+
+  <title>Gilda</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="icon" type="image/png" href="icons/icon-192.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       AUTH SCREEN
+  ═══════════════════════════════════════════ -->
+  <div id="screen-auth" class="screen active">
+    <div class="auth-container">
+      <div class="auth-logo">
+        <span class="logo-g">G</span>
+        <p class="auth-tagline">Da donna che funziona a donna che vive.</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Entra</button>
+        <button class="auth-tab" data-tab="register">Registrati</button>
+      </div>
+
+      <form id="form-login" class="auth-form active">
+        <div class="field-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="la tua email" autocomplete="email" required />
+        </div>
+        <div class="field-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required />
+        </div>
+        <button type="submit" class="btn-primary" id="btn-login">Entra</button>
+        <p class="auth-forgot"><a href="#" id="link-forgot">Password dimenticata?</a></p>
+      </form>
+
+      <form id="form-register" class="auth-form">
+        <div class="field-group">
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" placeholder="la tua email" autocomplete="email" required />
+        </div>
+        <div class="field-group">
+          <label for="reg-password">Password</label>
+          <input type="password" id="reg-password" placeholder="min. 8 caratteri" autocomplete="new-password" required minlength="8" />
+        </div>
+        <button type="submit" class="btn-primary" id="btn-register">Crea account</button>
+      </form>
+
+      <div id="auth-message" class="auth-message hidden"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       APP SHELL (authenticated)
+  ═══════════════════════════════════════════ -->
+  <div id="screen-app" class="screen">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <button class="topbar-back hidden" id="btn-back" aria-label="Indietro">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="topbar-logo" id="topbar-logo">
+        <span class="logo-g-small">G</span>
+      </div>
+      <button class="topbar-profile" id="btn-profile" aria-label="Profilo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </button>
+    </header>
+
+    <!-- ── LIBRARY VIEW ── -->
+    <div id="view-library" class="view active">
+      <div class="view-inner">
+        <div class="library-header">
+          <h1 class="library-title">La tua libreria</h1>
+          <p class="library-sub">I percorsi che hai scelto.</p>
+        </div>
+        <div id="products-grid" class="products-grid">
+          <!-- Populated by JS -->
+        </div>
+        <div class="unlock-section">
+          <p class="unlock-label">Hai un codice?</p>
+          <div class="unlock-row">
+            <input type="text" id="unlock-input" placeholder="Inserisci il codice" autocomplete="off" />
+            <button class="btn-secondary" id="btn-unlock">Sblocca</button>
+          </div>
+          <div id="unlock-message" class="unlock-message hidden"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PRODUCT VIEW ── -->
+    <div id="view-product" class="view">
+      <div class="view-inner">
+        <div id="product-header" class="product-header"></div>
+        <div id="product-progress-bar" class="progress-bar-wrap">
+          <div class="progress-bar-track">
+            <div id="progress-fill" class="progress-bar-fill"></div>
+          </div>
+          <span id="progress-label" class="progress-label">0%</span>
+        </div>
+        <div id="sections-list" class="sections-list"></div>
+        <button id="btn-export" class="btn-export">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Esporta le mie risposte
+        </button>
+      </div>
+    </div>
+
+    <!-- ── SECTION VIEW ── -->
+    <div id="view-section" class="view">
+      <div class="view-inner">
+        <div id="section-header" class="section-header"></div>
+        <div id="questions-list" class="questions-list"></div>
+        <div class="section-nav">
+          <button id="btn-prev-section" class="btn-nav btn-nav-prev">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="15 18 9 12 15 6"/></svg>
+            Precedente
+          </button>
+          <button id="btn-next-section" class="btn-nav btn-nav-next">
+            Successiva
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROFILE VIEW ── -->
+    <div id="view-profile" class="view">
+      <div class="view-inner">
+        <h2 class="profile-title">Il tuo account</h2>
+        <p id="profile-email" class="profile-email"></p>
+        <div class="profile-stats" id="profile-stats"></div>
+        <button id="btn-logout" class="btn-danger">Esci dall'account</button>
+      </div>
+    </div>
+
+  </div><!-- /screen-app -->
+
+  <!-- ═══════════════════════════════════════════
+       LOADING OVERLAY
+  ═══════════════════════════════════════════ -->
+  <div id="overlay-loading" class="overlay-loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       TOAST
+  ═══════════════════════════════════════════ -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
