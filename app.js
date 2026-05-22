@@ -171,8 +171,9 @@ function showAuthScreen() {
 D.fLogin.addEventListener('submit', async e => {
   e.preventDefault(); clearAMsg();
   D.bLogin.disabled=true; D.bLogin.textContent='…';
-  const { error } = await supa.auth.signInWithPassword({ email: D.lEmail.value.trim(), password: D.lPass.value });
+  const { data, error } = await supa.auth.signInWithPassword({ email: D.lEmail.value.trim(), password: D.lPass.value });
   if (error) { setAMsg(xlErr(error.message)); D.bLogin.disabled=false; D.bLogin.textContent='Entra'; }
+  else if (data?.user) { await signIn(data.user); }
 });
 
 D.fReg.addEventListener('submit', async e => {
