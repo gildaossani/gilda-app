@@ -106,7 +106,14 @@ let userAnswers = {};      // { "productId:sectionId:questionIndex": "testo" }
 let unlockedProducts = []; // array di product_id
 
 try {
-  db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    global: {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+      }
+    }
+  });
 } catch (e) {
   console.error('Supabase init error:', e);
 }
