@@ -10,7 +10,7 @@
    https://app.supabase.com → Settings → API
 ───────────────────────────────────────────── */
 const SUPABASE_URL = 'https://qnhnsjqzheyiacfmmmbe.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuaG5zanF6aGV5aWFjZm1tbWJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzODEyMjMsImV4cCI6MjA5NDk1NzIyM30.Y0XwmMed7pRlBPmMpCpmgfdppTEUI0-FIKXOWbaRuYk';
+const SUPABASE_ANON_KEY = 'sb_publishable_o_I1mMXd_l9nnnYQU13oHg_otWYXYoz';
 
 /* ─────────────────────────────────────────────
    CATALOGO PRODOTTI
