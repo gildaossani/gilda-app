@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════
-   GILDA PWA — app.js v3.0 — riscrittura pulita
+   GILDA PWA — app.js v3.1 — riscrittura pulita
 ═══════════════════════════════════════════════ */
 
 const SUPA_URL = 'https://qnhnsjqzheyiacfmmmbe.supabase.co';
