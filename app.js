@@ -171,12 +171,17 @@ async function boot() {
 }
 
 async function signIn(user) {
+  alert('signIn chiamata per: ' + user.email);
   me = user;
+  alert('loadData...');
   await loadData();
+  alert('loadData ok, cambio schermata...');
   D.sAuth.classList.remove('active');
   D.sApp.classList.add('active');
+  alert('schermata cambiata, renderLib...');
   renderLib();
   hideLoad();
+  alert('FINE - tutto ok');
 }
 
 function signOut() {
