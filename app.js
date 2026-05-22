@@ -139,10 +139,25 @@ D.prof.addEventListener('click', () => {
 
 async function boot() {
   showLoad();
-  if (!initSupa()) { hideLoad(); return; }
-  const { data: { session } } = await supa.auth.getSession();
-  if (session?.user) await signIn(session.user);
-  else { showAuthScreen(); hideLoad(); }
+  if (!initSupa()) { showAuthScreen(); hideLoad(); return; }
+
+  try {
+    const { data, error } = await Promise.race([
+      supa.auth.getSession(),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 5000))
+    ]);
+    if (!error && data?.session?.user) {
+      await signIn(data.session.user);
+    } else {
+      showAuthScreen();
+      hideLoad();
+    }
+  } catch(e) {
+    console.warn('boot error:', e);
+    showAuthScreen();
+    hideLoad();
+  }
+
   supa.auth.onAuthStateChange(async (ev, sess) => {
     if (ev==='SIGNED_IN' && sess?.user) await signIn(sess.user);
     else if (ev==='SIGNED_OUT') signOut();
