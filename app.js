@@ -4,8 +4,6 @@
    Stack: Supabase Auth + Database, JS vanilla
 ═══════════════════════════════════════════════ */
 
-'use strict';
-
 /* ─────────────────────────────────────────────
    ⚠️  CONFIGURAZIONE — sostituire con le
    credenziali reali del progetto Supabase
@@ -100,7 +98,7 @@ const PRODUCTS_CATALOG = [
    INIZIALIZZAZIONE
 ═══════════════════════════════════════════════ */
 
-let supabase;
+let db;
 let currentUser = null;
 let currentProductId = null;
 let currentSectionIndex = null;
@@ -108,7 +106,7 @@ let userAnswers = {};      // { "productId:sectionId:questionIndex": "testo" }
 let unlockedProducts = []; // array di product_id
 
 try {
-  supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 } catch (e) {
   console.error('Supabase init error:', e);
 }
@@ -253,13 +251,13 @@ function goBack() {
 async function initAuth() {
   showLoading();
 
-  if (!supabase) {
+  if (!db) {
     hideLoading();
     showDemoMode();
     return;
   }
 
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await db.auth.getSession();
 
   if (session?.user) {
     await onLogin(session.user);
@@ -268,7 +266,7 @@ async function initAuth() {
     hideLoading();
   }
 
-  supabase.auth.onAuthStateChange(async (event, session) => {
+  db.auth.onAuthStateChange(async (event, session) => {
     if (event === 'SIGNED_IN' && session?.user) {
       await onLogin(session.user);
     } else if (event === 'SIGNED_OUT') {
@@ -312,7 +310,7 @@ dom.formLogin.addEventListener('submit', async (e) => {
   dom.btnLogin.disabled = true;
   dom.btnLogin.textContent = '…';
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const { error } = await db.auth.signInWithPassword({
     email: dom.loginEmail.value.trim(),
     password: dom.loginPassword.value,
   });
@@ -332,7 +330,7 @@ dom.formRegister.addEventListener('submit', async (e) => {
   dom.btnRegister.disabled = true;
   dom.btnRegister.textContent = '…';
 
-  const { error } = await supabase.auth.signUp({
+  const { error } = await db.auth.signUp({
     email: dom.regEmail.value.trim(),
     password: dom.regPassword.value,
   });
@@ -352,7 +350,7 @@ dom.linkForgot.addEventListener('click', async (e) => {
   e.preventDefault();
   const email = dom.loginEmail.value.trim();
   if (!email) { showAuthMessage('Inserisci la tua email prima.'); return; }
-  const { error } = await supabase.auth.resetPasswordForEmail(email);
+  const { error } = await db.auth.resetPasswordForEmail(email);
   if (error) {
     showAuthMessage(translateAuthError(error.message));
   } else {
@@ -388,11 +386,11 @@ function translateAuthError(msg) {
 ═══════════════════════════════════════════════ */
 
 async function loadUserData() {
-  if (!supabase || !currentUser) return;
+  if (!db || !currentUser) return;
 
   try {
     // Load answers
-    const { data: answers } = await supabase
+    const { data: answers } = await db
       .from('answers')
       .select('answer_key, answer_text')
       .eq('user_id', currentUser.id);
@@ -403,7 +401,7 @@ async function loadUserData() {
     });
 
     // Load unlocked products
-    const { data: unlocked } = await supabase
+    const { data: unlocked } = await db
       .from('user_products')
       .select('product_id')
       .eq('user_id', currentUser.id);
@@ -414,7 +412,7 @@ async function loadUserData() {
     if (PRODUCTS_CATALOG.length > 0 && !unlockedProducts.includes(PRODUCTS_CATALOG[0].id)) {
       unlockedProducts.push(PRODUCTS_CATALOG[0].id);
       // Persist to db
-      await supabase.from('user_products').upsert({
+      await db.from('user_products').upsert({
         user_id: currentUser.id,
         product_id: PRODUCTS_CATALOG[0].id,
         unlocked_at: new Date().toISOString(),
@@ -432,13 +430,13 @@ async function saveAnswer(productId, sectionId, qIndex, text) {
   const key = answerKey(productId, sectionId, qIndex);
   userAnswers[key] = text;
 
-  if (!supabase || !currentUser) return;
+  if (!db || !currentUser) return;
 
   clearTimeout(saveDebounceTimers[key]);
   saveDebounceTimers[key] = setTimeout(async () => {
     updateSaveStatus(key, 'saving');
     try {
-      await supabase.from('answers').upsert({
+      await db.from('answers').upsert({
         user_id: currentUser.id,
         answer_key: key,
         answer_text: text,
@@ -482,13 +480,13 @@ async function handleUnlock() {
   dom.unlockMessage.className = 'unlock-message hidden';
 
   try {
-    if (!supabase || !currentUser) {
+    if (!db || !currentUser) {
       showUnlockMessage('Devi essere connessa per sbloccare un prodotto.', 'error');
       return;
     }
 
     // Find code in db
-    const { data: codeRow, error } = await supabase
+    const { data: codeRow, error } = await db
       .from('unlock_codes')
       .select('*')
       .eq('code', code)
@@ -510,13 +508,13 @@ async function handleUnlock() {
     }
 
     // Mark code as used
-    await supabase.from('unlock_codes').update({
+    await db.from('unlock_codes').update({
       used_by: currentUser.id,
       used_at: new Date().toISOString(),
     }).eq('code', code);
 
     // Add to user products
-    await supabase.from('user_products').upsert({
+    await db.from('user_products').upsert({
       user_id: currentUser.id,
       product_id: codeRow.product_id,
       unlocked_at: new Date().toISOString(),
@@ -811,7 +809,7 @@ function renderProfile() {
 }
 
 dom.btnLogout.addEventListener('click', async () => {
-  if (supabase) await supabase.auth.signOut();
+  if (db) await db.auth.signOut();
   else onLogout();
 });
 
