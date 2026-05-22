@@ -200,13 +200,18 @@ D.bLogin.addEventListener('click', async () => {
   try {
     const { data, error } = await supa.auth.signInWithPassword({ email, password });
     if (error) {
+      alert('ERRORE: ' + error.message);
       setAMsg(xlErr(error.message));
       D.bLogin.disabled=false; D.bLogin.textContent='Entra';
     } else if (data?.user) {
+      alert('OK: ' + data.user.email);
       await signIn(data.user);
+    } else {
+      alert('RISPOSTA VUOTA: ' + JSON.stringify(data));
+      D.bLogin.disabled=false; D.bLogin.textContent='Entra';
     }
   } catch(e) {
-    console.error('login error:', e);
+    alert('ECCEZIONE: ' + e.message);
     setAMsg('Errore di connessione. Riprova.');
     D.bLogin.disabled=false; D.bLogin.textContent='Entra';
   }
