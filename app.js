@@ -171,17 +171,12 @@ async function boot() {
 }
 
 async function signIn(user) {
-  alert('signIn chiamata per: ' + user.email);
   me = user;
-  alert('loadData...');
   await loadData();
-  alert('loadData ok, cambio schermata...');
   D.sAuth.classList.remove('active');
   D.sApp.classList.add('active');
-  alert('schermata cambiata, renderLib...');
   renderLib();
   hideLoad();
-  alert('FINE - tutto ok');
 }
 
 function signOut() {
@@ -205,21 +200,17 @@ D.bLogin.addEventListener('click', async () => {
   try {
     const { data, error } = await supa.auth.signInWithPassword({ email, password });
     if (error) {
-      alert('ERRORE: ' + error.message);
       setAMsg(xlErr(error.message));
       D.bLogin.disabled=false; D.bLogin.textContent='Entra';
     } else {
       const user = data?.user || data?.session?.user;
       if (user) {
-        alert('OK: ' + user.email);
         await signIn(user);
       } else {
-        alert('RISPOSTA VUOTA: ' + JSON.stringify(data));
         D.bLogin.disabled=false; D.bLogin.textContent='Entra';
       }
     }
   } catch(e) {
-    alert('ECCEZIONE: ' + e.message);
     setAMsg('Errore di connessione. Riprova.');
     D.bLogin.disabled=false; D.bLogin.textContent='Entra';
   }
