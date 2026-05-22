@@ -1,879 +1,390 @@
 /* ═══════════════════════════════════════════════
-   GILDA PWA — app.js
-   Versione: 2.0
-   Stack: Supabase Auth + Database, JS vanilla
+   GILDA PWA — app.js v3.0 — riscrittura pulita
 ═══════════════════════════════════════════════ */
 
-/* ─────────────────────────────────────────────
-   ⚠️  CONFIGURAZIONE — sostituire con le
-   credenziali reali del progetto Supabase
-   https://app.supabase.com → Settings → API
-───────────────────────────────────────────── */
-const SUPABASE_URL = 'https://qnhnsjqzheyiacfmmmbe.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_o_I1mMXd_l9nnnYQU13oHg_otWYXYoz';
+const SUPA_URL = 'https://qnhnsjqzheyiacfmmmbe.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuaG5zanF6aGV5aWFjZm1tbWJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzODEyMjMsImV4cCI6MjA5NDk1NzIyM30.Y0XwmMed7pRlBPmMpCpmgfdppTEUI0-FIKXOWbaRuYk';
 
-/* ─────────────────────────────────────────────
-   CATALOGO PRODOTTI
-   Aggiungere nuovi prodotti solo qui.
-   Il resto dell'app si adatta automaticamente.
-───────────────────────────────────────────── */
-const PRODUCTS_CATALOG = [
+const CATALOG = [
   {
-    id: 'autosabotaggio',
-    slug: 'autosabotaggio',
-    tag: 'Percorso',
+    id: 'autosabotaggio', slug: 'autosabotaggio', tag: 'Percorso',
     title: 'Come ti fai fuori da sola',
     description: 'Il tuo pattern di autosabotaggio — riconoscerlo, capirlo, smettere di alimentarlo.',
     price: '€9',
     sections: [
-      {
-        id: 'pattern',
-        name: 'Il tuo pattern',
-        questions: [
-          'Descrivi un momento recente in cui hai sabotato qualcosa che volevi davvero. Cosa è successo esattamente?',
-          'Qual è la storia che ti racconti in quel momento? Cosa ti dici?',
-          'Questo schema si ripete? In quali aree della tua vita lo riconosci di più?',
-          'Chi beneficia del fatto che tu rimanga ferma?',
-        ],
-      },
-      {
-        id: 'momento-esatto',
-        name: 'Il momento esatto',
-        questions: [
-          'Individua il momento preciso in cui la parte di te che si fa da parte prende il controllo. Cosa senti nel corpo?',
-          'C\'è un\'emozione che precede il blocco? Rabbia, paura, vergogna, eccitazione?',
-          'Cosa succederebbe — davvero — se riuscissi?',
-          'Cosa ti costerebbe riuscire?',
-        ],
-      },
-      {
-        id: 'logica-interna',
-        name: 'La logica interna',
-        questions: [
-          'Il tuo autosabotaggio ti protegge da qualcosa. Da cosa?',
-          'Quando hai imparato che era pericoloso avere troppo? Troppo successo, troppa gioia, troppa visibilità?',
-          'Se il sabotaggio avesse una voce, cosa direbbe?',
-          'C\'è qualcosa che questa strategia ti ha davvero salvato, in passato?',
-        ],
-      },
-      {
-        id: 'passo-piccolo',
-        name: 'Il passo piccolo',
-        questions: [
-          'Non ti chiedo di cambiare tutto. Ti chiedo: qual è la cosa più piccola possibile che potresti fare diversamente la prossima volta?',
-          'Come vorresti che qualcuno ti trattasse quando ti fai fuori da sola?',
-          'Scrivi una lettera breve alla versione di te che sabota. Non per giudicarla — per capirla.',
-          'Cosa ci vorrà per scegliere te, anche solo una volta?',
-        ],
-      },
+      { id: 'pattern', name: 'Il tuo pattern', questions: [
+        'Descrivi un momento recente in cui hai sabotato qualcosa che volevi davvero. Cosa è successo esattamente?',
+        'Qual è la storia che ti racconti in quel momento? Cosa ti dici?',
+        'Questo schema si ripete? In quali aree della tua vita lo riconosci di più?',
+        'Chi beneficia del fatto che tu rimanga ferma?',
+      ]},
+      { id: 'momento-esatto', name: 'Il momento esatto', questions: [
+        'Individua il momento preciso in cui la parte di te che si fa da parte prende il controllo. Cosa senti nel corpo?',
+        "C'è un'emozione che precede il blocco? Rabbia, paura, vergogna, eccitazione?",
+        'Cosa succederebbe — davvero — se riuscissi?',
+        'Cosa ti costerebbe riuscire?',
+      ]},
+      { id: 'logica-interna', name: 'La logica interna', questions: [
+        'Il tuo autosabotaggio ti protegge da qualcosa. Da cosa?',
+        'Quando hai imparato che era pericoloso avere troppo? Troppo successo, troppa gioia, troppa visibilità?',
+        'Se il sabotaggio avesse una voce, cosa direbbe?',
+        "C'è qualcosa che questa strategia ti ha davvero salvato, in passato?",
+      ]},
+      { id: 'passo-piccolo', name: 'Il passo piccolo', questions: [
+        'Non ti chiedo di cambiare tutto. Ti chiedo: qual è la cosa più piccola possibile che potresti fare diversamente la prossima volta?',
+        'Come vorresti che qualcuno ti trattasse quando ti fai fuori da sola?',
+        'Scrivi una lettera breve alla versione di te che sabota. Non per giudicarla — per capirla.',
+        'Cosa ci vorrà per scegliere te, anche solo una volta?',
+      ]},
     ],
   },
   {
-    id: 'confini',
-    slug: 'confini',
-    tag: 'Percorso',
+    id: 'confini', slug: 'confini', tag: 'Percorso',
     title: 'I confini',
     description: 'Imparare a dire no non è essere difficili. È sapere dove finisci tu e dove inizia il dovere degli altri.',
     price: '€9',
-    locked_preview: true,
     sections: [
-      { id: 's1', name: 'Dove sono i tuoi confini oggi', questions: ['Descrizione sezione 1...'] },
-      { id: 's2', name: 'Quando hai smesso di averli', questions: ['Descrizione sezione 2...'] },
-      { id: 's3', name: 'Il costo del sì continuo', questions: ['Descrizione sezione 3...'] },
-      { id: 's4', name: 'Costruire confini che reggono', questions: ['Descrizione sezione 4...'] },
+      { id: 's1', name: 'Dove sono i tuoi confini oggi', questions: [
+        'Pensa a una situazione recente in cui hai detto sì quando volevi dire no. Cosa è successo?',
+        'Come ti sei sentita dopo?',
+        'Hai paura di deludere qualcuno se metti un limite?',
+        'Chi nella tua vita rispetta i tuoi spazi?',
+      ]},
+      { id: 's2', name: 'Quando hai smesso di averli', questions: [
+        'Ricordi un momento in cui avevi confini chiari? Cosa è cambiato?',
+        'Cosa ti ha insegnato la famiglia sul dire no?',
+        'Hai mai pagato un prezzo per aver messo un confine?',
+        'Cosa significava "essere difficile" nella tua famiglia?',
+      ]},
+      { id: 's3', name: 'Il costo del sì continuo', questions: [
+        'Cosa ti costa dire sempre sì?',
+        'In quale area della tua vita senti più il peso?',
+        'Cosa hai rinunciato a fare per accontentare gli altri?',
+        'Il tuo corpo ti manda segnali quando superi i tuoi limiti?',
+      ]},
+      { id: 's4', name: 'Costruire confini che reggono', questions: [
+        'Qual è il confine più piccolo che potresti iniziare a mettere domani?',
+        'Con chi è più difficile? Perché?',
+        'Cosa cambierebbe nella tua vita se dicessi no più spesso?',
+        'Scrivi una frase che potresti usare la prossima volta.',
+      ]},
     ],
   },
 ];
 
-/* ─────────────────────────────────────────────
-   CODICI DI SBLOCCO (gestiti su Supabase)
-   La tabella `unlock_codes` su Supabase ha:
-   - code TEXT UNIQUE
-   - product_id TEXT
-   - used_by UUID (nullable)
-   - used_at TIMESTAMPTZ (nullable)
-───────────────────────────────────────────── */
+let supa = null;
+let me = null;
+let prodId = null;
+let secIdx = null;
+let ans = {};
+let open = [];
+let hist = ['library'];
+let timers = {};
 
-/* ═══════════════════════════════════════════════
-   INIZIALIZZAZIONE
-═══════════════════════════════════════════════ */
-
-let db;
-let currentUser = null;
-let currentProductId = null;
-let currentSectionIndex = null;
-let userAnswers = {};      // { "productId:sectionId:questionIndex": "testo" }
-let unlockedProducts = []; // array di product_id
-
-try {
-  db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    global: {
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
-      }
-    }
-  });
-} catch (e) {
-  console.error('Supabase init error:', e);
+function initSupa() {
+  try { supa = window.supabase.createClient(SUPA_URL, SUPA_KEY); return true; }
+  catch(e) { console.error(e); return false; }
 }
 
-/* ═══════════════════════════════════════════════
-   DOM REFS
-═══════════════════════════════════════════════ */
-const $ = id => document.getElementById(id);
-
-const dom = {
-  screenAuth:      $('screen-auth'),
-  screenApp:       $('screen-app'),
-  overlayLoading:  $('overlay-loading'),
-  toast:           $('toast'),
-
-  // Auth
-  formLogin:       $('form-login'),
-  formRegister:    $('form-register'),
-  loginEmail:      $('login-email'),
-  loginPassword:   $('login-password'),
-  regEmail:        $('reg-email'),
-  regPassword:     $('reg-password'),
-  btnLogin:        $('btn-login'),
-  btnRegister:     $('btn-register'),
-  authMessage:     $('auth-message'),
-  linkForgot:      $('link-forgot'),
-  authTabs:        document.querySelectorAll('.auth-tab'),
-
-  // App
-  btnBack:         $('btn-back'),
-  btnProfile:      $('btn-profile'),
-
-  // Views
-  viewLibrary:     $('view-library'),
-  viewProduct:     $('view-product'),
-  viewSection:     $('view-section'),
-  viewProfile:     $('view-profile'),
-
-  // Library
-  productsGrid:    $('products-grid'),
-  unlockInput:     $('unlock-input'),
-  btnUnlock:       $('btn-unlock'),
-  unlockMessage:   $('unlock-message'),
-
-  // Product
-  productHeader:   $('product-header'),
-  progressFill:    $('progress-fill'),
-  progressLabel:   $('progress-label'),
-  sectionsList:    $('sections-list'),
-  btnExport:       $('btn-export'),
-
-  // Section
-  sectionHeader:   $('section-header'),
-  questionsList:   $('questions-list'),
-  btnPrevSection:  $('btn-prev-section'),
-  btnNextSection:  $('btn-next-section'),
-
-  // Profile
-  profileEmail:    $('profile-email'),
-  profileStats:    $('profile-stats'),
-  btnLogout:       $('btn-logout'),
+const g = id => document.getElementById(id);
+const D = {
+  sAuth: g('screen-auth'), sApp: g('screen-app'), load: g('overlay-loading'), toast: g('toast'),
+  fLogin: g('form-login'), fReg: g('form-register'),
+  lEmail: g('login-email'), lPass: g('login-password'),
+  rEmail: g('reg-email'), rPass: g('reg-password'),
+  bLogin: g('btn-login'), bReg: g('btn-register'), aMsg: g('auth-message'), forgot: g('link-forgot'),
+  tabs: document.querySelectorAll('.auth-tab'),
+  back: g('btn-back'), prof: g('btn-profile'),
+  vLib: g('view-library'), vProd: g('view-product'), vSec: g('view-section'), vProf: g('view-profile'),
+  grid: g('products-grid'), uInput: g('unlock-input'), uBtn: g('btn-unlock'), uMsg: g('unlock-message'),
+  pH: g('product-header'), pFill: g('progress-fill'), pLbl: g('progress-label'), sList: g('sections-list'),
+  exp: g('btn-export'), sH: g('section-header'), qList: g('questions-list'),
+  prev: g('btn-prev-section'), next: g('btn-next-section'),
+  pEmail: g('profile-email'), pStats: g('profile-stats'), logout: g('btn-logout'),
 };
 
-/* ═══════════════════════════════════════════════
-   UTILS
-═══════════════════════════════════════════════ */
+let toastT;
+function showToast(m, t=2800) { D.toast.textContent=m; D.toast.classList.remove('hidden'); clearTimeout(toastT); toastT=setTimeout(()=>D.toast.classList.add('hidden'),t); }
+function showLoad() { D.load.classList.remove('hidden'); }
+function hideLoad() { D.load.classList.add('hidden'); }
+function setAMsg(m, t='error') { D.aMsg.textContent=m; D.aMsg.className=`auth-message ${t}`; }
+function clearAMsg() { D.aMsg.className='auth-message hidden'; }
+function ak(pid,sid,i) { return `${pid}:${sid}:${i}`; }
+function getProd(id) { return CATALOG.find(p=>p.id===id)||null; }
+function isOpen(pid) { return open.includes(pid); }
 
-function showLoading() { dom.overlayLoading.classList.remove('hidden'); }
-function hideLoading() { dom.overlayLoading.classList.add('hidden'); }
+const VIEWS = { library:D.vLib, product:D.vProd, section:D.vSec, profile:D.vProf };
 
-let toastTimer;
-function showToast(msg, duration = 2800) {
-  dom.toast.textContent = msg;
-  dom.toast.classList.remove('hidden');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => dom.toast.classList.add('hidden'), duration);
-}
-
-function showAuthMessage(msg, type = 'error') {
-  dom.authMessage.textContent = msg;
-  dom.authMessage.className = `auth-message ${type}`;
-}
-
-function hideAuthMessage() {
-  dom.authMessage.className = 'auth-message hidden';
-}
-
-function answerKey(productId, sectionId, qIndex) {
-  return `${productId}:${sectionId}:${qIndex}`;
-}
-
-function getProduct(id) {
-  return PRODUCTS_CATALOG.find(p => p.id === id) || null;
-}
-
-function isUnlocked(productId) {
-  return unlockedProducts.includes(productId);
-}
-
-/* ═══════════════════════════════════════════════
-   VIEW NAVIGATION
-═══════════════════════════════════════════════ */
-
-const views = {
-  library: dom.viewLibrary,
-  product: dom.viewProduct,
-  section: dom.viewSection,
-  profile: dom.viewProfile,
-};
-
-let viewStack = ['library'];
-
-function showView(name, pushToStack = true) {
-  Object.values(views).forEach(v => v.classList.remove('active'));
-  views[name].classList.add('active');
-
-  if (pushToStack) {
-    if (viewStack[viewStack.length - 1] !== name) {
-      viewStack.push(name);
-    }
-  }
-
-  const canGoBack = viewStack.length > 1;
-  dom.btnBack.classList.toggle('hidden', !canGoBack);
+function goTo(name, push=true) {
+  Object.values(VIEWS).forEach(v=>v.classList.remove('active'));
+  VIEWS[name].classList.add('active');
+  if (push && hist[hist.length-1]!==name) hist.push(name);
+  D.back.classList.toggle('hidden', hist.length<=1);
 }
 
 function goBack() {
-  if (viewStack.length <= 1) return;
-  viewStack.pop();
-  const prev = viewStack[viewStack.length - 1];
-  showView(prev, false);
-
-  // Refresh views on back navigation
-  if (prev === 'library') renderLibrary();
-  if (prev === 'product' && currentProductId) renderProduct(currentProductId);
+  if (hist.length<=1) return;
+  hist.pop();
+  const p = hist[hist.length-1];
+  goTo(p, false);
+  if (p==='library') renderLib();
+  if (p==='product' && prodId) renderProd(prodId);
 }
 
-/* ═══════════════════════════════════════════════
-   AUTH
-═══════════════════════════════════════════════ */
+D.back.addEventListener('click', goBack);
+D.prof.addEventListener('click', () => {
+  if (D.vProf.classList.contains('active')) goBack();
+  else { renderProf(); goTo('profile'); }
+});
 
-async function initAuth() {
-  showLoading();
-
-  if (!db) {
-    hideLoading();
-    showDemoMode();
-    return;
-  }
-
-  const { data: { session } } = await db.auth.getSession();
-
-  if (session?.user) {
-    await onLogin(session.user);
-  } else {
-    showAuthScreen();
-    hideLoading();
-  }
-
-  db.auth.onAuthStateChange(async (event, session) => {
-    if (event === 'SIGNED_IN' && session?.user) {
-      await onLogin(session.user);
-    } else if (event === 'SIGNED_OUT') {
-      onLogout();
-    }
+async function boot() {
+  showLoad();
+  if (!initSupa()) { hideLoad(); return; }
+  const { data: { session } } = await supa.auth.getSession();
+  if (session?.user) await signIn(session.user);
+  else { showAuthScreen(); hideLoad(); }
+  supa.auth.onAuthStateChange(async (ev, sess) => {
+    if (ev==='SIGNED_IN' && sess?.user) await signIn(sess.user);
+    else if (ev==='SIGNED_OUT') signOut();
   });
 }
 
-async function onLogin(user) {
-  currentUser = user;
-  await loadUserData();
-  showAppScreen();
-  renderLibrary();
-  hideLoading();
+async function signIn(user) {
+  me = user;
+  await loadData();
+  D.sAuth.classList.remove('active');
+  D.sApp.classList.add('active');
+  renderLib();
+  hideLoad();
 }
 
-function onLogout() {
-  currentUser = null;
-  userAnswers = {};
-  unlockedProducts = [];
-  currentProductId = null;
-  currentSectionIndex = null;
-  viewStack = ['library'];
+function signOut() {
+  me=null; ans={}; open=[]; prodId=null; secIdx=null; hist=['library'];
   showAuthScreen();
 }
 
 function showAuthScreen() {
-  dom.screenAuth.classList.add('active');
-  dom.screenApp.classList.remove('active');
+  D.sAuth.classList.add('active');
+  D.sApp.classList.remove('active');
 }
 
-function showAppScreen() {
-  dom.screenAuth.classList.remove('active');
-  dom.screenApp.classList.add('active');
-}
+D.fLogin.addEventListener('submit', async e => {
+  e.preventDefault(); clearAMsg();
+  D.bLogin.disabled=true; D.bLogin.textContent='…';
+  const { error } = await supa.auth.signInWithPassword({ email: D.lEmail.value.trim(), password: D.lPass.value });
+  if (error) { setAMsg(xlErr(error.message)); D.bLogin.disabled=false; D.bLogin.textContent='Entra'; }
+});
 
-// Login
-dom.formLogin.addEventListener('submit', async (e) => {
+D.fReg.addEventListener('submit', async e => {
+  e.preventDefault(); clearAMsg();
+  D.bReg.disabled=true; D.bReg.textContent='…';
+  const { error } = await supa.auth.signUp({ email: D.rEmail.value.trim(), password: D.rPass.value });
+  if (error) setAMsg(xlErr(error.message));
+  else setAMsg("Controlla la tua email per confermare l'account.", 'success');
+  D.bReg.disabled=false; D.bReg.textContent='Crea account';
+});
+
+D.forgot.addEventListener('click', async e => {
   e.preventDefault();
-  hideAuthMessage();
-  dom.btnLogin.disabled = true;
-  dom.btnLogin.textContent = '…';
-
-  const { error } = await db.auth.signInWithPassword({
-    email: dom.loginEmail.value.trim(),
-    password: dom.loginPassword.value,
-  });
-
-  if (error) {
-    showAuthMessage(translateAuthError(error.message));
-    dom.btnLogin.disabled = false;
-    dom.btnLogin.textContent = 'Entra';
-  }
-  // onAuthStateChange handles the rest
+  const email = D.lEmail.value.trim();
+  if (!email) { setAMsg('Inserisci prima la tua email.'); return; }
+  const { error } = await supa.auth.resetPasswordForEmail(email, { redirectTo: 'https://gildaossani.github.io/gilda-app/' });
+  if (error) setAMsg(xlErr(error.message));
+  else setAMsg('Email di reset inviata. Controlla la posta.', 'success');
 });
 
-// Register
-dom.formRegister.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  hideAuthMessage();
-  dom.btnRegister.disabled = true;
-  dom.btnRegister.textContent = '…';
+D.tabs.forEach(tab => tab.addEventListener('click', () => {
+  D.tabs.forEach(t=>t.classList.remove('active')); tab.classList.add('active');
+  const t = tab.dataset.tab;
+  D.fLogin.classList.toggle('active', t==='login');
+  D.fReg.classList.toggle('active', t==='register');
+  clearAMsg();
+}));
 
-  const { error } = await db.auth.signUp({
-    email: dom.regEmail.value.trim(),
-    password: dom.regPassword.value,
-  });
+D.logout.addEventListener('click', () => supa.auth.signOut());
 
-  if (error) {
-    showAuthMessage(translateAuthError(error.message));
-  } else {
-    showAuthMessage('Controlla la tua email per confermare l\'account.', 'success');
-  }
-
-  dom.btnRegister.disabled = false;
-  dom.btnRegister.textContent = 'Crea account';
-});
-
-// Forgot password
-dom.linkForgot.addEventListener('click', async (e) => {
-  e.preventDefault();
-  const email = dom.loginEmail.value.trim();
-  if (!email) { showAuthMessage('Inserisci la tua email prima.'); return; }
-  const { error } = await db.auth.resetPasswordForEmail(email);
-  if (error) {
-    showAuthMessage(translateAuthError(error.message));
-  } else {
-    showAuthMessage('Email di reset inviata. Controlla la posta.', 'success');
-  }
-});
-
-// Auth tabs
-dom.authTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    dom.authTabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    const target = tab.dataset.tab;
-    dom.formLogin.classList.toggle('active', target === 'login');
-    dom.formRegister.classList.toggle('active', target === 'register');
-    hideAuthMessage();
-  });
-});
-
-function translateAuthError(msg) {
+function xlErr(m) {
   const map = {
     'Invalid login credentials': 'Email o password errati.',
     'Email not confirmed': 'Email non confermata. Controlla la posta.',
     'User already registered': 'Questa email è già registrata.',
-    'Password should be at least 6 characters': 'La password deve avere almeno 6 caratteri.',
     'Rate limit exceeded': 'Troppi tentativi. Riprova tra poco.',
   };
-  return map[msg] || msg;
+  return map[m] || m;
 }
 
-/* ═══════════════════════════════════════════════
-   USER DATA — Supabase
-═══════════════════════════════════════════════ */
-
-async function loadUserData() {
-  if (!db || !currentUser) return;
-
+async function loadData() {
+  if (!supa || !me) return;
   try {
-    // Load answers
-    const { data: answers } = await db
-      .from('answers')
-      .select('answer_key, answer_text')
-      .eq('user_id', currentUser.id);
+    const { data: rows } = await supa.from('user_answers').select('answer_key, answer_text').eq('user_id', me.id);
+    ans = {};
+    (rows||[]).forEach(r => { ans[r.answer_key]=r.answer_text; });
 
-    userAnswers = {};
-    (answers || []).forEach(row => {
-      userAnswers[row.answer_key] = row.answer_text;
-    });
+    const { data: prods } = await supa.from('user_products').select('product_id').eq('user_id', me.id);
+    open = (prods||[]).map(r=>r.product_id);
 
-    // Load unlocked products
-    const { data: unlocked } = await db
-      .from('user_products')
-      .select('product_id')
-      .eq('user_id', currentUser.id);
-
-    unlockedProducts = (unlocked || []).map(r => r.product_id);
-
-    // First product always unlocked (demo/first product free)
-    if (PRODUCTS_CATALOG.length > 0 && !unlockedProducts.includes(PRODUCTS_CATALOG[0].id)) {
-      unlockedProducts.push(PRODUCTS_CATALOG[0].id);
-      // Persist to db
-      await db.from('user_products').upsert({
-        user_id: currentUser.id,
-        product_id: PRODUCTS_CATALOG[0].id,
-        unlocked_at: new Date().toISOString(),
-      });
+    if (CATALOG.length>0 && !open.includes(CATALOG[0].id)) {
+      open.push(CATALOG[0].id);
+      await supa.from('user_products').upsert({ user_id:me.id, product_id:CATALOG[0].id, unlocked_at:new Date().toISOString() }, { onConflict:'user_id,product_id' });
     }
-
-  } catch (err) {
-    console.error('loadUserData error:', err);
-  }
+  } catch(e) { console.error('loadData:', e); }
 }
 
-let saveDebounceTimers = {};
-
-async function saveAnswer(productId, sectionId, qIndex, text) {
-  const key = answerKey(productId, sectionId, qIndex);
-  userAnswers[key] = text;
-
-  if (!db || !currentUser) return;
-
-  clearTimeout(saveDebounceTimers[key]);
-  saveDebounceTimers[key] = setTimeout(async () => {
-    updateSaveStatus(key, 'saving');
+async function saveAns(pid, sid, qi, text) {
+  const key = ak(pid,sid,qi);
+  ans[key] = text;
+  if (!supa || !me) return;
+  clearTimeout(timers[key]);
+  timers[key] = setTimeout(async () => {
+    setStat(key, 'saving');
     try {
-      await db.from('answers').upsert({
-        user_id: currentUser.id,
-        answer_key: key,
-        answer_text: text,
-        updated_at: new Date().toISOString(),
-      }, { onConflict: 'user_id,answer_key' });
-      updateSaveStatus(key, 'saved');
-    } catch (err) {
-      console.error('saveAnswer error:', err);
-    }
+      await supa.from('user_answers').upsert({ user_id:me.id, answer_key:key, answer_text:text, updated_at:new Date().toISOString() }, { onConflict:'user_id,answer_key' });
+      setStat(key, 'saved');
+    } catch(e) { console.error('saveAns:', e); }
   }, 800);
 }
 
-function updateSaveStatus(key, status) {
+function setStat(key, st) {
   const el = document.querySelector(`[data-save-key="${key}"]`);
   if (!el) return;
-  if (status === 'saving') {
-    el.className = 'question-saved saving';
-    el.textContent = 'Salvataggio…';
-  } else if (status === 'saved') {
-    el.className = 'question-saved saved';
-    el.textContent = '✓ Salvato';
-    setTimeout(() => {
-      if (el) { el.className = 'question-saved'; el.textContent = ''; }
-    }, 2500);
-  }
+  if (st==='saving') { el.className='question-saved saving'; el.textContent='Salvataggio…'; }
+  else { el.className='question-saved saved'; el.textContent='✓ Salvato'; setTimeout(()=>{ if(el){el.className='question-saved'; el.textContent='';} }, 2500); }
 }
 
-/* ═══════════════════════════════════════════════
-   UNLOCK CODE
-═══════════════════════════════════════════════ */
+D.uBtn.addEventListener('click', doUnlock);
+D.uInput.addEventListener('keydown', e => { if(e.key==='Enter') doUnlock(); });
 
-dom.btnUnlock.addEventListener('click', handleUnlock);
-dom.unlockInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleUnlock(); });
-
-async function handleUnlock() {
-  const code = dom.unlockInput.value.trim().toUpperCase();
+async function doUnlock() {
+  const code = D.uInput.value.trim().toUpperCase();
   if (!code) return;
-
-  dom.btnUnlock.disabled = true;
-  dom.btnUnlock.textContent = '…';
-  dom.unlockMessage.className = 'unlock-message hidden';
-
+  D.uBtn.disabled=true; D.uBtn.textContent='…';
+  D.uMsg.className='unlock-message hidden';
   try {
-    if (!db || !currentUser) {
-      showUnlockMessage('Devi essere connessa per sbloccare un prodotto.', 'error');
-      return;
-    }
-
-    // Find code in db
-    const { data: codeRow, error } = await db
-      .from('unlock_codes')
-      .select('*')
-      .eq('code', code)
-      .single();
-
-    if (error || !codeRow) {
-      showUnlockMessage('Codice non valido. Controlla e riprova.', 'error');
-      return;
-    }
-
-    if (codeRow.used_by && codeRow.used_by !== currentUser.id) {
-      showUnlockMessage('Questo codice è già stato usato.', 'error');
-      return;
-    }
-
-    if (isUnlocked(codeRow.product_id)) {
-      showUnlockMessage('Questo prodotto è già nella tua libreria.', 'error');
-      return;
-    }
-
-    // Mark code as used
-    await db.from('unlock_codes').update({
-      used_by: currentUser.id,
-      used_at: new Date().toISOString(),
-    }).eq('code', code);
-
-    // Add to user products
-    await db.from('user_products').upsert({
-      user_id: currentUser.id,
-      product_id: codeRow.product_id,
-      unlocked_at: new Date().toISOString(),
-    });
-
-    unlockedProducts.push(codeRow.product_id);
-    dom.unlockInput.value = '';
-    showUnlockMessage('Prodotto sbloccato! Lo trovi in libreria.', 'success');
-    renderLibrary();
-
-  } catch (err) {
-    console.error('unlock error:', err);
-    showUnlockMessage('Errore. Riprova tra poco.', 'error');
-  } finally {
-    dom.btnUnlock.disabled = false;
-    dom.btnUnlock.textContent = 'Sblocca';
-  }
+    const { data:row, error } = await supa.from('unlock_codes').select('*').eq('code', code).single();
+    if (error||!row) { showUMsg('Codice non valido.', 'error'); return; }
+    if (row.used_by && row.used_by!==me.id) { showUMsg('Codice già usato.', 'error'); return; }
+    if (isOpen(row.product_id)) { showUMsg('Prodotto già in libreria.', 'error'); return; }
+    await supa.from('unlock_codes').update({ used_by:me.id, used_at:new Date().toISOString() }).eq('code', code);
+    await supa.from('user_products').upsert({ user_id:me.id, product_id:row.product_id, unlocked_at:new Date().toISOString() }, { onConflict:'user_id,product_id' });
+    open.push(row.product_id);
+    D.uInput.value='';
+    showUMsg('Prodotto sbloccato!', 'success');
+    renderLib();
+  } catch(e) { showUMsg('Errore. Riprova.', 'error'); }
+  finally { D.uBtn.disabled=false; D.uBtn.textContent='Sblocca'; }
 }
 
-function showUnlockMessage(msg, type) {
-  dom.unlockMessage.textContent = msg;
-  dom.unlockMessage.className = `unlock-message ${type}`;
+function showUMsg(m, t) { D.uMsg.textContent=m; D.uMsg.className=`unlock-message ${t}`; }
+
+function pct(pid) {
+  const p=getProd(pid); if(!p) return 0;
+  let tot=0, done=0;
+  p.sections.forEach(s => s.questions.forEach((_,i) => { tot++; const k=ak(pid,s.id,i); if(ans[k]&&ans[k].trim()) done++; }));
+  return tot===0 ? 0 : Math.round((done/tot)*100);
 }
 
-/* ═══════════════════════════════════════════════
-   PROGRESS
-═══════════════════════════════════════════════ */
-
-function getProductProgress(productId) {
-  const product = getProduct(productId);
-  if (!product) return 0;
-
-  let total = 0;
-  let answered = 0;
-
-  product.sections.forEach(section => {
-    section.questions.forEach((_, idx) => {
-      total++;
-      const key = answerKey(productId, section.id, idx);
-      if (userAnswers[key] && userAnswers[key].trim().length > 0) answered++;
-    });
-  });
-
-  return total === 0 ? 0 : Math.round((answered / total) * 100);
+function secDone(pid, sid) {
+  const p=getProd(pid); if(!p) return false;
+  const s=p.sections.find(s=>s.id===sid); if(!s) return false;
+  return s.questions.every((_,i) => { const k=ak(pid,sid,i); return ans[k]&&ans[k].trim(); });
 }
 
-function getSectionProgress(productId, sectionId) {
-  const product = getProduct(productId);
-  if (!product) return false;
-
-  const section = product.sections.find(s => s.id === sectionId);
-  if (!section) return false;
-
-  return section.questions.every((_, idx) => {
-    const key = answerKey(productId, sectionId, idx);
-    return userAnswers[key] && userAnswers[key].trim().length > 0;
-  });
+function renderLib() {
+  D.grid.innerHTML='';
+  CATALOG.forEach(p => D.grid.appendChild(buildCard(p, isOpen(p.id), pct(p.id))));
 }
 
-/* ═══════════════════════════════════════════════
-   RENDER LIBRARY
-═══════════════════════════════════════════════ */
-
-function renderLibrary() {
-  dom.productsGrid.innerHTML = '';
-
-  PRODUCTS_CATALOG.forEach(product => {
-    const unlocked = isUnlocked(product.id);
-    const progress = unlocked ? getProductProgress(product.id) : 0;
-    const card = createProductCard(product, unlocked, progress);
-    dom.productsGrid.appendChild(card);
-  });
-}
-
-function createProductCard(product, unlocked, progress) {
-  const div = document.createElement('div');
-  div.className = `product-card ${unlocked ? '' : 'locked'}`;
-
-  if (unlocked) {
-    div.addEventListener('click', () => openProduct(product.id));
-  }
-
-  const previewSections = product.sections.slice(0, 3)
-    .map(s => `<div class="preview-section-item">${s.name}</div>`)
-    .join('');
-
-  div.innerHTML = `
+function buildCard(p, unlk, pc) {
+  const div=document.createElement('div');
+  div.className=`product-card ${unlk?'':'locked'}`;
+  if (unlk) div.addEventListener('click', ()=>openProd(p.id));
+  const prev=p.sections.slice(0,3).map(s=>`<div class="preview-section-item">${s.name}</div>`).join('');
+  div.innerHTML=`
     <div class="card-stripe"></div>
     <div class="card-body">
-      <div class="card-tag">${product.tag}</div>
-      <div class="card-title">${product.title}</div>
-      <div class="card-desc">${product.description}</div>
-      ${unlocked ? `
-        <div class="card-progress">
-          <div class="card-progress-track">
-            <div class="card-progress-fill" style="width:${progress}%"></div>
-          </div>
-          <span class="card-progress-pct">${progress}%</span>
-        </div>
-      ` : `
-        <div class="card-locked-badge">
-          <svg class="lock-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-          <span class="card-locked-text">Sblocca con codice — ${product.price}</span>
-        </div>
-      `}
+      <div class="card-tag">${p.tag}</div>
+      <div class="card-title">${p.title}</div>
+      <div class="card-desc">${p.description}</div>
+      ${unlk ? `<div class="card-progress"><div class="card-progress-track"><div class="card-progress-fill" style="width:${pc}%"></div></div><span class="card-progress-pct">${pc}%</span></div>`
+              : `<div class="card-locked-badge"><svg class="lock-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="card-locked-text">Sblocca con codice — ${p.price}</span></div>`}
     </div>
-    ${!unlocked ? `
-      <div class="card-preview">
-        <div class="card-preview-title">Cosa trovi dentro</div>
-        <div class="card-preview-sections">${previewSections}</div>
-      </div>
-    ` : ''}
+    ${!unlk ? `<div class="card-preview"><div class="card-preview-title">Cosa trovi dentro</div><div class="card-preview-sections">${prev}</div></div>` : ''}
   `;
-
   return div;
 }
 
-/* ═══════════════════════════════════════════════
-   RENDER PRODUCT
-═══════════════════════════════════════════════ */
+function openProd(pid) { prodId=pid; renderProd(pid); goTo('product'); }
 
-function openProduct(productId) {
-  currentProductId = productId;
-  renderProduct(productId);
-  showView('product');
-}
-
-function renderProduct(productId) {
-  const product = getProduct(productId);
-  if (!product) return;
-
-  const progress = getProductProgress(productId);
-
-  dom.productHeader.innerHTML = `
-    <div class="product-header-tag">${product.tag}</div>
-    <div class="product-header-title">${product.title}</div>
-    <div class="product-header-desc">${product.description}</div>
-  `;
-
-  dom.progressFill.style.width = `${progress}%`;
-  dom.progressLabel.textContent = `${progress}%`;
-
-  dom.sectionsList.innerHTML = '';
-  product.sections.forEach((section, index) => {
-    const completed = getSectionProgress(productId, section.id);
-    const item = document.createElement('div');
-    item.className = `section-item ${completed ? 'completed' : ''}`;
-    item.innerHTML = `
-      <div class="section-num">${completed ? '✓' : index + 1}</div>
-      <div class="section-info">
-        <div class="section-name">${section.name}</div>
-        <div class="section-count">${section.questions.length} domande</div>
-      </div>
-      <svg class="section-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <polyline points="9 18 15 12 9 6"/>
-      </svg>
-    `;
-    item.addEventListener('click', () => openSection(productId, index));
-    dom.sectionsList.appendChild(item);
+function renderProd(pid) {
+  const p=getProd(pid); if(!p) return;
+  const pc=pct(pid);
+  D.pH.innerHTML=`<div class="product-header-tag">${p.tag}</div><div class="product-header-title">${p.title}</div><div class="product-header-desc">${p.description}</div>`;
+  D.pFill.style.width=`${pc}%`; D.pLbl.textContent=`${pc}%`;
+  D.sList.innerHTML='';
+  p.sections.forEach((s,i) => {
+    const done=secDone(pid,s.id);
+    const item=document.createElement('div');
+    item.className=`section-item ${done?'completed':''}`;
+    item.innerHTML=`<div class="section-num">${done?'✓':i+1}</div><div class="section-info"><div class="section-name">${s.name}</div><div class="section-count">${s.questions.length} domande</div></div><svg class="section-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 18 15 12 9 6"/></svg>`;
+    item.addEventListener('click', ()=>openSec(pid,i));
+    D.sList.appendChild(item);
   });
 }
 
-/* ═══════════════════════════════════════════════
-   RENDER SECTION / QUESTIONS
-═══════════════════════════════════════════════ */
+function openSec(pid, idx) { prodId=pid; secIdx=idx; renderSec(pid,idx); goTo('section'); }
 
-function openSection(productId, sectionIndex) {
-  currentProductId = productId;
-  currentSectionIndex = sectionIndex;
-  renderSection(productId, sectionIndex);
-  showView('section');
-}
-
-function renderSection(productId, sectionIndex) {
-  const product = getProduct(productId);
-  if (!product) return;
-
-  const section = product.sections[sectionIndex];
-  if (!section) return;
-
-  dom.sectionHeader.innerHTML = `
-    <div class="section-header-label">${product.title} — ${sectionIndex + 1} / ${product.sections.length}</div>
-    <div class="section-header-title">${section.name}</div>
-  `;
-
-  dom.questionsList.innerHTML = '';
-
-  section.questions.forEach((question, qIdx) => {
-    const key = answerKey(productId, section.id, qIdx);
-    const savedText = userAnswers[key] || '';
-
-    const block = document.createElement('div');
-    block.className = 'question-block';
-    block.innerHTML = `
-      <div class="question-num">Domanda ${qIdx + 1}</div>
-      <div class="question-text">${question}</div>
-      <textarea class="question-textarea" placeholder="Scrivi qui la tua risposta…" rows="4">${savedText}</textarea>
-      <div class="question-saved" data-save-key="${key}"></div>
-    `;
-
-    const textarea = block.querySelector('textarea');
-    textarea.addEventListener('input', () => {
-      saveAnswer(productId, section.id, qIdx, textarea.value);
-    });
-
-    dom.questionsList.appendChild(block);
+function renderSec(pid, idx) {
+  const p=getProd(pid); if(!p) return;
+  const s=p.sections[idx]; if(!s) return;
+  D.sH.innerHTML=`<div class="section-header-label">${p.title} — ${idx+1} / ${p.sections.length}</div><div class="section-header-title">${s.name}</div>`;
+  D.qList.innerHTML='';
+  s.questions.forEach((q,qi) => {
+    const key=ak(pid,s.id,qi);
+    const block=document.createElement('div');
+    block.className='question-block';
+    block.innerHTML=`<div class="question-num">Domanda ${qi+1}</div><div class="question-text">${q}</div><textarea class="question-textarea" placeholder="Scrivi qui la tua risposta…" rows="4"></textarea><div class="question-saved" data-save-key="${key}"></div>`;
+    const ta=block.querySelector('textarea');
+    ta.value=ans[key]||'';
+    ta.addEventListener('input', ()=>saveAns(pid,s.id,qi,ta.value));
+    D.qList.appendChild(block);
   });
-
-  // Prev / Next buttons
-  dom.btnPrevSection.disabled = sectionIndex === 0;
-  dom.btnNextSection.disabled = sectionIndex === product.sections.length - 1;
-  dom.btnPrevSection.onclick = () => navigateSection(-1);
-  dom.btnNextSection.onclick = () => navigateSection(1);
+  D.prev.disabled=idx===0;
+  D.next.disabled=idx===p.sections.length-1;
+  D.prev.onclick=()=>{ secIdx--; renderSec(pid,secIdx); window.scrollTo({top:0,behavior:'smooth'}); };
+  D.next.onclick=()=>{ secIdx++; renderSec(pid,secIdx); window.scrollTo({top:0,behavior:'smooth'}); };
 }
 
-function navigateSection(direction) {
-  const product = getProduct(currentProductId);
-  if (!product) return;
-
-  const newIndex = currentSectionIndex + direction;
-  if (newIndex < 0 || newIndex >= product.sections.length) return;
-
-  currentSectionIndex = newIndex;
-  renderSection(currentProductId, currentSectionIndex);
-  dom.viewSection.scrollTop = 0;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-/* ═══════════════════════════════════════════════
-   EXPORT
-═══════════════════════════════════════════════ */
-
-dom.btnExport.addEventListener('click', () => {
-  const product = getProduct(currentProductId);
-  if (!product) return;
-
-  let text = `${product.title}\nEsportato il ${new Date().toLocaleDateString('it-IT')}\n`;
-  text += '═'.repeat(50) + '\n\n';
-
-  product.sections.forEach((section, sIdx) => {
-    text += `${sIdx + 1}. ${section.name}\n`;
-    text += '─'.repeat(30) + '\n\n';
-    section.questions.forEach((q, qIdx) => {
-      const key = answerKey(product.id, section.id, qIdx);
-      const answer = userAnswers[key] || '';
-      text += `D${qIdx + 1}: ${q}\n`;
-      text += answer ? `R: ${answer}\n` : `R: —\n`;
-      text += '\n';
-    });
-    text += '\n';
+D.exp.addEventListener('click', () => {
+  const p=getProd(prodId); if(!p) return;
+  let txt=`${p.title}\nEsportato il ${new Date().toLocaleDateString('it-IT')}\n${'═'.repeat(50)}\n\n`;
+  p.sections.forEach((s,si) => {
+    txt+=`${si+1}. ${s.name}\n${'─'.repeat(30)}\n\n`;
+    s.questions.forEach((q,qi) => { const k=ak(p.id,s.id,qi); txt+=`D${qi+1}: ${q}\nR: ${ans[k]||'—'}\n\n`; });
+    txt+='\n';
   });
-
-  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `gilda-${product.slug}-risposte.txt`;
-  a.click();
+  const blob=new Blob([txt],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=`gilda-${p.slug}-risposte.txt`; a.click();
   URL.revokeObjectURL(url);
   showToast('File esportato ✓');
 });
 
-/* ═══════════════════════════════════════════════
-   PROFILE
-═══════════════════════════════════════════════ */
-
-function renderProfile() {
-  dom.profileEmail.textContent = currentUser?.email || '';
-
-  const totalAnswers = Object.values(userAnswers).filter(v => v && v.trim()).length;
-  const unlockedCount = unlockedProducts.length;
-
-  dom.profileStats.innerHTML = `
-    <div class="stat-row">
-      <span class="stat-label">Prodotti sbloccati</span>
-      <span class="stat-value">${unlockedCount}</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-label">Risposte scritte</span>
-      <span class="stat-value">${totalAnswers}</span>
-    </div>
-    ${PRODUCTS_CATALOG.filter(p => isUnlocked(p.id)).map(p => `
-      <div class="stat-row">
-        <span class="stat-label">${p.title}</span>
-        <span class="stat-value">${getProductProgress(p.id)}%</span>
-      </div>
-    `).join('')}
+function renderProf() {
+  D.pEmail.textContent=me?.email||'';
+  const tot=Object.values(ans).filter(v=>v&&v.trim()).length;
+  D.pStats.innerHTML=`
+    <div class="stat-row"><span class="stat-label">Prodotti sbloccati</span><span class="stat-value">${open.length}</span></div>
+    <div class="stat-row"><span class="stat-label">Risposte scritte</span><span class="stat-value">${tot}</span></div>
+    ${CATALOG.filter(p=>isOpen(p.id)).map(p=>`<div class="stat-row"><span class="stat-label">${p.title}</span><span class="stat-value">${pct(p.id)}%</span></div>`).join('')}
   `;
 }
 
-dom.btnLogout.addEventListener('click', async () => {
-  if (db) await db.auth.signOut();
-  else onLogout();
-});
-
-/* ═══════════════════════════════════════════════
-   NAVIGATION EVENTS
-═══════════════════════════════════════════════ */
-
-dom.btnBack.addEventListener('click', goBack);
-
-dom.btnProfile.addEventListener('click', () => {
-  if (dom.viewProfile.classList.contains('active')) {
-    goBack();
-  } else {
-    renderProfile();
-    showView('profile');
-  }
-});
-
-/* ═══════════════════════════════════════════════
-   DEMO MODE (no Supabase configured)
-═══════════════════════════════════════════════ */
-
-function showDemoMode() {
-  // Bypass auth for local demo
-  console.info('Modalità demo attiva — Supabase non configurato');
-
-  currentUser = { id: 'demo-user', email: 'demo@gildaossani.it' };
-  unlockedProducts = [PRODUCTS_CATALOG[0]?.id].filter(Boolean);
-
-  dom.screenAuth.classList.remove('active');
-  dom.screenApp.classList.add('active');
-  renderLibrary();
-  showToast('Modalità demo — configura Supabase per la versione completa');
-}
-
-/* ═══════════════════════════════════════════════
-   SERVICE WORKER REGISTRATION
-═══════════════════════════════════════════════ */
-
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => console.info('SW registered:', reg.scope))
-      .catch(err => console.warn('SW registration failed:', err));
+    navigator.serviceWorker.register('/gilda-app/service-worker.js')
+      .then(r=>console.info('SW:', r.scope))
+      .catch(e=>console.warn('SW failed:', e));
   });
 }
 
-/* ═══════════════════════════════════════════════
-   BOOT
-═══════════════════════════════════════════════ */
-
-document.addEventListener('DOMContentLoaded', () => {
-  if (SUPABASE_URL.includes('YOUR_PROJECT_ID')) {
-    // Demo mode — no Supabase configured yet
-    hideLoading();
-    showDemoMode();
-  } else {
-    initAuth();
-  }
-});
+document.addEventListener('DOMContentLoaded', boot);
