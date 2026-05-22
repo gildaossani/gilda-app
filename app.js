@@ -208,12 +208,15 @@ D.bLogin.addEventListener('click', async () => {
       alert('ERRORE: ' + error.message);
       setAMsg(xlErr(error.message));
       D.bLogin.disabled=false; D.bLogin.textContent='Entra';
-    } else if (data?.user) {
-      alert('OK: ' + data.user.email);
-      await signIn(data.user);
     } else {
-      alert('RISPOSTA VUOTA: ' + JSON.stringify(data));
-      D.bLogin.disabled=false; D.bLogin.textContent='Entra';
+      const user = data?.user || data?.session?.user;
+      if (user) {
+        alert('OK: ' + user.email);
+        await signIn(user);
+      } else {
+        alert('RISPOSTA VUOTA: ' + JSON.stringify(data));
+        D.bLogin.disabled=false; D.bLogin.textContent='Entra';
+      }
     }
   } catch(e) {
     alert('ECCEZIONE: ' + e.message);
