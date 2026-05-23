@@ -644,7 +644,7 @@ input, textarea { font-family: inherit; }
 .question-hint {
   font-family: var(--font-title);
   font-size: 14px; font-style: italic;
-  color: rgba(45,45,45,0.42);
+  color: rgba(45,45,45,0.65);
   margin-bottom: 10px;
   line-height: 1.6;
 }
@@ -663,7 +663,7 @@ input, textarea { font-family: inherit; }
   transition: border-color var(--transition);
 }
 .question-textarea::placeholder {
-  color: rgba(45,45,45,0.22); font-style: italic;
+  color: rgba(45,45,45,0.38); font-style: italic;
 }
 .question-textarea:focus { border-color: var(--terracotta); }
 
