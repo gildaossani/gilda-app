@@ -505,13 +505,7 @@ async function loadData() {
     const { data: prods } = await supa.from('user_products').select('product_id').eq('user_id', me.id);
     opened = (prods || []).map(r => r.product_id);
 
-    if (CATALOG.length > 0 && !opened.includes(CATALOG[0].id)) {
-      opened.push(CATALOG[0].id);
-      await supa.from('user_products').upsert(
-        { user_id: me.id, product_id: CATALOG[0].id, unlocked_at: new Date().toISOString() },
-        { onConflict: 'user_id,product_id' }
-      );
-    }
+
   } catch(e) { console.error('loadData:', e); }
 }
 
