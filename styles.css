@@ -458,3 +458,43 @@ input, textarea { font-family: inherit; }
 
 /* Section view position relative for number bg */
 #view-section { position: relative; }
+
+/* Final page */
+.section-final {
+  background: var(--antracite);
+  color: var(--bianco);
+  border-radius: var(--radius);
+  padding: 40px 28px;
+  margin-top: 16px;
+  text-align: center;
+}
+.final-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ocra);
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+.final-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--bianco);
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+.final-text {
+  font-size: 14px;
+  line-height: 1.85;
+  opacity: 0.7;
+  max-width: 460px;
+  margin: 0 auto 28px;
+}
+.final-sig {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--rosa-cipria);
+}
