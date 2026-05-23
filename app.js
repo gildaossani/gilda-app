@@ -134,9 +134,119 @@ const CATALOG = [
         closing: {
           title: 'Hai visto il meccanismo.',
           text: 'Non è un risultato. È un punto di partenza. Il meccanismo continuerà ad attivarsi. Ma ora sai dove guardare. La prossima volta che devia, la riconoscerai. E questo, già, è qualcosa.',
-          signature: '— Gilda 🌙'
+          signature: 'Gilda 🌙'
+        },
+        final: {
+          title: 'Se vuoi andare più a fondo.',
+          text: 'Arrivare fino in fondo a questo strumento non è scontato. Significa che sei disposta a guardare, e questo già cambia qualcosa nel modo in cui il meccanismo funziona. Il cervello impara a riconoscere i pattern ogni volta che li incontra. Hai trovato un filo. Ce ne sono altri e ogni volta che ne trovi uno e lo tiri, il meccanismo perde un po\'del suo potere. Puoi scaricare le tue risposte in qualsiasi momento e ricominciare da capo quando il meccanismo si riattiva di nuovo. Funziona meglio nel tempo, non in una sola sessione.',
+          signature: 'Gilda 🌙'
         }
       },
+    ],
+  },
+  {
+    id: 'non-abbastanza',
+    slug: 'non-sentirsi-abbastanza',
+    tag: 'Percorso',
+    title: 'Non sentirsi abbastanza',
+    description: 'La voce che dice che non sei abbastanza non è la verità. È una strategia. Impariamo a riconoscerla.',
+    price: '€9',
+    type: 'standard',
+    sections: [
+      { id: 's1', name: 'La voce', number: 'I', questions: [
+        { id: 'q1', label: "Quando senti per la prima volta quella voce", hint: 'In quale situazione si fa più forte?', placeholder: 'La voce si fa sentire quando...' },
+        { id: 'q2', label: "Con chi suona più forte", hint: 'A lavoro, in amore, con la famiglia, da sola?', placeholder: 'Soprattutto con...' },
+        { id: 'q3', label: "Se quella voce avesse un volto", hint: 'A chi assomiglierebbe?', placeholder: 'Assomiglierebbe a...' },
+        { id: 'q4', label: "Cosa succederebbe se quella voce avesse torto", hint: '', placeholder: 'Se avesse torto...' },
+      ]},
+      { id: 's2', name: 'Le prove', number: 'II', questions: [
+        { id: 'q1', label: "Cosa fai per dimostrare di valere", hint: 'Elenca anche le cose piccole.', placeholder: 'Faccio...' },
+        { id: 'q2', label: "Quando ottieni qualcosa riesci a godertelo", hint: 'O passi subito al prossimo obiettivo?', placeholder: 'Di solito...' },
+        { id: 'q3', label: "Hai mai sabotato qualcosa di buono", hint: "Perché non ti sentivi abbastanza?", placeholder: 'Sì, quando...' },
+        { id: 'q4', label: "Cosa non hai fatto perché non eri pronta", hint: '', placeholder: 'Ho rimandato...' },
+      ]},
+      { id: 's3', name: "L'origine", number: 'III', questions: [
+        { id: 'q1', label: "Chi ti ha fatto credere che non fossi abbastanza", hint: 'Per la prima volta.', placeholder: 'È stato...' },
+        { id: 'q2', label: "C'era una versione di te che si sentiva abbastanza", hint: 'Quanti anni aveva?', placeholder: 'Avevo circa...' },
+        { id: 'q3', label: "Cosa ti è stato chiesto di essere che non eri", hint: '', placeholder: 'Mi chiedevano di essere...' },
+        { id: 'q4', label: "Cosa avresti voluto che qualcuno ti dicesse allora", hint: '', placeholder: 'Avrei voluto sentire...' },
+      ]},
+      { id: 's4', name: 'Adesso', number: 'IV', questions: [
+        { id: 'q1', label: "Cosa significherebbe sentirti abbastanza", hint: 'Concretamente.', placeholder: 'Significherebbe...' },
+        { id: 'q2', label: "Qualcosa che fai bene e che fai fatica ad ammettere", hint: '', placeholder: 'So fare bene...' },
+        { id: 'q3', label: "Se una tua amica ti descrivesse cosa direbbe di te", hint: '', placeholder: 'Direbbe che...' },
+        { id: 'q4', label: "Una cosa che puoi fare oggi per trattarti come se fossi già abbastanza", hint: '', placeholder: 'Oggi posso...' },
+      ]},
+    ],
+  },
+  {
+    id: 'paura',
+    slug: 'la-paura',
+    tag: 'Percorso',
+    title: 'La paura',
+    description: "La paura non è il problema. È l'informazione. Impariamo a leggerla senza obbedirle.",
+    price: '€9',
+    type: 'standard',
+    sections: [
+      { id: 's1', name: 'Che paura è', number: 'I', questions: [
+        { id: 'q1', label: "Descrivi la tua paura principale in questo momento", hint: 'Non la più grande in assoluto. Quella più presente adesso.', placeholder: 'La paura più presente è...' },
+        { id: 'q2', label: "Come si manifesta nel corpo", hint: 'Fisicamente. Dove la senti?', placeholder: 'La sento...' },
+        { id: 'q3', label: "Da quanto tempo è lì", hint: '', placeholder: 'È lì da...' },
+        { id: 'q4', label: "Cosa fa quando si attiva", hint: 'Come cambia il tuo comportamento?', placeholder: 'Quando si attiva, io...' },
+      ]},
+      { id: 's2', name: 'Cosa protegge', number: 'II', questions: [
+        { id: 'q1', label: "Da cosa ti sta proteggendo questa paura", hint: 'Sii precisa, non generica.', placeholder: 'Mi sta proteggendo da...' },
+        { id: 'q2', label: "Cosa perderesti se sparisse", hint: 'Anche qualcosa di piccolo o apparentemente assurdo.', placeholder: 'Perderei...' },
+        { id: 'q3', label: "Quando ha iniziato ad avere senso", hint: 'In quale momento della tua vita questa paura era giustificata?', placeholder: 'Aveva senso quando...' },
+        { id: 'q4', label: "Ha ancora senso oggi", hint: 'La situazione è cambiata?', placeholder: 'Oggi...' },
+      ]},
+      { id: 's3', name: 'Cosa dice', number: 'III', questions: [
+        { id: 'q1', label: "Se la paura potesse parlare cosa ti direbbe", hint: '', placeholder: 'Mi direbbe...' },
+        { id: 'q2', label: "Quanto di quello che dice è vero", hint: 'Sii onesta.', placeholder: 'È vero che...' },
+        { id: 'q3', label: "Quanto è catastrofismo", hint: 'Cosa stai amplificando?', placeholder: 'Sto amplificando...' },
+        { id: 'q4', label: "Cosa succederebbe davvero nel caso peggiore", hint: 'La versione realistica, non quella cinematografica.', placeholder: 'Nel caso peggiore...' },
+      ]},
+      { id: 's4', name: 'Muoversi lo stesso', number: 'IV', questions: [
+        { id: 'q1', label: "Cosa faresti se la paura ci fosse ma non comandasse", hint: '', placeholder: 'Farei...' },
+        { id: 'q2', label: "Qual è il passo più piccolo possibile in quella direzione", hint: 'Quello che puoi fare anche con la paura addosso.', placeholder: 'Potrei...' },
+        { id: 'q3', label: "Chi o cosa ti ha già aiutata a muoverti nonostante la paura", hint: '', placeholder: 'Mi ha aiutata...' },
+        { id: 'q4', label: "Cosa vorresti dirti quando la paura si riattiva", hint: '', placeholder: 'Voglio ricordarmi che...' },
+      ]},
+    ],
+  },
+  {
+    id: 'confini',
+    slug: 'i-confini',
+    tag: 'Percorso',
+    title: 'I confini',
+    description: 'Imparare a dire no non è essere difficili. È sapere dove finisci tu e dove inizia il dovere degli altri.',
+    price: '€9',
+    type: 'standard',
+    sections: [
+      { id: 's1', name: 'Dove sono i tuoi confini oggi', number: 'I', questions: [
+        { id: 'q1', label: "Una situazione recente in cui hai detto sì quando volevi dire no", hint: 'Cosa è successo?', placeholder: 'È successo quando...' },
+        { id: 'q2', label: "Come ti sei sentita dopo", hint: '', placeholder: 'Mi sono sentita...' },
+        { id: 'q3', label: "Hai paura di deludere qualcuno se metti un limite", hint: '', placeholder: 'Ho paura che...' },
+        { id: 'q4', label: "Chi nella tua vita rispetta i tuoi spazi", hint: '', placeholder: 'Lo fa...' },
+      ]},
+      { id: 's2', name: 'Quando hai smesso di averli', number: 'II', questions: [
+        { id: 'q1', label: "Ricordi un momento in cui avevi confini chiari", hint: 'Cosa è cambiato?', placeholder: 'Avevo confini quando...' },
+        { id: 'q2', label: "Cosa ti ha insegnato la famiglia sul dire no", hint: '', placeholder: 'Mi ha insegnato che...' },
+        { id: 'q3', label: "Hai mai pagato un prezzo per aver messo un confine", hint: '', placeholder: 'Ho pagato...' },
+        { id: 'q4', label: "Cosa significava essere difficile nella tua famiglia", hint: '', placeholder: 'Significava...' },
+      ]},
+      { id: 's3', name: 'Il costo del sì continuo', number: 'III', questions: [
+        { id: 'q1', label: "Cosa ti costa dire sempre sì", hint: '', placeholder: 'Mi costa...' },
+        { id: 'q2', label: "In quale area della tua vita senti più il peso", hint: '', placeholder: 'Lo sento di più...' },
+        { id: 'q3', label: "Cosa hai rinunciato a fare per accontentare gli altri", hint: '', placeholder: 'Ho rinunciato a...' },
+        { id: 'q4', label: "Il tuo corpo ti manda segnali quando superi i tuoi limiti", hint: '', placeholder: 'Sento...' },
+      ]},
+      { id: 's4', name: 'Costruire confini che reggono', number: 'IV', questions: [
+        { id: 'q1', label: "Il confine più piccolo che potresti iniziare a mettere domani", hint: '', placeholder: 'Potrei...' },
+        { id: 'q2', label: "Con chi è più difficile e perché", hint: '', placeholder: 'Con... perché...' },
+        { id: 'q3', label: "Cosa cambierebbe nella tua vita se dicessi no più spesso", hint: '', placeholder: 'Cambierebbe...' },
+        { id: 'q4', label: "Una frase che potresti usare la prossima volta", hint: '', placeholder: 'Potrei dire...' },
+      ]},
     ],
   },
 ];
@@ -651,7 +761,7 @@ function renderSection(pid, idx) {
     list.appendChild(q);
   }
 
-  /* Closing (solo s4) */
+  /* Closing */
   if (s.closing) {
     const closing = document.createElement('div');
     closing.className = 'section-closing';
@@ -661,6 +771,19 @@ function renderSection(pid, idx) {
       <div class="closing-sig">${s.closing.signature}</div>
     `;
     list.appendChild(closing);
+  }
+
+  /* Final page */
+  if (s.final) {
+    const final = document.createElement('div');
+    final.className = 'section-final';
+    final.innerHTML = `
+      <div class="final-label">Gilda Ossani</div>
+      <div class="final-title">${s.final.title}</div>
+      <div class="final-text">${s.final.text}</div>
+      <div class="final-sig">${s.final.signature}</div>
+    `;
+    list.appendChild(final);
   }
 
   /* Nav prev/next */
