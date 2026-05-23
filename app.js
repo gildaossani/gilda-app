@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════
-   GILDA PWA — app.js v3.0 — riscrittura pulita
+   GILDA PWA — app.js v4.0
 ═══════════════════════════════════════════════ */
 
 const SUPA_URL = 'https://qnhnsjqzheyiacfmmmbe.supabase.co';
@@ -72,177 +72,234 @@ const CATALOG = [
   },
 ];
 
+/* ── Stato ── */
 let supa = null;
 let me = null;
 let prodId = null;
 let secIdx = null;
 let ans = {};
-let open = [];
-let hist = ['library'];
+let opened = [];
+let hist = [];
 let timers = {};
 
-function initSupa() {
-  try { supa = window.supabase.createClient(SUPA_URL, SUPA_KEY); return true; }
-  catch(e) { console.error(e); return false; }
+/* ── DOM refs ── */
+const g = id => document.getElementById(id);
+const loading     = g('loading');
+const screenAuth  = g('screen-auth');
+const screenApp   = g('screen-app');
+const viewLibrary = g('view-library');
+const viewProduct = g('view-product');
+const viewSection = g('view-section');
+const viewProfile = g('view-profile');
+
+/* ── Mostra/nascondi schermate ── */
+function showLoading() {
+  loading.classList.remove('hidden');
+  screenAuth.classList.add('hidden');
+  screenApp.classList.add('hidden');
 }
 
-const g = id => document.getElementById(id);
-const D = {
-  sAuth: g('screen-auth'), sApp: g('screen-app'), load: g('overlay-loading'), toast: g('toast'),
-  fLogin: g('form-login'), fReg: g('form-register'),
-  lEmail: g('login-email'), lPass: g('login-password'),
-  rEmail: g('reg-email'), rPass: g('reg-password'),
-  bLogin: g('btn-login'), bReg: g('btn-register'), aMsg: g('auth-message'), forgot: g('link-forgot'),
-  tabs: document.querySelectorAll('.auth-tab'),
-  back: g('btn-back'), prof: g('btn-profile'),
-  vLib: g('view-library'), vProd: g('view-product'), vSec: g('view-section'), vProf: g('view-profile'),
-  grid: g('products-grid'), uInput: g('unlock-input'), uBtn: g('btn-unlock'), uMsg: g('unlock-message'),
-  pH: g('product-header'), pFill: g('progress-fill'), pLbl: g('progress-label'), sList: g('sections-list'),
-  exp: g('btn-export'), sH: g('section-header'), qList: g('questions-list'),
-  prev: g('btn-prev-section'), next: g('btn-next-section'),
-  pEmail: g('profile-email'), pStats: g('profile-stats'), logout: g('btn-logout'),
-};
+function showAuth() {
+  loading.classList.add('hidden');
+  screenAuth.classList.remove('hidden');
+  screenApp.classList.add('hidden');
+  window.scrollTo(0, 0);
+}
 
-let toastT;
-function showToast(m, t=2800) { D.toast.textContent=m; D.toast.classList.remove('hidden'); clearTimeout(toastT); toastT=setTimeout(()=>D.toast.classList.add('hidden'),t); }
-function showLoad() { D.load.classList.remove('hidden'); }
-function hideLoad() { D.load.classList.add('hidden'); }
-function setAMsg(m, t='error') { D.aMsg.textContent=m; D.aMsg.className=`auth-message ${t}`; }
-function clearAMsg() { D.aMsg.className='auth-message hidden'; }
-function ak(pid,sid,i) { return `${pid}:${sid}:${i}`; }
-function getProd(id) { return CATALOG.find(p=>p.id===id)||null; }
-function isOpen(pid) { return open.includes(pid); }
+function showApp() {
+  loading.classList.add('hidden');
+  screenAuth.classList.add('hidden');
+  screenApp.classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
 
-const VIEWS = { library:D.vLib, product:D.vProd, section:D.vSec, profile:D.vProf };
+/* ── Navigazione views ── */
+const allViews = [viewLibrary, viewProduct, viewSection, viewProfile];
 
-function goTo(name, push=true) {
-  Object.values(VIEWS).forEach(v=>v.classList.remove('active'));
-  VIEWS[name].classList.add('active');
-  if (push && hist[hist.length-1]!==name) hist.push(name);
-  D.back.classList.toggle('hidden', hist.length<=1);
+function showView(view) {
+  allViews.forEach(v => v.classList.add('hidden'));
+  view.classList.remove('hidden');
+  window.scrollTo(0, 0);
+  hist.push(view);
+  g('btn-back').classList.toggle('hidden', hist.length <= 1);
 }
 
 function goBack() {
-  if (hist.length<=1) return;
+  if (hist.length <= 1) return;
   hist.pop();
-  const p = hist[hist.length-1];
-  goTo(p, false);
-  if (p==='library') renderLib();
-  if (p==='product' && prodId) renderProd(prodId);
+  const prev = hist[hist.length - 1];
+  allViews.forEach(v => v.classList.add('hidden'));
+  prev.classList.remove('hidden');
+  window.scrollTo(0, 0);
+  g('btn-back').classList.toggle('hidden', hist.length <= 1);
+  if (prev === viewLibrary) renderLibrary();
+  if (prev === viewProduct && prodId) renderProduct(prodId);
 }
 
-D.back.addEventListener('click', goBack);
-D.prof.addEventListener('click', () => {
-  if (D.vProf.classList.contains('active')) goBack();
-  else { renderProf(); goTo('profile'); }
-});
+/* ── Toast ── */
+let toastT;
+function toast(m) {
+  const t = g('toast');
+  t.textContent = m;
+  t.classList.remove('hidden');
+  clearTimeout(toastT);
+  toastT = setTimeout(() => t.classList.add('hidden'), 2800);
+}
 
+/* ── Auth message ── */
+function setMsg(m, type = 'error') {
+  const el = g('auth-message');
+  el.textContent = m;
+  el.className = 'auth-message ' + type;
+}
+function clearMsg() { g('auth-message').className = 'auth-message hidden'; }
+
+/* ── Helpers ── */
+function aKey(pid, sid, i) { return `${pid}:${sid}:${i}`; }
+function getProd(id) { return CATALOG.find(p => p.id === id) || null; }
+function isOpen(pid) { return opened.includes(pid); }
+
+/* ═══════════════════════════════════════════════
+   BOOT
+═══════════════════════════════════════════════ */
 async function boot() {
-  // Reset button states in case browser triggered form submit
-  document.getElementById('btn-login').disabled = false;
-  document.getElementById('btn-login').textContent = 'Entra';
-  document.getElementById('btn-register').disabled = false;
-  document.getElementById('btn-register').textContent = 'Crea account';
-
-  showLoad();
-  if (!initSupa()) { showAuthScreen(); hideLoad(); return; }
+  showLoading();
 
   try {
-    const { data, error } = await Promise.race([
-      supa.auth.getSession(),
-      new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 5000))
-    ]);
-    if (!error && data?.session?.user) {
-      await signIn(data.session.user);
-    } else {
-      showAuthScreen();
-      hideLoad();
-    }
+    supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
   } catch(e) {
-    console.warn('boot error:', e);
-    showAuthScreen();
-    hideLoad();
+    console.error('Supabase init failed:', e);
+    showAuth();
+    return;
   }
 
-  supa.auth.onAuthStateChange(async (ev, sess) => {
-    if (ev==='SIGNED_IN' && sess?.user) await signIn(sess.user);
-    else if (ev==='SIGNED_OUT') signOut();
-  });
+  try {
+    const { data } = await supa.auth.getSession();
+    if (data && data.session && data.session.user) {
+      await enterApp(data.session.user);
+    } else {
+      showAuth();
+    }
+  } catch(e) {
+    console.error('getSession failed:', e);
+    showAuth();
+  }
 }
 
-async function signIn(user) {
+async function enterApp(user) {
   me = user;
   await loadData();
-  D.sAuth.classList.remove('active');
-  D.sApp.classList.add('active');
-  renderLib();
-  hideLoad();
+  showApp();
+  hist = [];
+  showView(viewLibrary);
+  renderLibrary();
 }
 
-function signOut() {
-  me=null; ans={}; open=[]; prodId=null; secIdx=null; hist=['library'];
-  showAuthScreen();
+function leaveApp() {
+  me = null; ans = {}; opened = []; prodId = null; secIdx = null; hist = [];
+  showAuth();
 }
 
-function showAuthScreen() {
-  D.sAuth.classList.add('active');
-  D.sApp.classList.remove('active');
-}
+/* ═══════════════════════════════════════════════
+   AUTH EVENTS
+═══════════════════════════════════════════════ */
 
-D.fLogin.addEventListener('submit', e => e.preventDefault());
-
-D.bLogin.addEventListener('click', async () => {
-  const email = D.lEmail.value.trim();
-  const password = D.lPass.value;
-  if (!email || !password) { setAMsg('Inserisci email e password.'); return; }
-  clearAMsg();
-  D.bLogin.disabled=true; D.bLogin.textContent='…';
+/* Login */
+g('btn-login').addEventListener('click', async () => {
+  const email = g('login-email').value.trim();
+  const password = g('login-password').value;
+  if (!email || !password) { setMsg('Inserisci email e password.'); return; }
+  clearMsg();
+  g('btn-login').disabled = true;
+  g('btn-login').textContent = '…';
   try {
     const { data, error } = await supa.auth.signInWithPassword({ email, password });
     if (error) {
-      setAMsg(xlErr(error.message));
-      D.bLogin.disabled=false; D.bLogin.textContent='Entra';
+      setMsg(xlErr(error.message));
+      g('btn-login').disabled = false;
+      g('btn-login').textContent = 'Entra';
+    } else if (data && data.user) {
+      await enterApp(data.user);
+    } else if (data && data.session && data.session.user) {
+      await enterApp(data.session.user);
     } else {
-      const user = data?.user || data?.session?.user;
-      if (user) {
-        await signIn(user);
-      } else {
-        D.bLogin.disabled=false; D.bLogin.textContent='Entra';
-      }
+      setMsg('Risposta inattesa. Riprova.');
+      g('btn-login').disabled = false;
+      g('btn-login').textContent = 'Entra';
     }
   } catch(e) {
-    setAMsg('Errore di connessione. Riprova.');
-    D.bLogin.disabled=false; D.bLogin.textContent='Entra';
+    setMsg('Errore di connessione. Riprova.');
+    g('btn-login').disabled = false;
+    g('btn-login').textContent = 'Entra';
   }
 });
 
-D.fReg.addEventListener('submit', async e => {
-  e.preventDefault(); clearAMsg();
-  D.bReg.disabled=true; D.bReg.textContent='…';
-  const { error } = await supa.auth.signUp({ email: D.rEmail.value.trim(), password: D.rPass.value });
-  if (error) setAMsg(xlErr(error.message));
-  else setAMsg("Controlla la tua email per confermare l'account.", 'success');
-  D.bReg.disabled=false; D.bReg.textContent='Crea account';
+/* Register */
+g('btn-register').addEventListener('click', async () => {
+  const email = g('reg-email').value.trim();
+  const password = g('reg-password').value;
+  if (!email || !password) { setMsg('Inserisci email e password.'); return; }
+  clearMsg();
+  g('btn-register').disabled = true;
+  g('btn-register').textContent = '…';
+  try {
+    const { data, error } = await supa.auth.signUp({ email, password });
+    if (error) {
+      setMsg(xlErr(error.message));
+    } else if (data && data.user && data.user.identities && data.user.identities.length > 0) {
+      await enterApp(data.user);
+    } else {
+      setMsg('Controlla la tua email per confermare l\'account.', 'success');
+    }
+  } catch(e) {
+    setMsg('Errore di connessione. Riprova.');
+  }
+  g('btn-register').disabled = false;
+  g('btn-register').textContent = 'Crea account';
 });
 
-D.forgot.addEventListener('click', async e => {
+/* Forgot password */
+g('link-forgot').addEventListener('click', async e => {
   e.preventDefault();
-  const email = D.lEmail.value.trim();
-  if (!email) { setAMsg('Inserisci prima la tua email.'); return; }
-  const { error } = await supa.auth.resetPasswordForEmail(email, { redirectTo: 'https://gildaossani.github.io/gilda-app/' });
-  if (error) setAMsg(xlErr(error.message));
-  else setAMsg('Email di reset inviata. Controlla la posta.', 'success');
+  const email = g('login-email').value.trim();
+  if (!email) { setMsg('Inserisci prima la tua email.'); return; }
+  const { error } = await supa.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://gildaossani.github.io/gilda-app/'
+  });
+  if (error) setMsg(xlErr(error.message));
+  else setMsg('Email di reset inviata.', 'success');
 });
 
-D.tabs.forEach(tab => tab.addEventListener('click', () => {
-  D.tabs.forEach(t=>t.classList.remove('active')); tab.classList.add('active');
-  const t = tab.dataset.tab;
-  D.fLogin.classList.toggle('active', t==='login');
-  D.fReg.classList.toggle('active', t==='register');
-  clearAMsg();
-}));
+/* Auth tabs */
+document.querySelectorAll('.auth-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.dataset.tab;
+    g('form-login').classList.toggle('hidden', target !== 'login');
+    g('form-register').classList.toggle('hidden', target !== 'register');
+    clearMsg();
+  });
+});
 
-D.logout.addEventListener('click', () => supa.auth.signOut());
+/* Logout */
+g('btn-logout').addEventListener('click', async () => {
+  await supa.auth.signOut();
+  leaveApp();
+});
+
+/* Back */
+g('btn-back').addEventListener('click', goBack);
+
+/* Profile */
+g('btn-profile').addEventListener('click', () => {
+  if (!viewProfile.classList.contains('hidden')) {
+    goBack();
+  } else {
+    renderProfile();
+    showView(viewProfile);
+  }
+});
 
 function xlErr(m) {
   const map = {
@@ -254,32 +311,41 @@ function xlErr(m) {
   return map[m] || m;
 }
 
+/* ═══════════════════════════════════════════════
+   DATI
+═══════════════════════════════════════════════ */
 async function loadData() {
   if (!supa || !me) return;
   try {
     const { data: rows } = await supa.from('user_answers').select('answer_key, answer_text').eq('user_id', me.id);
     ans = {};
-    (rows||[]).forEach(r => { ans[r.answer_key]=r.answer_text; });
+    (rows || []).forEach(r => { ans[r.answer_key] = r.answer_text; });
 
     const { data: prods } = await supa.from('user_products').select('product_id').eq('user_id', me.id);
-    open = (prods||[]).map(r=>r.product_id);
+    opened = (prods || []).map(r => r.product_id);
 
-    if (CATALOG.length>0 && !open.includes(CATALOG[0].id)) {
-      open.push(CATALOG[0].id);
-      await supa.from('user_products').upsert({ user_id:me.id, product_id:CATALOG[0].id, unlocked_at:new Date().toISOString() }, { onConflict:'user_id,product_id' });
+    if (CATALOG.length > 0 && !opened.includes(CATALOG[0].id)) {
+      opened.push(CATALOG[0].id);
+      await supa.from('user_products').upsert(
+        { user_id: me.id, product_id: CATALOG[0].id, unlocked_at: new Date().toISOString() },
+        { onConflict: 'user_id,product_id' }
+      );
     }
   } catch(e) { console.error('loadData:', e); }
 }
 
 async function saveAns(pid, sid, qi, text) {
-  const key = ak(pid,sid,qi);
+  const key = aKey(pid, sid, qi);
   ans[key] = text;
   if (!supa || !me) return;
   clearTimeout(timers[key]);
   timers[key] = setTimeout(async () => {
     setStat(key, 'saving');
     try {
-      await supa.from('user_answers').upsert({ user_id:me.id, answer_key:key, answer_text:text, updated_at:new Date().toISOString() }, { onConflict:'user_id,answer_key' });
+      await supa.from('user_answers').upsert(
+        { user_id: me.id, answer_key: key, answer_text: text, updated_at: new Date().toISOString() },
+        { onConflict: 'user_id,answer_key' }
+      );
       setStat(key, 'saved');
     } catch(e) { console.error('saveAns:', e); }
   }, 800);
@@ -288,144 +354,194 @@ async function saveAns(pid, sid, qi, text) {
 function setStat(key, st) {
   const el = document.querySelector(`[data-save-key="${key}"]`);
   if (!el) return;
-  if (st==='saving') { el.className='question-saved saving'; el.textContent='Salvataggio…'; }
-  else { el.className='question-saved saved'; el.textContent='✓ Salvato'; setTimeout(()=>{ if(el){el.className='question-saved'; el.textContent='';} }, 2500); }
+  if (st === 'saving') { el.className = 'question-saved saving'; el.textContent = 'Salvataggio…'; }
+  else { el.className = 'question-saved saved'; el.textContent = '✓ Salvato'; setTimeout(() => { if (el) { el.className = 'question-saved'; el.textContent = ''; } }, 2500); }
 }
 
-D.uBtn.addEventListener('click', doUnlock);
-D.uInput.addEventListener('keydown', e => { if(e.key==='Enter') doUnlock(); });
+/* ═══════════════════════════════════════════════
+   UNLOCK
+═══════════════════════════════════════════════ */
+g('btn-unlock').addEventListener('click', doUnlock);
+g('unlock-input').addEventListener('keydown', e => { if (e.key === 'Enter') doUnlock(); });
 
 async function doUnlock() {
-  const code = D.uInput.value.trim().toUpperCase();
+  const code = g('unlock-input').value.trim().toUpperCase();
   if (!code) return;
-  D.uBtn.disabled=true; D.uBtn.textContent='…';
-  D.uMsg.className='unlock-message hidden';
+  g('btn-unlock').disabled = true;
+  g('btn-unlock').textContent = '…';
+  g('unlock-message').className = 'unlock-message hidden';
   try {
-    const { data:row, error } = await supa.from('unlock_codes').select('*').eq('code', code).single();
-    if (error||!row) { showUMsg('Codice non valido.', 'error'); return; }
-    if (row.used_by && row.used_by!==me.id) { showUMsg('Codice già usato.', 'error'); return; }
-    if (isOpen(row.product_id)) { showUMsg('Prodotto già in libreria.', 'error'); return; }
-    await supa.from('unlock_codes').update({ used_by:me.id, used_at:new Date().toISOString() }).eq('code', code);
-    await supa.from('user_products').upsert({ user_id:me.id, product_id:row.product_id, unlocked_at:new Date().toISOString() }, { onConflict:'user_id,product_id' });
-    open.push(row.product_id);
-    D.uInput.value='';
-    showUMsg('Prodotto sbloccato!', 'success');
-    renderLib();
-  } catch(e) { showUMsg('Errore. Riprova.', 'error'); }
-  finally { D.uBtn.disabled=false; D.uBtn.textContent='Sblocca'; }
+    const { data: row, error } = await supa.from('unlock_codes').select('*').eq('code', code).single();
+    if (error || !row) { showUM('Codice non valido.', 'error'); return; }
+    if (row.used_by && row.used_by !== me.id) { showUM('Codice già usato.', 'error'); return; }
+    if (isOpen(row.product_id)) { showUM('Prodotto già in libreria.', 'error'); return; }
+    await supa.from('unlock_codes').update({ used_by: me.id, used_at: new Date().toISOString() }).eq('code', code);
+    await supa.from('user_products').upsert(
+      { user_id: me.id, product_id: row.product_id, unlocked_at: new Date().toISOString() },
+      { onConflict: 'user_id,product_id' }
+    );
+    opened.push(row.product_id);
+    g('unlock-input').value = '';
+    showUM('Prodotto sbloccato!', 'success');
+    renderLibrary();
+  } catch(e) { showUM('Errore. Riprova.', 'error'); }
+  finally { g('btn-unlock').disabled = false; g('btn-unlock').textContent = 'Sblocca'; }
 }
 
-function showUMsg(m, t) { D.uMsg.textContent=m; D.uMsg.className=`unlock-message ${t}`; }
+function showUM(m, t) {
+  const el = g('unlock-message');
+  el.textContent = m;
+  el.className = 'unlock-message ' + t;
+}
 
+/* ═══════════════════════════════════════════════
+   PROGRESS
+═══════════════════════════════════════════════ */
 function pct(pid) {
-  const p=getProd(pid); if(!p) return 0;
-  let tot=0, done=0;
-  p.sections.forEach(s => s.questions.forEach((_,i) => { tot++; const k=ak(pid,s.id,i); if(ans[k]&&ans[k].trim()) done++; }));
-  return tot===0 ? 0 : Math.round((done/tot)*100);
+  const p = getProd(pid); if (!p) return 0;
+  let tot = 0, done = 0;
+  p.sections.forEach(s => s.questions.forEach((_, i) => {
+    tot++;
+    const k = aKey(pid, s.id, i);
+    if (ans[k] && ans[k].trim()) done++;
+  }));
+  return tot === 0 ? 0 : Math.round((done / tot) * 100);
 }
 
 function secDone(pid, sid) {
-  const p=getProd(pid); if(!p) return false;
-  const s=p.sections.find(s=>s.id===sid); if(!s) return false;
-  return s.questions.every((_,i) => { const k=ak(pid,sid,i); return ans[k]&&ans[k].trim(); });
+  const p = getProd(pid); if (!p) return false;
+  const s = p.sections.find(s => s.id === sid); if (!s) return false;
+  return s.questions.every((_, i) => { const k = aKey(pid, sid, i); return ans[k] && ans[k].trim(); });
 }
 
-function renderLib() {
-  D.grid.innerHTML='';
-  CATALOG.forEach(p => D.grid.appendChild(buildCard(p, isOpen(p.id), pct(p.id))));
+/* ═══════════════════════════════════════════════
+   RENDER
+═══════════════════════════════════════════════ */
+function renderLibrary() {
+  const grid = g('products-grid');
+  grid.innerHTML = '';
+  CATALOG.forEach(p => {
+    const unlk = isOpen(p.id);
+    const pc = pct(p.id);
+    const div = document.createElement('div');
+    div.className = 'product-card' + (unlk ? '' : ' locked');
+    if (unlk) div.addEventListener('click', () => openProduct(p.id));
+    const prev = p.sections.slice(0, 3).map(s => `<div class="preview-section-item">${s.name}</div>`).join('');
+    div.innerHTML = `
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-tag">${p.tag}</div>
+        <div class="card-title">${p.title}</div>
+        <div class="card-desc">${p.description}</div>
+        ${unlk
+          ? `<div class="card-progress"><div class="card-progress-track"><div class="card-progress-fill" style="width:${pc}%"></div></div><span class="card-progress-pct">${pc}%</span></div>`
+          : `<div class="card-locked-badge"><svg class="lock-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="card-locked-text">Sblocca con codice — ${p.price}</span></div>`
+        }
+      </div>
+      ${!unlk ? `<div class="card-preview"><div class="card-preview-title">Cosa trovi dentro</div><div class="card-preview-sections">${prev}</div></div>` : ''}
+    `;
+    grid.appendChild(div);
+  });
 }
 
-function buildCard(p, unlk, pc) {
-  const div=document.createElement('div');
-  div.className=`product-card ${unlk?'':'locked'}`;
-  if (unlk) div.addEventListener('click', ()=>openProd(p.id));
-  const prev=p.sections.slice(0,3).map(s=>`<div class="preview-section-item">${s.name}</div>`).join('');
-  div.innerHTML=`
-    <div class="card-stripe"></div>
-    <div class="card-body">
-      <div class="card-tag">${p.tag}</div>
-      <div class="card-title">${p.title}</div>
-      <div class="card-desc">${p.description}</div>
-      ${unlk ? `<div class="card-progress"><div class="card-progress-track"><div class="card-progress-fill" style="width:${pc}%"></div></div><span class="card-progress-pct">${pc}%</span></div>`
-              : `<div class="card-locked-badge"><svg class="lock-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="card-locked-text">Sblocca con codice — ${p.price}</span></div>`}
-    </div>
-    ${!unlk ? `<div class="card-preview"><div class="card-preview-title">Cosa trovi dentro</div><div class="card-preview-sections">${prev}</div></div>` : ''}
+function openProduct(pid) {
+  prodId = pid;
+  renderProduct(pid);
+  showView(viewProduct);
+}
+
+function renderProduct(pid) {
+  const p = getProd(pid); if (!p) return;
+  const pc = pct(pid);
+  g('product-header').innerHTML = `
+    <div class="product-header-tag">${p.tag}</div>
+    <div class="product-header-title">${p.title}</div>
+    <div class="product-header-desc">${p.description}</div>
   `;
-  return div;
-}
-
-function openProd(pid) { prodId=pid; renderProd(pid); goTo('product'); }
-
-function renderProd(pid) {
-  const p=getProd(pid); if(!p) return;
-  const pc=pct(pid);
-  D.pH.innerHTML=`<div class="product-header-tag">${p.tag}</div><div class="product-header-title">${p.title}</div><div class="product-header-desc">${p.description}</div>`;
-  D.pFill.style.width=`${pc}%`; D.pLbl.textContent=`${pc}%`;
-  D.sList.innerHTML='';
-  p.sections.forEach((s,i) => {
-    const done=secDone(pid,s.id);
-    const item=document.createElement('div');
-    item.className=`section-item ${done?'completed':''}`;
-    item.innerHTML=`<div class="section-num">${done?'✓':i+1}</div><div class="section-info"><div class="section-name">${s.name}</div><div class="section-count">${s.questions.length} domande</div></div><svg class="section-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 18 15 12 9 6"/></svg>`;
-    item.addEventListener('click', ()=>openSec(pid,i));
-    D.sList.appendChild(item);
+  g('progress-fill').style.width = pc + '%';
+  g('progress-label').textContent = pc + '%';
+  const list = g('sections-list');
+  list.innerHTML = '';
+  p.sections.forEach((s, i) => {
+    const done = secDone(pid, s.id);
+    const item = document.createElement('div');
+    item.className = 'section-item' + (done ? ' completed' : '');
+    item.innerHTML = `
+      <div class="section-num">${done ? '✓' : i + 1}</div>
+      <div class="section-info"><div class="section-name">${s.name}</div><div class="section-count">${s.questions.length} domande</div></div>
+      <svg class="section-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 18 15 12 9 6"/></svg>
+    `;
+    item.addEventListener('click', () => openSection(pid, i));
+    list.appendChild(item);
   });
 }
 
-function openSec(pid, idx) { prodId=pid; secIdx=idx; renderSec(pid,idx); goTo('section'); }
-
-function renderSec(pid, idx) {
-  const p=getProd(pid); if(!p) return;
-  const s=p.sections[idx]; if(!s) return;
-  D.sH.innerHTML=`<div class="section-header-label">${p.title} — ${idx+1} / ${p.sections.length}</div><div class="section-header-title">${s.name}</div>`;
-  D.qList.innerHTML='';
-  s.questions.forEach((q,qi) => {
-    const key=ak(pid,s.id,qi);
-    const block=document.createElement('div');
-    block.className='question-block';
-    block.innerHTML=`<div class="question-num">Domanda ${qi+1}</div><div class="question-text">${q}</div><textarea class="question-textarea" placeholder="Scrivi qui la tua risposta…" rows="4"></textarea><div class="question-saved" data-save-key="${key}"></div>`;
-    const ta=block.querySelector('textarea');
-    ta.value=ans[key]||'';
-    ta.addEventListener('input', ()=>saveAns(pid,s.id,qi,ta.value));
-    D.qList.appendChild(block);
-  });
-  D.prev.disabled=idx===0;
-  D.next.disabled=idx===p.sections.length-1;
-  D.prev.onclick=()=>{ secIdx--; renderSec(pid,secIdx); window.scrollTo({top:0,behavior:'smooth'}); };
-  D.next.onclick=()=>{ secIdx++; renderSec(pid,secIdx); window.scrollTo({top:0,behavior:'smooth'}); };
+function openSection(pid, idx) {
+  prodId = pid; secIdx = idx;
+  renderSection(pid, idx);
+  showView(viewSection);
 }
 
-D.exp.addEventListener('click', () => {
-  const p=getProd(prodId); if(!p) return;
-  let txt=`${p.title}\nEsportato il ${new Date().toLocaleDateString('it-IT')}\n${'═'.repeat(50)}\n\n`;
-  p.sections.forEach((s,si) => {
-    txt+=`${si+1}. ${s.name}\n${'─'.repeat(30)}\n\n`;
-    s.questions.forEach((q,qi) => { const k=ak(p.id,s.id,qi); txt+=`D${qi+1}: ${q}\nR: ${ans[k]||'—'}\n\n`; });
-    txt+='\n';
+function renderSection(pid, idx) {
+  const p = getProd(pid); if (!p) return;
+  const s = p.sections[idx]; if (!s) return;
+  g('section-header').innerHTML = `
+    <div class="section-header-label">${p.title} — ${idx + 1} / ${p.sections.length}</div>
+    <div class="section-header-title">${s.name}</div>
+  `;
+  const list = g('questions-list');
+  list.innerHTML = '';
+  s.questions.forEach((q, qi) => {
+    const key = aKey(pid, s.id, qi);
+    const block = document.createElement('div');
+    block.className = 'question-block';
+    block.innerHTML = `
+      <div class="question-num">Domanda ${qi + 1}</div>
+      <div class="question-text">${q}</div>
+      <textarea class="question-textarea" placeholder="Scrivi qui la tua risposta…" rows="4"></textarea>
+      <div class="question-saved" data-save-key="${key}"></div>
+    `;
+    const ta = block.querySelector('textarea');
+    ta.value = ans[key] || '';
+    ta.addEventListener('input', () => saveAns(pid, s.id, qi, ta.value));
+    list.appendChild(block);
   });
-  const blob=new Blob([txt],{type:'text/plain;charset=utf-8'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a'); a.href=url; a.download=`gilda-${p.slug}-risposte.txt`; a.click();
+  const btnPrev = g('btn-prev-section');
+  const btnNext = g('btn-next-section');
+  btnPrev.disabled = idx === 0;
+  btnNext.disabled = idx === p.sections.length - 1;
+  btnPrev.onclick = () => { secIdx--; renderSection(pid, secIdx); window.scrollTo(0, 0); };
+  btnNext.onclick = () => { secIdx++; renderSection(pid, secIdx); window.scrollTo(0, 0); };
+}
+
+/* Export */
+g('btn-export').addEventListener('click', () => {
+  const p = getProd(prodId); if (!p) return;
+  let txt = `${p.title}\nEsportato il ${new Date().toLocaleDateString('it-IT')}\n${'═'.repeat(50)}\n\n`;
+  p.sections.forEach((s, si) => {
+    txt += `${si + 1}. ${s.name}\n${'─'.repeat(30)}\n\n`;
+    s.questions.forEach((q, qi) => { const k = aKey(p.id, s.id, qi); txt += `D${qi + 1}: ${q}\nR: ${ans[k] || '—'}\n\n`; });
+    txt += '\n';
+  });
+  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = `gilda-${p.slug}-risposte.txt`; a.click();
   URL.revokeObjectURL(url);
-  showToast('File esportato ✓');
+  toast('File esportato ✓');
 });
 
-function renderProf() {
-  D.pEmail.textContent=me?.email||'';
-  const tot=Object.values(ans).filter(v=>v&&v.trim()).length;
-  D.pStats.innerHTML=`
-    <div class="stat-row"><span class="stat-label">Prodotti sbloccati</span><span class="stat-value">${open.length}</span></div>
+/* Profile */
+function renderProfile() {
+  g('profile-email').textContent = me ? me.email : '';
+  const tot = Object.values(ans).filter(v => v && v.trim()).length;
+  g('profile-stats').innerHTML = `
+    <div class="stat-row"><span class="stat-label">Prodotti sbloccati</span><span class="stat-value">${opened.length}</span></div>
     <div class="stat-row"><span class="stat-label">Risposte scritte</span><span class="stat-value">${tot}</span></div>
-    ${CATALOG.filter(p=>isOpen(p.id)).map(p=>`<div class="stat-row"><span class="stat-label">${p.title}</span><span class="stat-value">${pct(p.id)}%</span></div>`).join('')}
+    ${CATALOG.filter(p => isOpen(p.id)).map(p => `<div class="stat-row"><span class="stat-label">${p.title}</span><span class="stat-value">${pct(p.id)}%</span></div>`).join('')}
   `;
 }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/gilda-app/service-worker.js')
-      .then(r=>console.info('SW:', r.scope))
-      .catch(e=>console.warn('SW failed:', e));
-  });
-}
-
+/* ═══════════════════════════════════════════════
+   AVVIO
+═══════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', boot);
