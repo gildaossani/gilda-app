@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════
-   GILDA PWA — app.js v5.0
+   GILDA PWA — app.js v6.0
    Il Meccanismo — struttura completa
 ═══════════════════════════════════════════════ */
 
@@ -20,15 +20,31 @@ const CATALOG = [
     type: 'meccanismo',
     intro: {
       title: 'Una nota onesta.',
-      text: 'Questo non è un workbook per sentirti meglio. Non promette cambiamenti in sette giorni. Non ti chiede di credere in te stessa. È uno strumento per guardare da vicino qualcosa che di solito preferisci tenere leggermente sfocato: il modo preciso in cui ti metti i bastoni tra le ruote, e le ragioni impeccabili con cui giustifichi questa scelta. Non cerchiamo colpevoli. Sarebbe comodo, quindi lo lasciamo fare ad altri. Cerchiamo il meccanismo. Il tuo, specifico, personale, probabilmente abbastanza intelligente da sembrare ragionevole la maggior parte delle volte. Puoi compilarlo in una seduta o a spezzoni. Puoi tornare indietro, cancellare, riscrivere. L\'unica cosa che non ha senso fare è rispondere quello che pensi si debba rispondere.',
-      signature: '— Gilda ☕'
+      blockquote: 'Questo non è un workbook per sentirti meglio.\nNon promette cambiamenti in sette giorni. Non ti chiede di credere in te stessa.',
+      paragraphs: [
+        'È uno strumento per guardare da vicino qualcosa che di solito preferisci tenere leggermente sfocato: il modo preciso in cui ti metti i bastoni tra le ruote, e le ragioni impeccabili con cui giustifichi questa scelta.',
+        'Non cerchiamo colpevoli. Sarebbe comodo, quindi lo lasciamo fare ad altri. Cerchiamo il meccanismo. Il tuo, specifico, personale, probabilmente abbastanza intelligente da sembrare ragionevole la maggior parte delle volte.',
+        'Puoi compilarlo in una seduta o a spezzoni. Puoi tornare indietro, cancellare, riscrivere. L\'unica cosa che non ha senso fare è rispondere quello che pensi si debba rispondere. Nessuno legge questo tranne te.'
+      ],
+      signature: '— Gilda'
+    },
+    instructions: {
+      title: 'Come usare questo strumento.',
+      items: [
+        { label: 'Quattro sezioni', text: 'Il tuo pattern / Il momento esatto / La logica interna / Il passo piccolo. Seguono una logica. Meglio non saltare.' },
+        { label: 'Salvato in automatico', text: 'Tutto quello che scrivi viene salvato nel cloud. Se chiudi e riapri, trovi le tue risposte da qualsiasi dispositivo.' },
+        { label: 'Esporta', text: 'Usa il tasto Esporta per scaricare le tue risposte in formato testo. Torna a compilarlo quando il meccanismo si riattiva.' },
+        { label: 'Un episodio specifico', text: 'Funziona meglio se pensi a una situazione concreta. Non al tuo modo di essere in generale, ma a una volta precisa.' },
+      ]
     },
     sections: [
       {
         id: 's1',
         name: 'Il tuo pattern',
         number: 'I',
-        intro: 'Non sei ferma. Sei occupatissima a non fare la cosa che conta. L\'autosabotaggio elegante non assomiglia all\'immobilità. Ha un\'agenda piena, ottimi motivi, un senso di responsabilità molto sviluppato. In questa sezione identifichiamo il tuo modo specifico di fare una cosa invece dell\'altra.',
+        openerBg: 'terracotta',
+        openerIntro: 'Non sei ferma. Sei occupatissima a non fare la cosa che conta.',
+        intro: 'L\'autosabotaggio elegante non assomiglia all\'immobilità. Ha un\'agenda piena, ottimi motivi, un senso di responsabilità molto sviluppato. In questa sezione identifichiamo il tuo modo specifico di fare una cosa invece dell\'altra.',
         checklist: [
           { id: 'p1', title: 'Faccio cose utili per evitare quella che conta davvero', note: 'Rispondo email, sistemo, organizzo. Tutto urgente. Niente importante.' },
           { id: 'p2', title: 'Perfeziono ancora prima di agire', note: 'Non è mai abbastanza pronto. Ancora un giro. Ancora.' },
@@ -52,13 +68,16 @@ const CATALOG = [
             { id: 'q-sintesi-evito', label: 'In questo modo evito di...', placeholder: '...' },
           ]
         },
-        quote: 'Non hai un problema di disciplina. Hai una parte di te che ha delle priorità diverse dalle tue.'
+        quote: 'Non hai un problema di disciplina. Hai una parte di te che ha delle priorità diverse dalle tue.',
+        editorialBreak: true
       },
       {
         id: 's2',
         name: 'Il momento esatto',
         number: 'II',
-        intro: 'Il punto non è diventare invincibile. Il punto è beccarti in flagrante. In questa sezione lavoriamo su un episodio specifico: il momento preciso in cui stavi per fare la cosa vera e hai fatto altro. Non in generale. Quella volta lì.',
+        openerBg: 'beige',
+        openerIntro: 'Il punto non è diventare invincibile. Il punto è beccarti in flagrante.',
+        intro: 'In questa sezione lavoriamo su un episodio specifico: il momento preciso in cui stavi per fare la cosa vera e hai fatto altro. Non in generale. Quella volta lì.',
         questions: [
           { id: 'q-episodio', label: 'L\'episodio', hint: 'Descrivi brevemente cosa stava per succedere. Cosa avevi in programma di fare?', placeholder: 'Stavo per...' },
           { id: 'q-visibilita', label: 'Cosa sarebbe diventato visibile', hint: 'Se fossi andata avanti, cos\'avrebbe potuto vedere qualcuno?', placeholder: 'Se lo facevo, diventava visibile che...' },
@@ -78,13 +97,16 @@ const CATALOG = [
             { id: 'q-storia-breve', label: 'La mia storia era...', placeholder: '...' },
           ]
         },
-        quote: 'La deviazione raramente sembra una fuga. Sembra una scelta ragionevole.'
+        quote: 'La deviazione raramente sembra una fuga. Sembra una scelta ragionevole.',
+        editorialBreak: false
       },
       {
         id: 's3',
         name: 'La logica interna',
         number: 'III',
-        intro: 'L\'autosabotaggio non è stupidità. È una strategia. Spesso funziona benissimo, per quello che è stata progettata per fare. Non cerchiamo cause, non risaliamo alle origini, non diagnostichiamo niente. Cerchiamo la logica: cosa stava proteggendo quella parte di te che ha deviato?',
+        openerBg: 'dark',
+        openerIntro: 'L\'autosabotaggio non è stupidità. È una strategia.',
+        intro: 'Non cerchiamo cause, non risaliamo alle origini, non diagnostichiamo niente. Cerchiamo la logica: cosa stava proteggendo quella parte di te che ha deviato?',
         questions: [
           { id: 'q-vantaggio', label: 'Il vantaggio immediato', hint: 'Cosa hai guadagnato nell\'immediato fermandoti? Anche una cosa piccola conta.', placeholder: 'Mi sono risparmiata... ho mantenuto...' },
           { id: 'q-protezione', label: 'La protezione', hint: 'Da cosa ti ha protetta quella deviazione? Sii precisa, non generica.', placeholder: 'Mi ha protetta da...' },
@@ -103,13 +125,16 @@ const CATALOG = [
             { id: 'q-sintesi-controllo', label: 'E mantengo il controllo su...', placeholder: '...' },
           ]
         },
-        quote: 'Nessuna di queste risposte ti rende stupida. Ti rendono umana con una strategia precisa.'
+        quote: 'Nessuna di queste risposte ti rende stupida. Ti rendono umana con una strategia precisa.',
+        editorialBreak: false
       },
       {
         id: 's4',
         name: 'Il passo piccolo',
         number: 'IV',
-        intro: 'Non devi diventare un\'altra persona. Devi rendere più difficile mentirti. Non si tratta di superare la resistenza con la forza. Si tratta di aggirarla. Un\'azione così piccola da sembrare quasi ridicola. Concreta. Reale. Domani.',
+        openerBg: 'cipria',
+        openerIntro: 'Non devi diventare un\'altra persona. Devi rendere più difficile mentirti.',
+        intro: 'Non si tratta di superare la resistenza con la forza. Si tratta di aggirarla. Un\'azione così piccola da sembrare quasi ridicola. Concreta. Reale. Domani.',
         questions: [
           { id: 'q-opzione-1', label: 'Prima opzione di passo piccolo', hint: 'Un\'azione che si fa in meno di 10 minuti, specifica e verificabile, nella direzione della cosa che stai evitando.', placeholder: 'Potrei...' },
           { id: 'q-opzione-2', label: 'Seconda opzione', hint: 'Anche quella che sembra banale o insufficiente.', placeholder: 'Oppure...' },
@@ -134,12 +159,12 @@ const CATALOG = [
         closing: {
           title: 'Hai visto il meccanismo.',
           text: 'Non è un risultato. È un punto di partenza. Il meccanismo continuerà ad attivarsi. Ma ora sai dove guardare. La prossima volta che devia, la riconoscerai. E questo, già, è qualcosa.',
-          signature: 'Gilda 🌙'
+          signature: '— Gilda'
         },
         final: {
           title: 'Se vuoi andare più a fondo.',
-          text: 'Arrivare fino in fondo a questo strumento non è scontato. Significa che sei disposta a guardare, e questo già cambia qualcosa nel modo in cui il meccanismo funziona. Il cervello impara a riconoscere i pattern ogni volta che li incontra. Hai trovato un filo. Ce ne sono altri e ogni volta che ne trovi uno e lo tiri, il meccanismo perde un po\'del suo potere. Puoi scaricare le tue risposte in qualsiasi momento e ricominciare da capo quando il meccanismo si riattiva di nuovo. Funziona meglio nel tempo, non in una sola sessione.',
-          signature: 'Gilda 🌙'
+          text: 'Arrivare fino in fondo a questo strumento non è scontato. Significa che sei disposta a guardare, e questo già cambia qualcosa nel modo in cui il meccanismo funziona. Il cervello impara a riconoscere i pattern ogni volta che li incontra. Hai trovato un filo. Ce ne sono altri e ogni volta che ne trovi uno e lo tiri, il meccanismo perde un po\' del suo potere. Puoi scaricare le tue risposte in qualsiasi momento e ricominciare da capo quando il meccanismo si riattiva di nuovo. Funziona meglio nel tempo, non in una sola sessione.',
+          signature: '— Gilda'
         }
       },
     ],
@@ -153,25 +178,25 @@ const CATALOG = [
     price: '€9',
     type: 'standard',
     sections: [
-      { id: 's1', name: 'La voce', number: 'I', questions: [
+      { id: 's1', name: 'La voce', number: 'I', openerBg: 'dark', questions: [
         { id: 'q1', label: "Quando senti per la prima volta quella voce", hint: 'In quale situazione si fa più forte?', placeholder: 'La voce si fa sentire quando...' },
         { id: 'q2', label: "Con chi suona più forte", hint: 'A lavoro, in amore, con la famiglia, da sola?', placeholder: 'Soprattutto con...' },
         { id: 'q3', label: "Se quella voce avesse un volto", hint: 'A chi assomiglierebbe?', placeholder: 'Assomiglierebbe a...' },
         { id: 'q4', label: "Cosa succederebbe se quella voce avesse torto", hint: '', placeholder: 'Se avesse torto...' },
       ]},
-      { id: 's2', name: 'Le prove', number: 'II', questions: [
+      { id: 's2', name: 'Le prove', number: 'II', openerBg: 'beige', questions: [
         { id: 'q1', label: "Cosa fai per dimostrare di valere", hint: 'Elenca anche le cose piccole.', placeholder: 'Faccio...' },
         { id: 'q2', label: "Quando ottieni qualcosa riesci a godertelo", hint: 'O passi subito al prossimo obiettivo?', placeholder: 'Di solito...' },
         { id: 'q3', label: "Hai mai sabotato qualcosa di buono", hint: "Perché non ti sentivi abbastanza?", placeholder: 'Sì, quando...' },
         { id: 'q4', label: "Cosa non hai fatto perché non eri pronta", hint: '', placeholder: 'Ho rimandato...' },
       ]},
-      { id: 's3', name: "L'origine", number: 'III', questions: [
+      { id: 's3', name: "L'origine", number: 'III', openerBg: 'terracotta', questions: [
         { id: 'q1', label: "Chi ti ha fatto credere che non fossi abbastanza", hint: 'Per la prima volta.', placeholder: 'È stato...' },
         { id: 'q2', label: "C'era una versione di te che si sentiva abbastanza", hint: 'Quanti anni aveva?', placeholder: 'Avevo circa...' },
         { id: 'q3', label: "Cosa ti è stato chiesto di essere che non eri", hint: '', placeholder: 'Mi chiedevano di essere...' },
         { id: 'q4', label: "Cosa avresti voluto che qualcuno ti dicesse allora", hint: '', placeholder: 'Avrei voluto sentire...' },
       ]},
-      { id: 's4', name: 'Adesso', number: 'IV', questions: [
+      { id: 's4', name: 'Adesso', number: 'IV', openerBg: 'cipria', questions: [
         { id: 'q1', label: "Cosa significherebbe sentirti abbastanza", hint: 'Concretamente.', placeholder: 'Significherebbe...' },
         { id: 'q2', label: "Qualcosa che fai bene e che fai fatica ad ammettere", hint: '', placeholder: 'So fare bene...' },
         { id: 'q3', label: "Se una tua amica ti descrivesse cosa direbbe di te", hint: '', placeholder: 'Direbbe che...' },
@@ -188,25 +213,25 @@ const CATALOG = [
     price: '€9',
     type: 'standard',
     sections: [
-      { id: 's1', name: 'Che paura è', number: 'I', questions: [
+      { id: 's1', name: 'Che paura è', number: 'I', openerBg: 'dark', questions: [
         { id: 'q1', label: "Descrivi la tua paura principale in questo momento", hint: 'Non la più grande in assoluto. Quella più presente adesso.', placeholder: 'La paura più presente è...' },
         { id: 'q2', label: "Come si manifesta nel corpo", hint: 'Fisicamente. Dove la senti?', placeholder: 'La sento...' },
         { id: 'q3', label: "Da quanto tempo è lì", hint: '', placeholder: 'È lì da...' },
         { id: 'q4', label: "Cosa fa quando si attiva", hint: 'Come cambia il tuo comportamento?', placeholder: 'Quando si attiva, io...' },
       ]},
-      { id: 's2', name: 'Cosa protegge', number: 'II', questions: [
+      { id: 's2', name: 'Cosa protegge', number: 'II', openerBg: 'beige', questions: [
         { id: 'q1', label: "Da cosa ti sta proteggendo questa paura", hint: 'Sii precisa, non generica.', placeholder: 'Mi sta proteggendo da...' },
         { id: 'q2', label: "Cosa perderesti se sparisse", hint: 'Anche qualcosa di piccolo o apparentemente assurdo.', placeholder: 'Perderei...' },
         { id: 'q3', label: "Quando ha iniziato ad avere senso", hint: 'In quale momento della tua vita questa paura era giustificata?', placeholder: 'Aveva senso quando...' },
         { id: 'q4', label: "Ha ancora senso oggi", hint: 'La situazione è cambiata?', placeholder: 'Oggi...' },
       ]},
-      { id: 's3', name: 'Cosa dice', number: 'III', questions: [
+      { id: 's3', name: 'Cosa dice', number: 'III', openerBg: 'terracotta', questions: [
         { id: 'q1', label: "Se la paura potesse parlare cosa ti direbbe", hint: '', placeholder: 'Mi direbbe...' },
         { id: 'q2', label: "Quanto di quello che dice è vero", hint: 'Sii onesta.', placeholder: 'È vero che...' },
         { id: 'q3', label: "Quanto è catastrofismo", hint: 'Cosa stai amplificando?', placeholder: 'Sto amplificando...' },
         { id: 'q4', label: "Cosa succederebbe davvero nel caso peggiore", hint: 'La versione realistica, non quella cinematografica.', placeholder: 'Nel caso peggiore...' },
       ]},
-      { id: 's4', name: 'Muoversi lo stesso', number: 'IV', questions: [
+      { id: 's4', name: 'Muoversi lo stesso', number: 'IV', openerBg: 'cipria', questions: [
         { id: 'q1', label: "Cosa faresti se la paura ci fosse ma non comandasse", hint: '', placeholder: 'Farei...' },
         { id: 'q2', label: "Qual è il passo più piccolo possibile in quella direzione", hint: 'Quello che puoi fare anche con la paura addosso.', placeholder: 'Potrei...' },
         { id: 'q3', label: "Chi o cosa ti ha già aiutata a muoverti nonostante la paura", hint: '', placeholder: 'Mi ha aiutata...' },
@@ -223,25 +248,25 @@ const CATALOG = [
     price: '€9',
     type: 'standard',
     sections: [
-      { id: 's1', name: 'Dove sono i tuoi confini oggi', number: 'I', questions: [
+      { id: 's1', name: 'Dove sono i tuoi confini oggi', number: 'I', openerBg: 'dark', questions: [
         { id: 'q1', label: "Una situazione recente in cui hai detto sì quando volevi dire no", hint: 'Cosa è successo?', placeholder: 'È successo quando...' },
         { id: 'q2', label: "Come ti sei sentita dopo", hint: '', placeholder: 'Mi sono sentita...' },
         { id: 'q3', label: "Hai paura di deludere qualcuno se metti un limite", hint: '', placeholder: 'Ho paura che...' },
         { id: 'q4', label: "Chi nella tua vita rispetta i tuoi spazi", hint: '', placeholder: 'Lo fa...' },
       ]},
-      { id: 's2', name: 'Quando hai smesso di averli', number: 'II', questions: [
+      { id: 's2', name: 'Quando hai smesso di averli', number: 'II', openerBg: 'beige', questions: [
         { id: 'q1', label: "Ricordi un momento in cui avevi confini chiari", hint: 'Cosa è cambiato?', placeholder: 'Avevo confini quando...' },
         { id: 'q2', label: "Cosa ti ha insegnato la famiglia sul dire no", hint: '', placeholder: 'Mi ha insegnato che...' },
         { id: 'q3', label: "Hai mai pagato un prezzo per aver messo un confine", hint: '', placeholder: 'Ho pagato...' },
         { id: 'q4', label: "Cosa significava essere difficile nella tua famiglia", hint: '', placeholder: 'Significava...' },
       ]},
-      { id: 's3', name: 'Il costo del sì continuo', number: 'III', questions: [
+      { id: 's3', name: 'Il costo del sì continuo', number: 'III', openerBg: 'terracotta', questions: [
         { id: 'q1', label: "Cosa ti costa dire sempre sì", hint: '', placeholder: 'Mi costa...' },
         { id: 'q2', label: "In quale area della tua vita senti più il peso", hint: '', placeholder: 'Lo sento di più...' },
         { id: 'q3', label: "Cosa hai rinunciato a fare per accontentare gli altri", hint: '', placeholder: 'Ho rinunciato a...' },
         { id: 'q4', label: "Il tuo corpo ti manda segnali quando superi i tuoi limiti", hint: '', placeholder: 'Sento...' },
       ]},
-      { id: 's4', name: 'Costruire confini che reggono', number: 'IV', questions: [
+      { id: 's4', name: 'Costruire confini che reggono', number: 'IV', openerBg: 'cipria', questions: [
         { id: 'q1', label: "Il confine più piccolo che potresti iniziare a mettere domani", hint: '', placeholder: 'Potrei...' },
         { id: 'q2', label: "Con chi è più difficile e perché", hint: '', placeholder: 'Con... perché...' },
         { id: 'q3', label: "Cosa cambierebbe nella tua vita se dicessi no più spesso", hint: '', placeholder: 'Cambierebbe...' },
@@ -301,6 +326,7 @@ function showView(name) {
   window.scrollTo(0, 0);
   hist.push(name);
   g('btn-back').classList.toggle('hidden', hist.length <= 1);
+  g('btn-export').classList.toggle('hidden', name !== 'view-product');
 }
 
 function goBack() {
@@ -311,6 +337,7 @@ function goBack() {
   g(prev).classList.remove('hidden');
   window.scrollTo(0, 0);
   g('btn-back').classList.toggle('hidden', hist.length <= 1);
+  g('btn-export').classList.toggle('hidden', prev !== 'view-product');
   if (prev === 'view-library') renderLibrary();
   if (prev === 'view-product' && prodId) renderProduct(prodId);
 }
@@ -608,6 +635,7 @@ function renderProduct(pid) {
   const p = getProd(pid); if (!p) return;
   const pc = productProgress(pid);
 
+  // Header dark con titolo
   g('product-header').innerHTML = `
     <div class="product-header-tag">${p.tag}</div>
     <div class="product-header-title">${p.title}</div>
@@ -619,19 +647,43 @@ function renderProduct(pid) {
   const list = g('sections-list');
   list.innerHTML = '';
 
-  /* Intro card */
+  // Intro card — struttura HTML: titolo + divider + blockquote + paragrafi
   if (p.intro) {
     const introCard = document.createElement('div');
     introCard.className = 'intro-card';
+    const bqLines = p.intro.blockquote.split('\n').map(l => `<p>${l}</p>`).join('');
+    const bodyParas = (p.intro.paragraphs || []).map(par => `<p class="intro-card-para">${par}</p>`).join('');
     introCard.innerHTML = `
-      <div class="intro-card-title">Prima di iniziare</div>
-      <div class="intro-card-text">${p.intro.text}</div>
+      <div class="intro-card-eyebrow">Prima di iniziare</div>
+      <div class="intro-card-title">${p.intro.title}</div>
+      <div class="intro-card-divider"></div>
+      <div class="intro-card-blockquote">${bqLines}</div>
+      <div class="intro-card-body">${bodyParas}</div>
       <div class="intro-card-sig">${p.intro.signature}</div>
     `;
     list.appendChild(introCard);
   }
 
-  /* Section cards */
+  // Istruzioni — pagina scura con 4 box bordo ocra
+  if (p.instructions) {
+    const instrCard = document.createElement('div');
+    instrCard.className = 'instructions-card';
+    const items = p.instructions.items.map(item => `
+      <div class="instr-item">
+        <p class="instr-item-label">${item.label}</p>
+        <p class="instr-item-text">${item.text}</p>
+      </div>
+    `).join('');
+    instrCard.innerHTML = `
+      <div class="instr-eyebrow">Istruzioni</div>
+      <div class="instr-title">${p.instructions.title}</div>
+      <div class="instr-divider"></div>
+      <div class="instr-grid">${items}</div>
+    `;
+    list.appendChild(instrCard);
+  }
+
+  // Section cards
   p.sections.forEach((s, i) => {
     const done = sectionComplete(pid, s.id);
     const item = document.createElement('div');
@@ -662,25 +714,23 @@ function renderSection(pid, idx) {
   const p = getProd(pid); if (!p) return;
   const s = p.sections[idx]; if (!s) return;
 
+  // Header sezione con numero romano grande in trasparenza
+  const bgClass = openerBgClass(s.openerBg);
   const header = g('section-header');
+  header.className = 'section-opener ' + bgClass;
   header.innerHTML = `
-    <div class="section-header-number">${s.number}</div>
-    <div class="section-header-label">${p.title} — Sezione ${idx + 1} di ${p.sections.length}</div>
-    <div class="section-header-title">${s.name}</div>
+    <div class="section-number-bg">${s.number}</div>
+    <span class="section-opener-label">Sezione ${romanToWord(s.number)}</span>
+    <h2 class="section-opener-title">${s.name}.</h2>
+    <div class="section-opener-divider"></div>
+    <p class="section-opener-intro">${s.openerIntro || ''}</p>
+    ${s.intro ? `<p class="section-opener-body">${s.intro}</p>` : ''}
   `;
 
   const list = g('questions-list');
   list.innerHTML = '';
 
-  /* Intro sezione */
-  if (s.intro) {
-    const introBlock = document.createElement('div');
-    introBlock.className = 'section-intro-block';
-    introBlock.textContent = s.intro;
-    list.appendChild(introBlock);
-  }
-
-  /* Checklist (solo s1) */
+  // Checklist (solo s1 meccanismo)
   if (s.checklist) {
     const clBlock = document.createElement('div');
     clBlock.className = 'checklist-block';
@@ -709,7 +759,7 @@ function renderSection(pid, idx) {
     list.appendChild(clBlock);
   }
 
-  /* Domande */
+  // Domande
   (s.questions || []).forEach(q => {
     const key = aKey(pid, s.id, q.id);
     const block = document.createElement('div');
@@ -729,7 +779,7 @@ function renderSection(pid, idx) {
     list.appendChild(block);
   });
 
-  /* Sintesi */
+  // Sintesi
   if (s.synthesis) {
     const synBlock = document.createElement('div');
     synBlock.className = 'synthesis-block';
@@ -753,7 +803,7 @@ function renderSection(pid, idx) {
     list.appendChild(synBlock);
   }
 
-  /* Quote */
+  // Quote — bordo sinistro terracotta
   if (s.quote) {
     const q = document.createElement('div');
     q.className = 'section-quote';
@@ -761,7 +811,23 @@ function renderSection(pid, idx) {
     list.appendChild(q);
   }
 
-  /* Closing */
+  // Pausa editoriale tra sezioni
+  if (s.editorialBreak && idx < p.sections.length - 1) {
+    const nextSec = p.sections[idx + 1];
+    const eb = document.createElement('div');
+    eb.className = 'editorial-break';
+    eb.innerHTML = `
+      <div class="editorial-break-inner">
+        <div class="editorial-quote-mark">"</div>
+        <p class="editorial-quote-text">${s.quote}</p>
+        <div class="editorial-divider"></div>
+        <p class="editorial-continue">Continua nella sezione ${idx + 2}</p>
+      </div>
+    `;
+    list.appendChild(eb);
+  }
+
+  // Closing
   if (s.closing) {
     const closing = document.createElement('div');
     closing.className = 'section-closing';
@@ -773,26 +839,37 @@ function renderSection(pid, idx) {
     list.appendChild(closing);
   }
 
-  /* Final page */
+  // Final page
   if (s.final) {
     const final = document.createElement('div');
     final.className = 'section-final';
     final.innerHTML = `
       <div class="final-label">Gilda Ossani</div>
       <div class="final-title">${s.final.title}</div>
+      <div class="final-divider"></div>
       <div class="final-text">${s.final.text}</div>
       <div class="final-sig">${s.final.signature}</div>
     `;
     list.appendChild(final);
   }
 
-  /* Nav prev/next */
+  // Nav prev/next
   const btnPrev = g('btn-prev-section');
   const btnNext = g('btn-next-section');
   btnPrev.disabled = idx === 0;
   btnNext.disabled = idx === p.sections.length - 1;
   btnPrev.onclick = () => { secIdx--; renderSection(pid, secIdx); window.scrollTo(0, 0); };
   btnNext.onclick = () => { secIdx++; renderSection(pid, secIdx); window.scrollTo(0, 0); };
+}
+
+function openerBgClass(bg) {
+  const map = { terracotta: 'opener--terracotta', beige: 'opener--beige', dark: 'opener--dark', cipria: 'opener--cipria' };
+  return map[bg] || 'opener--dark';
+}
+
+function romanToWord(r) {
+  const map = { 'I': 'uno', 'II': 'due', 'III': 'tre', 'IV': 'quattro' };
+  return map[r] || r;
 }
 
 /* ═══════════════════════════════════════════════
@@ -820,7 +897,7 @@ g('btn-export').addEventListener('click', () => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a'); a.href = url; a.download = `gilda-${p.slug}-risposte.txt`; a.click();
   URL.revokeObjectURL(url);
-  toast('File esportato ✓');
+  toast('File esportato');
 });
 
 /* ═══════════════════════════════════════════════
