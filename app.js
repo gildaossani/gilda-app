@@ -706,8 +706,14 @@ function renderProduct(pid) {
 ═══════════════════════════════════════════════ */
 function openSection(pid, idx) {
   prodId = pid; secIdx = idx;
-  renderSection(pid, idx);
-  showView('view-section');
+  const alreadyInSection = hist.length > 0 && hist[hist.length - 1] === 'view-section';
+  if (alreadyInSection) {
+    renderSection(pid, idx);
+    window.scrollTo(0, 0);
+  } else {
+    renderSection(pid, idx);
+    showView('view-section');
+  }
 }
 
 function renderSection(pid, idx) {
@@ -858,8 +864,8 @@ function renderSection(pid, idx) {
   const btnNext = g('btn-next-section');
   btnPrev.disabled = idx === 0;
   btnNext.disabled = idx === p.sections.length - 1;
-  btnPrev.onclick = () => { secIdx--; renderSection(pid, secIdx); window.scrollTo(0, 0); };
-  btnNext.onclick = () => { secIdx++; renderSection(pid, secIdx); window.scrollTo(0, 0); };
+  btnPrev.onclick = () => { if (secIdx > 0) { secIdx--; renderSection(pid, secIdx); window.scrollTo(0,0); } };
+  btnNext.onclick = () => { if (secIdx < p.sections.length - 1) { secIdx++; renderSection(pid, secIdx); window.scrollTo(0,0); } };
 }
 
 function openerBgClass(bg) {
