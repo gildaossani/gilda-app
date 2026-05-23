@@ -541,10 +541,10 @@ async function doUnlock() {
   g('unlock-message').className = 'unlock-message hidden';
   try {
     const { data: row, error } = await supa.from('unlock_codes').select('*').eq('code', code).single();
-    if (error || !row) { showUM('Codice non valido.', 'error'); return; }
-    if (row.used_by && row.used_by !== me.id) { showUM('Codice già usato.', 'error'); return; }
+    const isWelcome = code.startsWith('GILDA-WELCOME');
+    if (!isWelcome && row.used_by && row.used_by !== me.id) { showUM('Codice già usato.', 'error'); return; }
     if (isOpen(row.product_id)) { showUM('Prodotto già in libreria.', 'error'); return; }
-    await supa.from('unlock_codes').update({ used_by: me.id, used_at: new Date().toISOString() }).eq('code', code);
+    if (!isWelcome) await supa.from('unlock_codes').update({ used_by: me.id, used_at: new Date().toISOString() }).eq('code', code);
     await supa.from('user_products').upsert(
       { user_id: me.id, product_id: row.product_id, unlocked_at: new Date().toISOString() },
       { onConflict: 'user_id,product_id' }
