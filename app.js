@@ -172,10 +172,11 @@ const CATALOG = [
   {
     id: 'non-abbastanza',
     slug: 'non-sentirsi-abbastanza',
+    kofiUrl: 'https://ko-fi.com/s/c8964c27d8',
     tag: 'Percorso',
     title: 'Non sentirsi abbastanza',
     description: 'La voce che dice che non sei abbastanza non è la verità. È una strategia. Impariamo a riconoscerla.',
-    price: '€9',
+    price: '€9 + IVA',
     type: 'standard',
     intro: {
       title: 'Prima di iniziare.',
@@ -255,10 +256,11 @@ const CATALOG = [
   {
     id: 'paura',
     slug: 'la-paura',
+    kofiUrl: 'https://ko-fi.com/s/12e6f4363d',
     tag: 'Percorso',
     title: 'La paura',
     description: "La paura non è il problema. È l'informazione. Impariamo a leggerla senza obbedirle.",
-    price: '€9',
+    price: '€9 + IVA',
     type: 'standard',
     intro: {
       title: 'Prima di iniziare.',
@@ -338,10 +340,11 @@ const CATALOG = [
   {
     id: 'confini',
     slug: 'i-confini',
+    kofiUrl: 'https://ko-fi.com/s/e8c2cd9c99',
     tag: 'Percorso',
     title: 'I confini',
     description: 'Imparare a dire no non è essere difficili. È sapere dove finisci tu e dove inizia il dovere degli altri.',
-    price: '€9',
+    price: '€9 + IVA',
     type: 'standard',
     intro: {
       title: 'Prima di iniziare.',
@@ -754,12 +757,25 @@ function renderLibrary() {
         <div class="card-desc">${p.description}</div>
         ${unlk
           ? `<div class="card-progress"><div class="card-progress-track"><div class="card-progress-fill" style="width:${pc}%"></div></div><span class="card-progress-pct">${pc}%</span></div>`
-          : `<div class="card-locked-badge"><svg class="lock-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="card-locked-text">Sblocca con codice — ${p.price}</span></div>`
+          : `<div class="card-locked-buttons">
+              <div class="card-locked-badge" data-unlock="true"><svg class="lock-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="card-locked-text">Ho già un codice</span></div>
+              ${p.kofiUrl ? `<a href="${p.kofiUrl}" target="_blank" class="card-kofi-btn">Acquista su Ko-fi — ${p.price}</a>` : ''}
+            </div>`
         }
       </div>
       ${!unlk ? `<div class="card-preview"><div class="card-preview-title">Cosa trovi dentro</div><div class="card-preview-sections">${prev}</div></div>` : ''}
     `;
     grid.appendChild(div);
+  });
+
+  // Click su "Ho già un codice" → scroll all'input unlock
+  grid.querySelectorAll('[data-unlock="true"]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const unlockInput = g('unlock-input');
+      unlockInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => unlockInput.focus(), 400);
+    });
   });
 }
 
@@ -1063,4 +1079,61 @@ function renderProfile() {
 /* ═══════════════════════════════════════════════
    AVVIO
 ═══════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════
+   RESET PASSWORD
+═══════════════════════════════════════════════ */
+function showReset() {
+  g('loading').classList.add('hidden');
+  g('screen-auth').classList.add('hidden');
+  g('screen-app').classList.add('hidden');
+  g('screen-reset').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+g('btn-reset-confirm').addEventListener('click', async () => {
+  const pwd = g('reset-password').value;
+  const confirm = g('reset-password-confirm').value;
+  const msg = g('reset-message');
+  msg.className = 'auth-message hidden';
+
+  if (!pwd || pwd.length < 6) {
+    msg.textContent = 'La password deve avere almeno 6 caratteri.';
+    msg.className = 'auth-message error';
+    return;
+  }
+  if (pwd !== confirm) {
+    msg.textContent = 'Le password non coincidono.';
+    msg.className = 'auth-message error';
+    return;
+  }
+
+  g('btn-reset-confirm').disabled = true;
+  g('btn-reset-confirm').textContent = '…';
+
+  try {
+    const { error } = await supa.auth.updateUser({ password: pwd });
+    if (error) throw error;
+    msg.textContent = 'Password aggiornata. Accedi con la nuova password.';
+    msg.className = 'auth-message success';
+    setTimeout(() => {
+      g('screen-reset').classList.add('hidden');
+      showAuth();
+    }, 2000);
+  } catch (err) {
+    msg.textContent = err.message || 'Errore. Riprova.';
+    msg.className = 'auth-message error';
+  } finally {
+    g('btn-reset-confirm').disabled = false;
+    g('btn-reset-confirm').textContent = 'Salva nuova password';
+  }
+});
+
+// Intercetta il token di reset nell'URL
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'PASSWORD_RECOVERY') {
+    showReset();
+  }
+});
+
 document.addEventListener('DOMContentLoaded', boot);
