@@ -246,31 +246,65 @@ const CATALOG = [
     description: "La paura non è il problema. È l'informazione. Impariamo a leggerla senza obbedirle.",
     price: '€9',
     type: 'standard',
+    intro: {
+      title: 'Prima di iniziare.',
+      blockquote: 'Questo non è un percorso per eliminare la paura.\nNon funzionerebbe. E probabilmente non è nemmeno quello che vuoi davvero.',
+      paragraphs: [
+        'La paura è un segnale, non un nemico. Il punto non è farla smettere, ma capire cosa sta dicendo e smettere di lasciarle l'ultima parola.',
+        'In questo percorso guardiamo la tua paura specifica: dove abita, cosa protegge, quanto di quello che racconta è reale. Non per darle torto, ma per scegliere consapevolmente cosa fartene.',
+        'Puoi compilarlo in una seduta o tornare più volte. Funziona meglio se pensi a una paura concreta, non al tuo modo di essere in generale.'
+      ],
+      signature: '— Gilda'
+    },
     sections: [
-      { id: 's1', name: 'Che paura è', number: 'I', openerBg: 'dark', questions: [
-        { id: 'q1', label: "Descrivi la tua paura principale in questo momento", hint: 'Non la più grande in assoluto. Quella più presente adesso.', placeholder: 'La paura più presente è...' },
-        { id: 'q2', label: "Come si manifesta nel corpo", hint: 'Fisicamente. Dove la senti?', placeholder: 'La sento...' },
-        { id: 'q3', label: "Da quanto tempo è lì", hint: '', placeholder: 'È lì da...' },
-        { id: 'q4', label: "Cosa fa quando si attiva", hint: 'Come cambia il tuo comportamento?', placeholder: 'Quando si attiva, io...' },
-      ]},
-      { id: 's2', name: 'Cosa protegge', number: 'II', openerBg: 'beige', questions: [
-        { id: 'q1', label: "Da cosa ti sta proteggendo questa paura", hint: 'Sii precisa, non generica.', placeholder: 'Mi sta proteggendo da...' },
-        { id: 'q2', label: "Cosa perderesti se sparisse", hint: 'Anche qualcosa di piccolo o apparentemente assurdo.', placeholder: 'Perderei...' },
-        { id: 'q3', label: "Quando ha iniziato ad avere senso", hint: 'In quale momento della tua vita questa paura era giustificata?', placeholder: 'Aveva senso quando...' },
-        { id: 'q4', label: "Ha ancora senso oggi", hint: 'La situazione è cambiata?', placeholder: 'Oggi...' },
-      ]},
-      { id: 's3', name: 'Cosa dice', number: 'III', openerBg: 'terracotta', questions: [
-        { id: 'q1', label: "Se la paura potesse parlare cosa ti direbbe", hint: '', placeholder: 'Mi direbbe...' },
-        { id: 'q2', label: "Quanto di quello che dice è vero", hint: 'Sii onesta.', placeholder: 'È vero che...' },
-        { id: 'q3', label: "Quanto è catastrofismo", hint: 'Cosa stai amplificando?', placeholder: 'Sto amplificando...' },
-        { id: 'q4', label: "Cosa succederebbe davvero nel caso peggiore", hint: 'La versione realistica, non quella cinematografica.', placeholder: 'Nel caso peggiore...' },
-      ]},
-      { id: 's4', name: 'Muoversi lo stesso', number: 'IV', openerBg: 'cipria', questions: [
-        { id: 'q1', label: "Cosa faresti se la paura ci fosse ma non comandasse", hint: '', placeholder: 'Farei...' },
-        { id: 'q2', label: "Qual è il passo più piccolo possibile in quella direzione", hint: 'Quello che puoi fare anche con la paura addosso.', placeholder: 'Potrei...' },
-        { id: 'q3', label: "Chi o cosa ti ha già aiutata a muoverti nonostante la paura", hint: '', placeholder: 'Mi ha aiutata...' },
-        { id: 'q4', label: "Cosa vorresti dirti quando la paura si riattiva", hint: '', placeholder: 'Voglio ricordarmi che...' },
-      ]},
+      {
+        id: 's1', name: 'Che paura è', number: 'I', openerBg: 'dark',
+        openerIntro: 'La paura non è il nemico. È un segnale. Il guaio non è sentirla, ma non sapere cosa sta dicendo.',
+        intro: 'C'è una differenza tra la paura e l'ansia, anche se le usiamo come sinonimi. La paura risponde a qualcosa di preciso, adesso. L'ansia abita il futuro, anticipa, inventa. In questa sezione cerchiamo quella concreta. Quella che senti nel corpo quando stai per fare qualcosa che conta.',
+        quote: 'La paura non è irrazionale. È una risposta. La domanda è: a cosa, esattamente?',
+        questions: [
+          { id: 'q1', label: "Descrivi la tua paura principale in questo momento", hint: 'Non la più grande in assoluto. Quella più presente adesso.', placeholder: 'La paura più presente è...' },
+          { id: 'q2', label: "Come si manifesta nel corpo", hint: 'Fisicamente. Dove la senti?', placeholder: 'La sento...' },
+          { id: 'q3', label: "Da quanto tempo è lì", hint: '', placeholder: 'È lì da...' },
+          { id: 'q4', label: "Cosa fa quando si attiva", hint: 'Come cambia il tuo comportamento?', placeholder: 'Quando si attiva, io...' },
+        ]
+      },
+      {
+        id: 's2', name: 'Cosa protegge', number: 'II', openerBg: 'beige',
+        openerIntro: 'Ogni paura protegge qualcosa. Non è debolezza, ma una strategia che ad un certo punto aveva senso.',
+        intro: 'Evitare funziona, nell'immediato. Togli il disagio, torni a respirare. Ma ogni volta che eviti, la paura prende nota e la prossima volta arriva prima. Non è una questione di forza. È che l'evitamento insegna al cervello che c'era davvero qualcosa da cui scappare. In questa sezione guardiamo cosa stai proteggendo, e se vale ancora quello che ti costa.',
+        quote: 'La paura non comanda perché è forte. Comanda perché non le abbiamo mai chiesto cosa vuole.',
+        questions: [
+          { id: 'q1', label: "Da cosa ti sta proteggendo questa paura", hint: 'Sii precisa, non generica.', placeholder: 'Mi sta proteggendo da...' },
+          { id: 'q2', label: "Cosa perderesti se sparisse", hint: 'Anche qualcosa di piccolo o apparentemente assurdo.', placeholder: 'Perderei...' },
+          { id: 'q3', label: "Quando ha iniziato ad avere senso", hint: 'In quale momento della tua vita questa paura era giustificata?', placeholder: 'Aveva senso quando...' },
+          { id: 'q4', label: "Ha ancora senso oggi", hint: 'La situazione è cambiata?', placeholder: 'Oggi...' },
+        ]
+      },
+      {
+        id: 's3', name: 'Cosa dice', number: 'III', openerBg: 'terracotta',
+        openerIntro: 'La paura parla. Il punto non è darle torto, ma capire cosa dice esattamente prima di obbedirle.',
+        intro: 'Quasi tutti i messaggi della paura suonano più grandi di quello che sono. Non vuol dire che ha torto su tutto. Vuol dire che merita un'analisi seria, non solo obbedienza cieca. Quando sai cosa dice esattamente, puoi scegliere cosa fartene.',
+        quote: 'Non devi eliminare la paura. Devi smettere di lasciarle decidere per te.',
+        questions: [
+          { id: 'q1', label: "Se la paura potesse parlare cosa ti direbbe", hint: '', placeholder: 'Mi direbbe...' },
+          { id: 'q2', label: "Quanto di quello che dice è vero", hint: 'Sii onesta.', placeholder: 'È vero che...' },
+          { id: 'q3', label: "Quanto è catastrofismo", hint: 'Cosa stai amplificando?', placeholder: 'Sto amplificando...' },
+          { id: 'q4', label: "Cosa succederebbe davvero nel caso peggiore", hint: 'La versione realistica, non quella cinematografica.', placeholder: 'Nel caso peggiore...' },
+        ]
+      },
+      {
+        id: 's4', name: 'Muoversi lo stesso', number: 'IV', openerBg: 'cipria',
+        openerIntro: 'Il coraggio non è assenza di paura. È fare la cosa mentre c'è ancora.',
+        intro: 'Non aspetti che passi, perché non passa così. Si restringe ogni volta che vai avanti lo stesso. Non serve un gesto grande. Serve il passo più piccolo possibile nella direzione giusta, con la paura addosso. Quello conta.',
+        quote: 'La paura non sparisce quando vai avanti. Diventa più piccola.',
+        questions: [
+          { id: 'q1', label: "Cosa faresti se la paura ci fosse ma non comandasse", hint: '', placeholder: 'Farei...' },
+          { id: 'q2', label: "Qual è il passo più piccolo possibile in quella direzione", hint: 'Quello che puoi fare anche con la paura addosso.', placeholder: 'Potrei...' },
+          { id: 'q3', label: "Chi o cosa ti ha già aiutata a muoverti nonostante la paura", hint: '', placeholder: 'Mi ha aiutata...' },
+          { id: 'q4', label: "Cosa vorresti dirti quando la paura si riattiva", hint: '', placeholder: 'Voglio ricordarmi che...' },
+        ]
+      },
     ],
   },
   {
