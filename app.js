@@ -315,31 +315,65 @@ const CATALOG = [
     description: 'Imparare a dire no non è essere difficili. È sapere dove finisci tu e dove inizia il dovere degli altri.',
     price: '€9',
     type: 'standard',
+    intro: {
+      title: 'Prima di iniziare.',
+      blockquote: 'Questo non è un percorso per diventare più dure.\nO più egoiste. O più difficili da amare.',
+      paragraphs: [
+        'È uno strumento per capire dove finisci tu e dove inizia il bisogno degli altri. Perché spesso non lo sappiamo. Abbiamo ceduto così tante volte che il confine è diventato irriconoscibile.',
+        'Non cerchiamo colpevoli. Cerchiamo il meccanismo: cosa ti ha insegnato a cedere, cosa ti costa dirlo, e come si costruisce qualcosa che regge davvero.',
+        'Puoi compilarlo in una seduta o tornare più volte. Funziona meglio se pensi a una relazione concreta, non al tuo modo di essere in generale.'
+      ],
+      signature: '— Gilda'
+    },
     sections: [
-      { id: 's1', name: 'Dove sono i tuoi confini oggi', number: 'I', openerBg: 'dark', questions: [
-        { id: 'q1', label: "Una situazione recente in cui hai detto sì quando volevi dire no", hint: 'Cosa è successo?', placeholder: 'È successo quando...' },
-        { id: 'q2', label: "Come ti sei sentita dopo", hint: '', placeholder: 'Mi sono sentita...' },
-        { id: 'q3', label: "Hai paura di deludere qualcuno se metti un limite", hint: '', placeholder: 'Ho paura che...' },
-        { id: 'q4', label: "Chi nella tua vita rispetta i tuoi spazi", hint: '', placeholder: 'Lo fa...' },
-      ]},
-      { id: 's2', name: 'Quando hai smesso di averli', number: 'II', openerBg: 'beige', questions: [
-        { id: 'q1', label: "Ricordi un momento in cui avevi confini chiari", hint: 'Cosa è cambiato?', placeholder: 'Avevo confini quando...' },
-        { id: 'q2', label: "Cosa ti ha insegnato la famiglia sul dire no", hint: '', placeholder: 'Mi ha insegnato che...' },
-        { id: 'q3', label: "Hai mai pagato un prezzo per aver messo un confine", hint: '', placeholder: 'Ho pagato...' },
-        { id: 'q4', label: "Cosa significava essere difficile nella tua famiglia", hint: '', placeholder: 'Significava...' },
-      ]},
-      { id: 's3', name: 'Il costo del sì continuo', number: 'III', openerBg: 'terracotta', questions: [
-        { id: 'q1', label: "Cosa ti costa dire sempre sì", hint: '', placeholder: 'Mi costa...' },
-        { id: 'q2', label: "In quale area della tua vita senti più il peso", hint: '', placeholder: 'Lo sento di più...' },
-        { id: 'q3', label: "Cosa hai rinunciato a fare per accontentare gli altri", hint: '', placeholder: 'Ho rinunciato a...' },
-        { id: 'q4', label: "Il tuo corpo ti manda segnali quando superi i tuoi limiti", hint: '', placeholder: 'Sento...' },
-      ]},
-      { id: 's4', name: 'Costruire confini che reggono', number: 'IV', openerBg: 'cipria', questions: [
-        { id: 'q1', label: "Il confine più piccolo che potresti iniziare a mettere domani", hint: '', placeholder: 'Potrei...' },
-        { id: 'q2', label: "Con chi è più difficile e perché", hint: '', placeholder: 'Con... perché...' },
-        { id: 'q3', label: "Cosa cambierebbe nella tua vita se dicessi no più spesso", hint: '', placeholder: 'Cambierebbe...' },
-        { id: 'q4', label: "Una frase che potresti usare la prossima volta", hint: '', placeholder: 'Potrei dire...' },
-      ]},
+      {
+        id: 's1', name: 'Dove sono i tuoi confini oggi', number: 'I', openerBg: 'dark',
+        openerIntro: 'Un confine non è un muro. È sapere dove finisci tu e dove inizia il bisogno degli altri.',
+        intro: 'La maggior parte di noi non ha mai imparato a mettere confini in modo sano. Ha imparato a cedere per evitare conflitti, a dire sì per non deludere, a fare spazio agli altri togliendo spazio a sé. In questa sezione guardiamo dove sei adesso, senza giudicare niente.',
+        quote: 'Dire no non è egoismo. È sapere cosa vale il tuo sì.',
+        questions: [
+          { id: 'q1', label: "Una situazione recente in cui hai detto sì quando volevi dire no", hint: 'Cosa è successo?', placeholder: 'È successo quando...' },
+          { id: 'q2', label: "Come ti sei sentita dopo", hint: '', placeholder: 'Mi sono sentita...' },
+          { id: 'q3', label: "Hai paura di deludere qualcuno se metti un limite", hint: '', placeholder: 'Ho paura che...' },
+          { id: 'q4', label: "Chi nella tua vita rispetta i tuoi spazi", hint: '', placeholder: 'Lo fa...' },
+        ]
+      },
+      {
+        id: 's2', name: 'Quando hai smesso di averli', number: 'II', openerBg: 'beige',
+        openerIntro: 'I confini si imparano da piccoli. O non si imparano. E quello che non si impara si eredita come normalità.',
+        intro: 'Le prime persone che ci hanno detto no, o che non l'hanno mai fatto, hanno disegnato la mappa di quello che abbiamo creduto possibile nelle relazioni. Non per colpa, ma per trasmissione. In questa sezione guardiamo da dove viene il tuo modo di cedere, e quando ha iniziato a sembrare l'unica opzione.',
+        quote: 'Non hai smesso di avere confini per scelta. Li hai persi per sopravvivenza.',
+        questions: [
+          { id: 'q1', label: "Ricordi un momento in cui avevi confini chiari", hint: 'Cosa è cambiato?', placeholder: 'Avevo confini quando...' },
+          { id: 'q2', label: "Cosa ti ha insegnato la famiglia sul dire no", hint: '', placeholder: 'Mi ha insegnato che...' },
+          { id: 'q3', label: "Hai mai pagato un prezzo per aver messo un confine", hint: '', placeholder: 'Ho pagato...' },
+          { id: 'q4', label: "Cosa significava essere difficile nella tua famiglia", hint: '', placeholder: 'Significava...' },
+        ]
+      },
+      {
+        id: 's3', name: 'Il costo del sì continuo', number: 'III', openerBg: 'terracotta',
+        openerIntro: 'Dire sempre sì ha un costo. Non è virtù, è abitudine.',
+        intro: 'C'è una differenza tra essere generose e svuotarsi. La prima nasce da una scelta, la seconda da un automatismo. Quando smetti di scegliere e inizi solo a cedere, il corpo lo sa prima della testa. In questa sezione lo guardiamo senza sconti.',
+        quote: 'Il punto non è chi ti chiede troppo. È che hai smesso di tenere il conto.',
+        questions: [
+          { id: 'q1', label: "Cosa ti costa dire sempre sì", hint: '', placeholder: 'Mi costa...' },
+          { id: 'q2', label: "In quale area della tua vita senti più il peso", hint: '', placeholder: 'Lo sento di più...' },
+          { id: 'q3', label: "Cosa hai rinunciato a fare per accontentare gli altri", hint: '', placeholder: 'Ho rinunciato a...' },
+          { id: 'q4', label: "Il tuo corpo ti manda segnali quando superi i tuoi limiti", hint: '', placeholder: 'Sento...' },
+        ]
+      },
+      {
+        id: 's4', name: 'Costruire confini che reggono', number: 'IV', openerBg: 'cipria',
+        openerIntro: 'Un confine che cede alla prima resistenza non è un confine. È un'intenzione.',
+        intro: 'Mettere un confine non è un atto ostile. È un atto di chiarezza verso te stessa e verso chi ti sta vicino. Le relazioni sane reggono i confini, anzi ne hanno bisogno. Quelle che si rompono quando dici no erano già fragili prima. In questa sezione costruiamo qualcosa che regge.',
+        quote: 'Chi ti vuole bene davvero non se ne va quando dici no. Si adatta.',
+        questions: [
+          { id: 'q1', label: "Il confine più piccolo che potresti iniziare a mettere domani", hint: '', placeholder: 'Potrei...' },
+          { id: 'q2', label: "Con chi è più difficile e perché", hint: '', placeholder: 'Con... perché...' },
+          { id: 'q3', label: "Cosa cambierebbe nella tua vita se dicessi no più spesso", hint: '', placeholder: 'Cambierebbe...' },
+          { id: 'q4', label: "Una frase che potresti usare la prossima volta", hint: '', placeholder: 'Potrei dire...' },
+        ]
+      },
     ],
   },
 ];
