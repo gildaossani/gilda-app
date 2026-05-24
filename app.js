@@ -219,7 +219,7 @@ const CATALOG = [
         quote: 'Non hai scelto la misura. Puoi scegliere se continuare a usarla.',
         questions: [
           { id: 'q1', label: "Chi ti ha fatto credere che non fossi abbastanza", hint: 'Per la prima volta.', placeholder: 'È stato...' },
-          { id: 'q2', label: "C'era una versione di te che si sentiva abbastanza", hint: 'Quanti anni aveva?', placeholder: 'Avevo circa...' },
+          { id: 'q2', label: "C\'era una versione di te che si sentiva abbastanza", hint: 'Quanti anni aveva?', placeholder: 'Avevo circa...' },
           { id: 'q3', label: "Cosa ti è stato chiesto di essere che non eri", hint: '', placeholder: 'Mi chiedevano di essere...' },
           { id: 'q4', label: "Cosa avresti voluto che qualcuno ti dicesse allora", hint: '', placeholder: 'Avrei voluto sentire...' },
         ]
@@ -264,7 +264,7 @@ const CATALOG = [
       title: 'Prima di iniziare.',
       blockquote: 'Questo non è un percorso per eliminare la paura.\nNon funzionerebbe. E probabilmente non è nemmeno quello che vuoi davvero.',
       paragraphs: [
-        'La paura è un segnale, non un nemico. Il punto non è farla smettere, ma capire cosa sta dicendo e smettere di lasciarle l'ultima parola.',
+        'La paura è un segnale, non un nemico. Il punto non è farla smettere, ma capire cosa sta dicendo e smettere di lasciarle l\'ultima parola.',
         'In questo percorso guardiamo la tua paura specifica: dove abita, cosa protegge, quanto di quello che racconta è reale. Non per darle torto, ma per scegliere consapevolmente cosa fartene.',
         'Puoi compilarlo in una seduta o tornare più volte. Funziona meglio se pensi a una paura concreta, non al tuo modo di essere in generale.'
       ],
@@ -274,7 +274,7 @@ const CATALOG = [
       {
         id: 's1', name: 'Che paura è', number: 'I', openerBg: 'dark',
         openerIntro: 'La paura non è il nemico. È un segnale. Il guaio non è sentirla, ma non sapere cosa sta dicendo.',
-        intro: 'C'è una differenza tra la paura e l'ansia, anche se le usiamo come sinonimi. La paura risponde a qualcosa di preciso, adesso. L'ansia abita il futuro, anticipa, inventa. In questa sezione cerchiamo quella concreta. Quella che senti nel corpo quando stai per fare qualcosa che conta.',
+        intro: 'C\'è una differenza tra la paura e l\'ansia, anche se le usiamo come sinonimi. La paura risponde a qualcosa di preciso, adesso. L\'ansia abita il futuro, anticipa, inventa. In questa sezione cerchiamo quella concreta. Quella che senti nel corpo quando stai per fare qualcosa che conta.',
         quote: 'La paura non è irrazionale. È una risposta. La domanda è: a cosa, esattamente?',
         questions: [
           { id: 'q1', label: "Descrivi la tua paura principale in questo momento", hint: 'Non la più grande in assoluto. Quella più presente adesso.', placeholder: 'La paura più presente è...' },
@@ -286,7 +286,7 @@ const CATALOG = [
       {
         id: 's2', name: 'Cosa protegge', number: 'II', openerBg: 'beige',
         openerIntro: 'Ogni paura protegge qualcosa. Non è debolezza, ma una strategia che ad un certo punto aveva senso.',
-        intro: 'Evitare funziona, nell'immediato. Togli il disagio, torni a respirare. Ma ogni volta che eviti, la paura prende nota e la prossima volta arriva prima. Non è una questione di forza. È che l'evitamento insegna al cervello che c'era davvero qualcosa da cui scappare. In questa sezione guardiamo cosa stai proteggendo, e se vale ancora quello che ti costa.',
+        intro: 'Evitare funziona, nell\'immediato. Togli il disagio, torni a respirare. Ma ogni volta che eviti, la paura prende nota e la prossima volta arriva prima. Non è una questione di forza. È che l\'evitamento insegna al cervello che c\'era davvero qualcosa da cui scappare. In questa sezione guardiamo cosa stai proteggendo, e se vale ancora quello che ti costa.',
         quote: 'La paura non comanda perché è forte. Comanda perché non le abbiamo mai chiesto cosa vuole.',
         questions: [
           { id: 'q1', label: "Da cosa ti sta proteggendo questa paura", hint: 'Sii precisa, non generica.', placeholder: 'Mi sta proteggendo da...' },
@@ -298,7 +298,7 @@ const CATALOG = [
       {
         id: 's3', name: 'Cosa dice', number: 'III', openerBg: 'terracotta',
         openerIntro: 'La paura parla. Il punto non è darle torto, ma capire cosa dice esattamente prima di obbedirle.',
-        intro: 'Quasi tutti i messaggi della paura suonano più grandi di quello che sono. Non vuol dire che ha torto su tutto. Vuol dire che merita un'analisi seria, non solo obbedienza cieca. Quando sai cosa dice esattamente, puoi scegliere cosa fartene.',
+        intro: 'Quasi tutti i messaggi della paura suonano più grandi di quello che sono. Non vuol dire che ha torto su tutto. Vuol dire che merita un\'analisi seria, non solo obbedienza cieca. Quando sai cosa dice esattamente, puoi scegliere cosa fartene.',
         quote: 'Non devi eliminare la paura. Devi smettere di lasciarle decidere per te.',
         questions: [
           { id: 'q1', label: "Se la paura potesse parlare cosa ti direbbe", hint: '', placeholder: 'Mi direbbe...' },
@@ -309,7 +309,7 @@ const CATALOG = [
       },
       {
         id: 's4', name: 'Muoversi lo stesso', number: 'IV', openerBg: 'cipria',
-        openerIntro: 'Il coraggio non è assenza di paura. È fare la cosa mentre c'è ancora.',
+        openerIntro: 'Il coraggio non è assenza di paura. È fare la cosa mentre c\'è ancora.',
         intro: 'Non aspetti che passi, perché non passa così. Si restringe ogni volta che vai avanti lo stesso. Non serve un gesto grande. Serve il passo più piccolo possibile nella direzione giusta, con la paura addosso. Quello conta.',
         quote: 'La paura non sparisce quando vai avanti. Diventa più piccola.',
         questions: [
@@ -369,7 +369,7 @@ const CATALOG = [
       {
         id: 's2', name: 'Quando hai smesso di averli', number: 'II', openerBg: 'beige',
         openerIntro: 'I confini si imparano da piccoli. O non si imparano. E quello che non si impara si eredita come normalità.',
-        intro: 'Le prime persone che ci hanno detto no, o che non l'hanno mai fatto, hanno disegnato la mappa di quello che abbiamo creduto possibile nelle relazioni. Non per colpa, ma per trasmissione. In questa sezione guardiamo da dove viene il tuo modo di cedere, e quando ha iniziato a sembrare l'unica opzione.',
+        intro: 'Le prime persone che ci hanno detto no, o che non l\'hanno mai fatto, hanno disegnato la mappa di quello che abbiamo creduto possibile nelle relazioni. Non per colpa, ma per trasmissione. In questa sezione guardiamo da dove viene il tuo modo di cedere, e quando ha iniziato a sembrare l\'unica opzione.',
         quote: 'Non hai smesso di avere confini per scelta. Li hai persi per sopravvivenza.',
         questions: [
           { id: 'q1', label: "Ricordi un momento in cui avevi confini chiari", hint: 'Cosa è cambiato?', placeholder: 'Avevo confini quando...' },
@@ -381,7 +381,7 @@ const CATALOG = [
       {
         id: 's3', name: 'Il costo del sì continuo', number: 'III', openerBg: 'terracotta',
         openerIntro: 'Dire sempre sì ha un costo. Non è virtù, è abitudine.',
-        intro: 'C'è una differenza tra essere generose e svuotarsi. La prima nasce da una scelta, la seconda da un automatismo. Quando smetti di scegliere e inizi solo a cedere, il corpo lo sa prima della testa. In questa sezione lo guardiamo senza sconti.',
+        intro: 'C\'è una differenza tra essere generose e svuotarsi. La prima nasce da una scelta, la seconda da un automatismo. Quando smetti di scegliere e inizi solo a cedere, il corpo lo sa prima della testa. In questa sezione lo guardiamo senza sconti.',
         quote: 'Il punto non è chi ti chiede troppo. È che hai smesso di tenere il conto.',
         questions: [
           { id: 'q1', label: "Cosa ti costa dire sempre sì", hint: '', placeholder: 'Mi costa...' },
@@ -392,7 +392,7 @@ const CATALOG = [
       },
       {
         id: 's4', name: 'Costruire confini che reggono', number: 'IV', openerBg: 'cipria',
-        openerIntro: 'Un confine che cede alla prima resistenza non è un confine. È un'intenzione.',
+        openerIntro: 'Un confine che cede alla prima resistenza non è un confine. È un\'intenzione.',
         intro: 'Mettere un confine non è un atto ostile. È un atto di chiarezza verso te stessa e verso chi ti sta vicino. Le relazioni sane reggono i confini, anzi ne hanno bisogno. Quelle che si rompono quando dici no erano già fragili prima. In questa sezione costruiamo qualcosa che regge.',
         quote: 'Chi ti vuole bene davvero non se ne va quando dici no. Si adatta.',
         questions: [
