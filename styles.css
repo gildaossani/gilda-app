@@ -951,3 +951,34 @@ input, textarea { font-family: inherit; }
 .editorial-quote-text { font-family: var(--font-title); font-size: clamp(20px, 4vw, 30px); font-style: italic; font-weight: 300; color: var(--bianco); line-height: 1.45; max-width: 520px; margin: 0 auto; }
 .editorial-divider { width: 36px; height: 1px; background: var(--ocra); opacity: 0.4; margin: 28px auto; }
 .editorial-continue { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+
+/* =============================================
+   TASTO LIBRERIA FISSO
+   ============================================= */
+.btn-library-fixed {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--antracite);
+  color: var(--bianco);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  box-shadow: 0 4px 20px rgba(45,45,45,0.3);
+  cursor: pointer;
+  border: none;
+  transition: background var(--transition), transform var(--transition);
+  white-space: nowrap;
+}
+.btn-library-fixed:hover { background: var(--terracotta); }
+.btn-library-fixed:active { transform: translateX(-50%) scale(0.97); }
+.btn-library-fixed.hidden { display: none; }
