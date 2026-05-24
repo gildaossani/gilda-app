@@ -524,10 +524,23 @@ async function boot() {
     supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
   } catch(e) { showAuth(); return; }
 
+  // Intercetta reset password dall'URL
+  supa.auth.onAuthStateChange((event, session) => {
+    if (event === 'PASSWORD_RECOVERY') {
+      showReset();
+    }
+  });
+
   try {
     const { data } = await supa.auth.getSession();
     if (data && data.session && data.session.user) {
-      await enterApp(data.session.user);
+      // Controlla se siamo in modalità reset password
+      const hash = window.location.hash;
+      if (hash.includes('type=recovery')) {
+        showReset();
+      } else {
+        await enterApp(data.session.user);
+      }
     } else {
       showAuth();
     }
@@ -1129,11 +1142,6 @@ g('btn-reset-confirm').addEventListener('click', async () => {
   }
 });
 
-// Intercetta il token di reset nell'URL
-supabase.auth.onAuthStateChange((event, session) => {
-  if (event === 'PASSWORD_RECOVERY') {
-    showReset();
-  }
-});
+// onAuthStateChange per reset viene gestito nel boot
 
 document.addEventListener('DOMContentLoaded', boot);
