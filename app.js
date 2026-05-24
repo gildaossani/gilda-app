@@ -524,23 +524,25 @@ async function boot() {
     supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
   } catch(e) { showAuth(); return; }
 
-  // Intercetta reset password dall'URL
+  // Intercetta reset password — deve essere registrato subito dopo createClient
   supa.auth.onAuthStateChange((event, session) => {
     if (event === 'PASSWORD_RECOVERY') {
       showReset();
+      return;
+    }
+    if (event === 'SIGNED_IN' && session) {
+      // Solo se non siamo già nell'app
+      if (g('screen-app').classList.contains('hidden') && 
+          g('screen-reset').classList.contains('hidden')) {
+        enterApp(session.user);
+      }
     }
   });
 
   try {
     const { data } = await supa.auth.getSession();
     if (data && data.session && data.session.user) {
-      // Controlla se siamo in modalità reset password
-      const hash = window.location.hash;
-      if (hash.includes('type=recovery')) {
-        showReset();
-      } else {
-        await enterApp(data.session.user);
-      }
+      await enterApp(data.session.user);
     } else {
       showAuth();
     }
