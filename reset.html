@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2D2D2D" />
+  <title>Nuova password — Gilda Ossani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --antracite: #2D2D2D;
+      --terracotta: #B5603A;
+      --ocra: #C8943A;
+      --beige: #F5EDE4;
+      --bianco: #FFFFFF;
+      --font-title: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: var(--antracite);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    .brand { text-align: center; }
+    .eyebrow {
+      display: block;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ocra);
+      margin-bottom: 20px;
+    }
+    .title {
+      font-family: var(--font-title);
+      font-size: clamp(56px, 12vw, 72px);
+      font-weight: 300;
+      color: var(--bianco);
+      line-height: 0.88;
+    }
+    .rule {
+      width: 36px; height: 1px;
+      background: var(--terracotta);
+      margin: 24px auto 0;
+    }
+    .tabs {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 32px;
+    }
+    .tab {
+      padding: 12px 0;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bianco);
+      border-bottom: 2px solid var(--terracotta);
+      display: inline-block;
+    }
+    .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .label {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .input {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      padding: 14px 16px;
+      font-size: 15px;
+      color: var(--bianco);
+      outline: none;
+      width: 100%;
+      font-family: var(--font-body);
+    }
+    .input:focus { border-color: var(--terracotta); }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 15px 24px;
+      background: var(--terracotta);
+      color: var(--bianco);
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .btn:hover { background: #9d5230; }
+    .btn:disabled { opacity: 0.6; cursor: default; }
+    .msg {
+      font-size: 13px;
+      text-align: center;
+      min-height: 18px;
+      margin-top: 12px;
+    }
+    .msg.error { color: #e07070; }
+    .msg.success { color: var(--ocra); }
+    .back {
+      text-align: center;
+      margin-top: 16px;
+    }
+    .back a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <span class="eyebrow">Strumento di autoanalisi</span>
+      <h1 class="title">Gilda<br>Ossani</h1>
+      <div class="rule"></div>
+    </div>
+    <div>
+      <div class="tabs"><span class="tab">Nuova password</span></div>
+      <div class="field">
+        <label class="label">Nuova password</label>
+        <input type="password" id="pwd" class="input" placeholder="min. 6 caratteri" />
+      </div>
+      <div class="field">
+        <label class="label">Conferma password</label>
+        <input type="password" id="pwd2" class="input" placeholder="••••••••" />
+      </div>
+      <button id="btn" class="btn">Salva nuova password</button>
+      <p id="msg" class="msg"></p>
+      <div class="back"><a href="https://gildaossani.github.io/gilda-app/">Torna all'app</a></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
+  <script>
+    const SUPA_URL = 'https://qnhnsjqzheyiacfmmmbe.supabase.co';
+    const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuaG5zanF6aGV5aWFjZm1tbWJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzODEyMjMsImV4cCI6MjA5NDk1NzIyM30.Y0XwmMed7pRlBPmMpCpmgfdppTEUI0-FIKXOWbaRuYk';
+
+    const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+    const btn = document.getElementById('btn');
+    const msg = document.getElementById('msg');
+
+    // Processa il token dall'hash URL
+    supa.auth.onAuthStateChange((event, session) => {
+      if (event === 'PASSWORD_RECOVERY') {
+        msg.textContent = '';
+        msg.className = 'msg';
+      }
+    });
+
+    btn.addEventListener('click', async () => {
+      const pwd = document.getElementById('pwd').value;
+      const pwd2 = document.getElementById('pwd2').value;
+      msg.className = 'msg';
+      msg.textContent = '';
+
+      if (!pwd || pwd.length < 6) {
+        msg.textContent = 'La password deve avere almeno 6 caratteri.';
+        msg.className = 'msg error';
+        return;
+      }
+      if (pwd !== pwd2) {
+        msg.textContent = 'Le password non coincidono.';
+        msg.className = 'msg error';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = '…';
+
+      try {
+        const { error } = await supa.auth.updateUser({ password: pwd });
+        if (error) throw error;
+        msg.textContent = 'Password aggiornata. Puoi accedere con la nuova password.';
+        msg.className = 'msg success';
+        setTimeout(() => {
+          window.location.href = 'https://gildaossani.github.io/gilda-app/';
+        }, 2500);
+      } catch (err) {
+        msg.textContent = err.message || 'Errore. Riprova.';
+        msg.className = 'msg error';
+        btn.disabled = false;
+        btn.textContent = 'Salva nuova password';
+      }
+    });
+  </script>
+</body>
+</html>
