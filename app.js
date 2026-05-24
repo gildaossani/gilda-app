@@ -234,7 +234,21 @@ const CATALOG = [
           { id: 'q2', label: "Qualcosa che fai bene e che fai fatica ad ammettere", hint: '', placeholder: 'So fare bene...' },
           { id: 'q3', label: "Se una tua amica ti descrivesse cosa direbbe di te", hint: '', placeholder: 'Direbbe che...' },
           { id: 'q4', label: "Una cosa che puoi fare oggi per trattarti come se fossi già abbastanza", hint: '', placeholder: 'Oggi posso...' },
-        ]
+        ],
+        synthesis: {
+          title: 'Porta qualcosa fuori da questa pagina.',
+          label: 'Quello che hai capito, in poche righe.',
+          fields: [
+            { id: 'q-sint-nonsa-1', label: 'Da quello che ho scritto, la cosa che non sapevo di sapere è...', placeholder: '...' },
+            { id: 'q-sint-nonsa-2', label: 'La misura che smetto di usare è...', placeholder: '...' },
+            { id: 'q-sint-nonsa-3', label: 'Una cosa concreta che cambia da oggi è...', placeholder: '...' },
+          ]
+        },
+        closing: {
+          title: 'Hai fatto una cosa difficile.',
+          text: 'Hai guardato quella voce senza cercare di farla tacere. Hai visto da dove viene, cosa misura, a chi apparteneva prima di diventare tua. Una voce che hai imparato a riconoscere ha già perso una parte del suo potere. E magari adesso quel sentirsi abbastanza te lo dici da sola, senza aspettare conferme esterne. Anche perché non sei abbastanza, sei molto di più.',
+          signature: '— Gilda'
+        }
       },
     ],
   },
@@ -303,7 +317,21 @@ const CATALOG = [
           { id: 'q2', label: "Qual è il passo più piccolo possibile in quella direzione", hint: 'Quello che puoi fare anche con la paura addosso.', placeholder: 'Potrei...' },
           { id: 'q3', label: "Chi o cosa ti ha già aiutata a muoverti nonostante la paura", hint: '', placeholder: 'Mi ha aiutata...' },
           { id: 'q4', label: "Cosa vorresti dirti quando la paura si riattiva", hint: '', placeholder: 'Voglio ricordarmi che...' },
-        ]
+        ],
+        synthesis: {
+          title: 'Porta qualcosa fuori da questa pagina.',
+          label: 'Quello che hai capito, in poche righe.',
+          fields: [
+            { id: 'q-sint-paura-1', label: 'La mia paura in una riga è...', placeholder: '...' },
+            { id: 'q-sint-paura-2', label: 'Quello che scelgo di fare comunque è...', placeholder: '...' },
+            { id: 'q-sint-paura-3', label: 'La prossima volta che si attiva, faccio...', placeholder: '...' },
+          ]
+        },
+        closing: {
+          title: 'Sei arrivata fino in fondo.',
+          text: 'Hai guardato qualcosa che di solito si tiene a distanza di sicurezza. Hai capito cosa dice la tua paura, da dove viene, cosa sta proteggendo. Non è poco. La maggior parte delle persone preferisce non saperlo, perché sapere implica scegliere. Ora sai. E questo cambia qualcosa, anche se adesso non lo senti ancora. La paura ci sarà ancora. Ma una paura che hai guardato in faccia non comanda più nello stesso modo.',
+          signature: '— Gilda'
+        }
       },
     ],
   },
@@ -372,7 +400,21 @@ const CATALOG = [
           { id: 'q2', label: "Con chi è più difficile e perché", hint: '', placeholder: 'Con... perché...' },
           { id: 'q3', label: "Cosa cambierebbe nella tua vita se dicessi no più spesso", hint: '', placeholder: 'Cambierebbe...' },
           { id: 'q4', label: "Una frase che potresti usare la prossima volta", hint: '', placeholder: 'Potrei dire...' },
-        ]
+        ],
+        synthesis: {
+          title: 'Porta qualcosa fuori da questa pagina.',
+          label: 'Quello che hai capito, in poche righe.',
+          fields: [
+            { id: 'q-sint-confini-1', label: 'Il confine che porto fuori da questa pagina è...', placeholder: '...' },
+            { id: 'q-sint-confini-2', label: 'Con chi inizia a cambiare qualcosa è...', placeholder: '...' },
+            { id: 'q-sint-confini-3', label: 'Me lo ricordo così...', placeholder: '...' },
+          ]
+        },
+        closing: {
+          title: 'Sei arrivata fino in fondo.',
+          text: 'Guardare dove cedi, capire da dove viene, rendendoti conto di quanto ti costa, non è un esercizio facile. È più comodo non farlo. Hai scelto la strada difficile, quella che porta a te. Io sai come la chiamo? Libertà. Quello che hai scritto qui non serve a niente se resta su questa pagina. La cosa più utile che puoi fare adesso è prendere una cosa sola, la più piccola o la più importante, sentilo e portarla fuori. Non un cambiamento di vita. Un confine. Uno. Quello che hai già individuato. Ce la fai.',
+          signature: '— Gilda'
+        }
       },
     ],
   },
