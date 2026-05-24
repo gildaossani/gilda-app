@@ -177,31 +177,65 @@ const CATALOG = [
     description: 'La voce che dice che non sei abbastanza non è la verità. È una strategia. Impariamo a riconoscerla.',
     price: '€9',
     type: 'standard',
+    intro: {
+      title: 'Prima di iniziare.',
+      blockquote: 'Questo non è un percorso per convincerti che sei abbastanza.\nNon funzionerebbe. E lo sai già.',
+      paragraphs: [
+        'È uno strumento per guardare quella voce da vicino — quella che misura, valuta, trova sempre qualcosa che manca. Non per farla tacere, ma per capire cosa sta facendo lì e da dove viene.',
+        'Non cerchiamo colpevoli. Cerchiamo la logica. Perché una voce che hai imparato a riconoscere ha meno potere di una che continua a sembrare la verità.',
+        'Puoi compilarlo in una seduta o a spezzoni. Puoi tornare indietro, cancellare, riscrivere. L\'unica cosa che non ha senso fare è rispondere quello che pensi si debba rispondere. Nessuno legge questo tranne te.'
+      ],
+      signature: '— Gilda'
+    },
     sections: [
-      { id: 's1', name: 'La voce', number: 'I', openerBg: 'dark', questions: [
-        { id: 'q1', label: "Quando senti per la prima volta quella voce", hint: 'In quale situazione si fa più forte?', placeholder: 'La voce si fa sentire quando...' },
-        { id: 'q2', label: "Con chi suona più forte", hint: 'A lavoro, in amore, con la famiglia, da sola?', placeholder: 'Soprattutto con...' },
-        { id: 'q3', label: "Se quella voce avesse un volto", hint: 'A chi assomiglierebbe?', placeholder: 'Assomiglierebbe a...' },
-        { id: 'q4', label: "Cosa succederebbe se quella voce avesse torto", hint: '', placeholder: 'Se avesse torto...' },
-      ]},
-      { id: 's2', name: 'Le prove', number: 'II', openerBg: 'beige', questions: [
-        { id: 'q1', label: "Cosa fai per dimostrare di valere", hint: 'Elenca anche le cose piccole.', placeholder: 'Faccio...' },
-        { id: 'q2', label: "Quando ottieni qualcosa riesci a godertelo", hint: 'O passi subito al prossimo obiettivo?', placeholder: 'Di solito...' },
-        { id: 'q3', label: "Hai mai sabotato qualcosa di buono", hint: "Perché non ti sentivi abbastanza?", placeholder: 'Sì, quando...' },
-        { id: 'q4', label: "Cosa non hai fatto perché non eri pronta", hint: '', placeholder: 'Ho rimandato...' },
-      ]},
-      { id: 's3', name: "L'origine", number: 'III', openerBg: 'terracotta', questions: [
-        { id: 'q1', label: "Chi ti ha fatto credere che non fossi abbastanza", hint: 'Per la prima volta.', placeholder: 'È stato...' },
-        { id: 'q2', label: "C'era una versione di te che si sentiva abbastanza", hint: 'Quanti anni aveva?', placeholder: 'Avevo circa...' },
-        { id: 'q3', label: "Cosa ti è stato chiesto di essere che non eri", hint: '', placeholder: 'Mi chiedevano di essere...' },
-        { id: 'q4', label: "Cosa avresti voluto che qualcuno ti dicesse allora", hint: '', placeholder: 'Avrei voluto sentire...' },
-      ]},
-      { id: 's4', name: 'Adesso', number: 'IV', openerBg: 'cipria', questions: [
-        { id: 'q1', label: "Cosa significherebbe sentirti abbastanza", hint: 'Concretamente.', placeholder: 'Significherebbe...' },
-        { id: 'q2', label: "Qualcosa che fai bene e che fai fatica ad ammettere", hint: '', placeholder: 'So fare bene...' },
-        { id: 'q3', label: "Se una tua amica ti descrivesse cosa direbbe di te", hint: '', placeholder: 'Direbbe che...' },
-        { id: 'q4', label: "Una cosa che puoi fare oggi per trattarti come se fossi già abbastanza", hint: '', placeholder: 'Oggi posso...' },
-      ]},
+      {
+        id: 's1', name: 'La voce', number: 'I', openerBg: 'dark',
+        openerIntro: 'C\'è una voce che dice che non sei abbastanza. Prima di ascoltarla, vale la pena capire cosa sta facendo lì.',
+        intro: 'Non cerchiamo di zittirla. Cerchiamo di guardarla. Quando si fa sentire, con chi parla, cosa dice esattamente. Perché una voce che non riconosci ha meno potere di una che hai imparato a vedere.',
+        quote: 'La voce che dice che non sei abbastanza non è la verità. È una strategia.',
+        questions: [
+          { id: 'q1', label: "Quando senti per la prima volta quella voce", hint: 'In quale situazione si fa più forte?', placeholder: 'La voce si fa sentire quando...' },
+          { id: 'q2', label: "Con chi suona più forte", hint: 'A lavoro, in amore, con la famiglia, da sola?', placeholder: 'Soprattutto con...' },
+          { id: 'q3', label: "Se quella voce avesse un volto", hint: 'A chi assomiglierebbe?', placeholder: 'Assomiglierebbe a...' },
+          { id: 'q4', label: "Cosa succederebbe se quella voce avesse torto", hint: '', placeholder: 'Se avesse torto...' },
+        ]
+      },
+      {
+        id: 's2', name: 'Le prove', number: 'II', openerBg: 'beige',
+        openerIntro: 'Cosa fai per sentirti abbastanza? Vale la pena guardarlo senza giudicarlo.',
+        intro: 'Non per smettere di farlo. Per capire cosa stai cercando di dimostrare, e a chi. Perché a volte quello che sembra ambizione è solo un tentativo di far tacere quella voce. E quella voce, di solito, non si accontenta mai.',
+        quote: 'Il problema non è quello che fai. È per chi lo fai.',
+        questions: [
+          { id: 'q1', label: "Cosa fai per dimostrare di valere", hint: 'Elenca anche le cose piccole.', placeholder: 'Faccio...' },
+          { id: 'q2', label: "Quando ottieni qualcosa riesci a godertelo", hint: 'O passi subito al prossimo obiettivo?', placeholder: 'Di solito...' },
+          { id: 'q3', label: "Hai mai sabotato qualcosa di buono", hint: "Perché non ti sentivi abbastanza?", placeholder: 'Sì, quando...' },
+          { id: 'q4', label: "Cosa non hai fatto perché non eri pronta", hint: '', placeholder: 'Ho rimandato...' },
+        ]
+      },
+      {
+        id: 's3', name: "L'origine", number: 'III', openerBg: 'terracotta',
+        openerIntro: 'La misura che usi per valutarti — da dove viene? Non è una domanda retorica.',
+        intro: 'Non risaliamo per trovare un colpevole. Risaliamo perché capire da dove viene una convinzione cambia il peso che le dai. Una misura che hai ereditato non è necessariamente quella giusta per te.',
+        quote: 'Non hai scelto la misura. Puoi scegliere se continuare a usarla.',
+        questions: [
+          { id: 'q1', label: "Chi ti ha fatto credere che non fossi abbastanza", hint: 'Per la prima volta.', placeholder: 'È stato...' },
+          { id: 'q2', label: "C'era una versione di te che si sentiva abbastanza", hint: 'Quanti anni aveva?', placeholder: 'Avevo circa...' },
+          { id: 'q3', label: "Cosa ti è stato chiesto di essere che non eri", hint: '', placeholder: 'Mi chiedevano di essere...' },
+          { id: 'q4', label: "Cosa avresti voluto che qualcuno ti dicesse allora", hint: '', placeholder: 'Avrei voluto sentire...' },
+        ]
+      },
+      {
+        id: 's4', name: 'Adesso', number: 'IV', openerBg: 'cipria',
+        openerIntro: 'Non ti chiedo di convincerti che sei abbastanza. Ti chiedo di guardare cosa cambierebbe se lo fossi.',
+        intro: 'Non è un esercizio di autostima. È un esercizio di chiarezza. Perché spesso sappiamo già cosa vorremmo fare — ma aspettiamo un permesso che non arriverà mai dall\'esterno.',
+        quote: 'La chiave non arriva da fuori. Ce l\'hai già.',
+        questions: [
+          { id: 'q1', label: "Cosa significherebbe sentirti abbastanza", hint: 'Concretamente.', placeholder: 'Significherebbe...' },
+          { id: 'q2', label: "Qualcosa che fai bene e che fai fatica ad ammettere", hint: '', placeholder: 'So fare bene...' },
+          { id: 'q3', label: "Se una tua amica ti descrivesse cosa direbbe di te", hint: '', placeholder: 'Direbbe che...' },
+          { id: 'q4', label: "Una cosa che puoi fare oggi per trattarti come se fossi già abbastanza", hint: '', placeholder: 'Oggi posso...' },
+        ]
+      },
     ],
   },
   {
