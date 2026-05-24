@@ -176,7 +176,7 @@ const CATALOG = [
     tag: 'Percorso',
     title: 'Non sentirsi abbastanza',
     description: 'La voce che dice che non sei abbastanza non è la verità. È una strategia. Impariamo a riconoscerla.',
-    price: '€9 + IVA',
+    price: '€9',
     type: 'standard',
     intro: {
       title: 'Prima di iniziare.',
@@ -260,7 +260,7 @@ const CATALOG = [
     tag: 'Percorso',
     title: 'La paura',
     description: "La paura non è il problema. È l'informazione. Impariamo a leggerla senza obbedirle.",
-    price: '€9 + IVA',
+    price: '€9',
     type: 'standard',
     intro: {
       title: 'Prima di iniziare.',
@@ -344,7 +344,7 @@ const CATALOG = [
     tag: 'Percorso',
     title: 'I confini',
     description: 'Imparare a dire no non è essere difficili. È sapere dove finisci tu e dove inizia il dovere degli altri.',
-    price: '€9 + IVA',
+    price: '€9',
     type: 'standard',
     intro: {
       title: 'Prima di iniziare.',
