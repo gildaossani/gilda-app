@@ -161,8 +161,20 @@
     // Processa il token dall'hash URL
     supa.auth.onAuthStateChange((event, session) => {
       if (event === 'PASSWORD_RECOVERY') {
+        // Siamo nella pagina giusta, non fare niente
         msg.textContent = '';
         msg.className = 'msg';
+      } else if (event === 'SIGNED_IN') {
+        // Non redirigere automaticamente — lascia l'utente inserire la password
+      }
+    });
+
+    // Controlla se c'è un token di recovery nell'URL
+    window.addEventListener('load', async () => {
+      const hash = window.location.hash;
+      if (!hash.includes('access_token') && !hash.includes('type=recovery')) {
+        // Nessun token — redirect all'app
+        window.location.href = 'https://gildaossani.github.io/gilda-app/';
       }
     });
 
