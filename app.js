@@ -524,21 +524,6 @@ async function boot() {
     supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
   } catch(e) { showAuth(); return; }
 
-  // Intercetta reset password — deve essere registrato subito dopo createClient
-  supa.auth.onAuthStateChange((event, session) => {
-    if (event === 'PASSWORD_RECOVERY') {
-      showReset();
-      return;
-    }
-    if (event === 'SIGNED_IN' && session) {
-      // Solo se non siamo già nell'app
-      if (g('screen-app').classList.contains('hidden') && 
-          g('screen-reset').classList.contains('hidden')) {
-        enterApp(session.user);
-      }
-    }
-  });
-
   try {
     const { data } = await supa.auth.getSession();
     if (data && data.session && data.session.user) {
@@ -617,10 +602,61 @@ g('link-forgot').addEventListener('click', async e => {
   e.preventDefault();
   const email = g('login-email').value.trim();
   if (!email) { setMsg('Inserisci prima la tua email.'); return; }
-  const { error } = await supa.auth.resetPasswordForEmail(email, { redirectTo: 'https://gildaossani.github.io/gilda-app/' });
-  if (error) setMsg(xlErr(error.message));
-  else setMsg('Email di reset inviata.', 'success');
+  clearMsg();
+  const { error } = await supa.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://gildaossani.github.io/gilda-app/'
+  });
+  if (error) {
+    setMsg(xlErr(error.message));
+  } else {
+    setMsg('Controlla la tua email — ti abbiamo mandato un codice a 6 cifre.', 'success');
+    // Mostra form OTP
+    showOtpForm(email);
+  }
 });
+
+function showOtpForm(email) {
+  const formLogin = g('form-login');
+  formLogin.innerHTML = `
+    <div class="auth-field">
+      <label class="auth-label">Codice ricevuto via email</label>
+      <input type="text" id="otp-code" class="auth-input" placeholder="123456" maxlength="6" autocomplete="one-time-code" style="letter-spacing:0.2em;text-align:center;" />
+    </div>
+    <div class="auth-field">
+      <label class="auth-label">Nuova password</label>
+      <input type="password" id="otp-password" class="auth-input" placeholder="min. 6 caratteri" />
+    </div>
+    <button id="btn-otp-confirm" class="btn-auth-submit">Salva nuova password</button>
+    <div class="auth-link-row">
+      <a id="link-back-login" class="auth-link" href="#">Torna al login</a>
+    </div>
+  `;
+  g('btn-otp-confirm').addEventListener('click', async () => {
+    const code = g('otp-code').value.trim();
+    const pwd = g('otp-password').value;
+    clearMsg();
+    if (!code || code.length !== 6) { setMsg('Inserisci il codice a 6 cifre.'); return; }
+    if (!pwd || pwd.length < 6) { setMsg('La password deve avere almeno 6 caratteri.'); return; }
+    g('btn-otp-confirm').disabled = true;
+    g('btn-otp-confirm').textContent = '…';
+    try {
+      const { error } = await supa.auth.verifyOtp({ email, token: code, type: 'recovery' });
+      if (error) throw error;
+      const { error: updErr } = await supa.auth.updateUser({ password: pwd });
+      if (updErr) throw updErr;
+      setMsg('Password aggiornata. Accedi con la nuova password.', 'success');
+      setTimeout(() => location.reload(), 2000);
+    } catch (err) {
+      setMsg(err.message || 'Codice non valido. Riprova.');
+      g('btn-otp-confirm').disabled = false;
+      g('btn-otp-confirm').textContent = 'Salva nuova password';
+    }
+  });
+  g('link-back-login').addEventListener('click', e => {
+    e.preventDefault();
+    location.reload();
+  });
+}
 
 document.querySelectorAll('.auth-tab').forEach(tab => {
   tab.addEventListener('click', () => {
@@ -1095,55 +1131,6 @@ function renderProfile() {
    AVVIO
 ═══════════════════════════════════════════════ */
 
-/* ═══════════════════════════════════════════════
-   RESET PASSWORD
-═══════════════════════════════════════════════ */
-function showReset() {
-  g('loading').classList.add('hidden');
-  g('screen-auth').classList.add('hidden');
-  g('screen-app').classList.add('hidden');
-  g('screen-reset').classList.remove('hidden');
-  window.scrollTo(0, 0);
-}
 
-g('btn-reset-confirm').addEventListener('click', async () => {
-  const pwd = g('reset-password').value;
-  const confirm = g('reset-password-confirm').value;
-  const msg = g('reset-message');
-  msg.className = 'auth-message hidden';
-
-  if (!pwd || pwd.length < 6) {
-    msg.textContent = 'La password deve avere almeno 6 caratteri.';
-    msg.className = 'auth-message error';
-    return;
-  }
-  if (pwd !== confirm) {
-    msg.textContent = 'Le password non coincidono.';
-    msg.className = 'auth-message error';
-    return;
-  }
-
-  g('btn-reset-confirm').disabled = true;
-  g('btn-reset-confirm').textContent = '…';
-
-  try {
-    const { error } = await supa.auth.updateUser({ password: pwd });
-    if (error) throw error;
-    msg.textContent = 'Password aggiornata. Accedi con la nuova password.';
-    msg.className = 'auth-message success';
-    setTimeout(() => {
-      g('screen-reset').classList.add('hidden');
-      showAuth();
-    }, 2000);
-  } catch (err) {
-    msg.textContent = err.message || 'Errore. Riprova.';
-    msg.className = 'auth-message error';
-  } finally {
-    g('btn-reset-confirm').disabled = false;
-    g('btn-reset-confirm').textContent = 'Salva nuova password';
-  }
-});
-
-// onAuthStateChange per reset viene gestito nel boot
 
 document.addEventListener('DOMContentLoaded', boot);
