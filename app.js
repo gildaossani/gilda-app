@@ -620,7 +620,7 @@ function showOtpForm(email) {
   formLogin.innerHTML = `
     <div class="auth-field">
       <label class="auth-label">Codice ricevuto via email</label>
-      <input type="text" id="otp-code" class="auth-input" placeholder="123456" maxlength="6" autocomplete="one-time-code" style="letter-spacing:0.2em;text-align:center;" />
+      <input type="text" id="otp-code" class="auth-input" placeholder="123456" maxlength="8" autocomplete="one-time-code" style="letter-spacing:0.2em;text-align:center;" />
     </div>
     <div class="auth-field">
       <label class="auth-label">Nuova password</label>
@@ -635,7 +635,7 @@ function showOtpForm(email) {
     const code = g('otp-code').value.trim();
     const pwd = g('otp-password').value;
     clearMsg();
-    if (!code || code.length !== 6) { setMsg('Inserisci il codice a 6 cifre.'); return; }
+    if (!code || code.length < 6) { setMsg('Inserisci il codice a 6 cifre.'); return; }
     if (!pwd || pwd.length < 6) { setMsg('La password deve avere almeno 6 caratteri.'); return; }
     g('btn-otp-confirm').disabled = true;
     g('btn-otp-confirm').textContent = '…';
