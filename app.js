@@ -361,6 +361,8 @@ function showView(name) {
   hist.push(name);
   g('btn-back').classList.toggle('hidden', hist.length <= 1);
   g('btn-export').classList.toggle('hidden', name !== 'view-product');
+  const showLibBtn = name === 'view-product' || name === 'view-section';
+  g('btn-library-fixed').classList.toggle('hidden', !showLibBtn);
 }
 
 function goBack() {
@@ -504,6 +506,7 @@ document.querySelectorAll('.auth-tab').forEach(tab => {
 });
 
 g('btn-logout').addEventListener('click', async () => { await supa.auth.signOut(); leaveApp(); });
+g('btn-library-fixed').addEventListener('click', () => { renderLibrary(); showView('view-library'); });
 g('btn-back').addEventListener('click', goBack);
 g('btn-profile').addEventListener('click', () => {
   if (!g('view-profile').classList.contains('hidden')) goBack();
