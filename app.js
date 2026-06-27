@@ -421,6 +421,172 @@ const CATALOG = [
       },
     ],
   },
+  {
+    id: 'corpo',
+    slug: 'il-corpo-non-mente',
+    kofiUrl: 'https://ko-fi.com/s/8c06cb9b7c',
+    tag: 'Percorso',
+    title: 'Il corpo non mente',
+    description: 'Il corpo registra quello che la mente non ha ancora nominato. Impariamo a leggerlo.',
+    price: '€9',
+    type: 'standard',
+    intro: {
+      title: 'Prima di iniziare.',
+      blockquote: 'Questo non è un percorso per imparare ad ascoltare il corpo.\nSai già farlo. Il problema è che spesso non ci credi.',
+      paragraphs: [
+        'Il corpo parla prima della mente. Non aspetta che tu abbia le parole giuste, non aspetta il momento opportuno. Manda segnali continui: tensione, insonnia, fame fuori posto, respiro trattenuto. E tu li chiami stress, coincidenza, debolezza.',
+        'Non lo sono. Sono informazioni precise. In questo percorso impariamo a leggerle senza squalificarle.',
+        'Puoi compilarlo in una seduta o tornare più volte. Funziona meglio se pensi a qualcosa di specifico che senti adesso, non al tuo modo di essere in generale.'
+      ],
+      signature: '— Gilda'
+    },
+    sections: [
+      {
+        id: 's1', name: 'I segnali che ignori', number: 'I', openerBg: 'dark',
+        openerIntro: 'Il corpo non mente. Sei tu che hai imparato a non dargli retta.',
+        intro: 'Ci sono segnali che arrivano ogni giorno e che tu hai imparato a mettere a tacere in fretta: la notte che non dormi, il respiro che trattieni, la stretta al petto quando dici sì e vuoi dire no. Non sono sintomi da gestire. Sono messaggi da leggere. In questa sezione li guardiamo uno per uno.',
+        quote: 'Il corpo non aspetta che tu sia pronta. Parla adesso. La domanda è se stai ascoltando.',
+        questions: [
+          { id: 'q-corpo-1', label: 'Il segnale che il tuo corpo manda più spesso', hint: 'Tensione, insonnia, mal di testa, nausea, fame improvvisa. Quale riconosci di più?', placeholder: 'Il segnale che sento più spesso è...' },
+          { id: 'q-corpo-2', label: 'Quando compare', hint: 'In quale tipo di situazione si presenta? Prima di cosa, dopo cosa?', placeholder: 'Compare quando...' },
+          { id: 'q-corpo-3', label: 'Come lo chiami di solito', hint: 'Stanchezza, stress, ansia, debolezza? Come lo hai etichettato finora?', placeholder: 'Di solito lo chiamo...' },
+          { id: 'q-corpo-4', label: 'Cosa fai per farlo smettere', hint: 'Non per giudicarti. Per capire la strategia che usi.', placeholder: 'Di solito faccio...' },
+        ]
+      },
+      {
+        id: 's2', name: 'Cosa sta dicendo', number: 'II', openerBg: 'beige',
+        openerIntro: 'Ogni segnale del corpo è una risposta a qualcosa. Il problema non è il segnale. È che non hai ancora capito a cosa sta rispondendo.',
+        intro: 'La notte che non dormi non è insonnia generica: è il sistema nervoso che elabora quello che di giorno non ha avuto spazio. Il mal di testa del lunedì non è coincidenza: è il corpo che registra l\'anticipazione del ritorno. Ogni segnale ha una fonte. In questa sezione la cerchiamo.',
+        quote: 'Non è il corpo che si sbaglia. È che stai usando le energie per ignorarlo invece di capirlo.',
+        questions: [
+          { id: 'q-corpo-5', label: 'Se quel segnale potesse parlare, cosa direbbe', hint: 'Non la versione logica. La versione diretta, quella che non vorresti sentire.', placeholder: 'Direbbe...' },
+          { id: 'q-corpo-6', label: 'A quale situazione della tua vita sta rispondendo', hint: 'Il lavoro, una relazione, qualcosa che stai rimandando, qualcosa che stai sopportando.', placeholder: 'Sta rispondendo a...' },
+          { id: 'q-corpo-7', label: 'Da quanto tempo lo senti', hint: '', placeholder: 'Lo sento da...' },
+          { id: 'q-corpo-8', label: 'Cosa è cambiato nella tua vita nel periodo in cui è comparso', hint: '', placeholder: 'In quel periodo stava succedendo...' },
+        ]
+      },
+      {
+        id: 's3', name: 'Il costo di non ascoltare', number: 'III', openerBg: 'terracotta',
+        openerIntro: 'Ignorare il corpo non fa smettere il segnale. Lo fa alzare di volume.',
+        intro: 'Il corpo non rinuncia. Se non lo ascolti a bassa voce, parla più forte. Prima la tensione, poi il dolore. Prima l\'insonnia occasionale, poi quella strutturale. Non è una punizione, è una logica precisa: il segnale continua finché non viene ricevuto. In questa sezione guardiamo quanto ti sta costando non riceverlo.',
+        quote: 'Il corpo non ti tradisce. Si assicura che tu non possa ignorare quello che stai ignorando.',
+        questions: [
+          { id: 'q-corpo-9', label: 'Cosa hai continuato a fare nonostante il segnale', hint: 'Cosa hai portato avanti lo stesso, mettendo a tacere quello che sentivi?', placeholder: 'Ho continuato a...' },
+          { id: 'q-corpo-10', label: 'Cosa ti è costato non ascoltare', hint: 'In energia, in salute, in qualità di vita.', placeholder: 'Mi è costato...' },
+          { id: 'q-corpo-11', label: 'C\'è stato un momento in cui il corpo ha alzato la voce', hint: 'Un episodio in cui non potevi più ignorarlo.', placeholder: 'È successo quando...' },
+          { id: 'q-corpo-12', label: 'Cosa ti ha detto quella volta', hint: '', placeholder: 'Mi ha detto che...' },
+        ]
+      },
+      {
+        id: 's4', name: 'Ascoltare senza obbedire', number: 'IV', openerBg: 'cipria',
+        openerIntro: 'Ascoltare il corpo non significa lasciarlo comandare. Significa usarlo come bussola.',
+        intro: 'C\'è una differenza tra ascoltare un segnale e farsene travolgere. Il punto non è smettere di fare tutto quello che genera tensione: alcune tensioni sono parte della vita che vuoi. Il punto è saper distinguere il segnale di allarme da quello di adattamento. E rispondere con consapevolezza invece di ignorare o cedere.',
+        quote: 'Il corpo non ti chiede di fermarti. Ti chiede di sapere dove stai andando.',
+        questions: [
+          { id: 'q-corpo-13', label: 'Una cosa che il tuo corpo ti sta chiedendo da tempo', hint: 'Non la versione idealizzata. Quella concreta, quella che sai già.', placeholder: 'Mi sta chiedendo...' },
+          { id: 'q-corpo-14', label: 'Perché non l\'hai ancora ascoltata', hint: '', placeholder: 'Non l\'ho ascoltata perché...' },
+          { id: 'q-corpo-15', label: 'La risposta più piccola che potresti dargli domani', hint: 'Non una soluzione completa. Un gesto concreto nella direzione giusta.', placeholder: 'Potrei...' },
+        ],
+        synthesis: {
+          title: 'Porta qualcosa fuori da questa pagina.',
+          label: 'Quello che hai capito, in poche righe.',
+          fields: [
+            { id: 'q-sint-corpo-1', label: 'Il segnale che ho smesso di ignorare è...', placeholder: '...' },
+            { id: 'q-sint-corpo-2', label: 'Sta rispondendo a...', placeholder: '...' },
+            { id: 'q-sint-corpo-3', label: 'La risposta concreta che gli do è...', placeholder: '...' },
+          ]
+        },
+        closing: {
+          title: 'Hai ascoltato.',
+          text: 'Non è poco. Siamo abituate a mettere a tacere, a spiegare, a razionalizzare. Guardare il corpo come una fonte di informazioni invece che come un problema da gestire è un cambio di prospettiva che richiede pratica. Quello che hai scritto qui è già una risposta al segnale. Il corpo lo sa. Adesso lo sai anche tu.',
+          signature: '— Gilda'
+        }
+      },
+    ],
+  },
+  {
+    id: 'amicizie',
+    slug: 'le-amicizie',
+    kofiUrl: 'https://ko-fi.com/s/c97d2674fa',
+    tag: 'Percorso',
+    title: 'Le amicizie',
+    description: 'Non tutte le amicizie reggono la versione nuova di te. Guardiamo quali tieni, quali hai perso e cosa dicono di chi sei adesso.',
+    price: '€9',
+    type: 'standard',
+    intro: {
+      title: 'Prima di iniziare.',
+      blockquote: 'Questo non è un percorso per capire se le tue amiche sono buone amiche.\nÈ un percorso per capire cosa dicono di te le persone che hai scelto di tenere vicino.',
+      paragraphs: [
+        'Le amicizie sono uno specchio. Non nel senso romantico: nel senso che chi tieni vicino parla di chi sei adesso, di cosa cerchi, di dove hai ancora bisogno di crescere.',
+        'Non cerchiamo colpevoli. Non giudichiamo nessuna. Guardiamo il meccanismo: perché hai continuato a tornare dove non potevi essere te stessa, e cosa hai guadagnato dall\'amicizia che ti ha permesso di esserlo.',
+        'Puoi compilarlo pensando a una persona specifica o alle tue amicizie in generale. Funziona meglio se sei onesta anche sulle cose scomode.'
+      ],
+      signature: '— Gilda'
+    },
+    sections: [
+      {
+        id: 's1', name: 'La mappa delle tue amicizie', number: 'I', openerBg: 'dark',
+        openerIntro: 'Non tutte le amicizie reggono la versione nuova di te. Non è un fallimento. È selezione naturale.',
+        intro: 'Ci sono amicizie che si sono allargate con te e amicizie che non hanno retto il cambiamento. Entrambe dicono qualcosa. Non su di loro: su di te, su cosa cercavi allora, su cosa cerchi adesso. In questa sezione facciamo il punto su dove sei.',
+        quote: 'Il problema non è che le amicizie finiscono. È quando resti per abitudine invece di scegliere.',
+        questions: [
+          { id: 'q-ami-1', label: "Un'amicizia che si è allargata con il tuo cambiamento", hint: 'Chi c\'è ancora, anche se sei diventata diversa?', placeholder: 'C\'è ancora...' },
+          { id: 'q-ami-2', label: "Un'amicizia che non ha retto", hint: 'Non chi ha sbagliato. Cosa è cambiato tra voi.', placeholder: 'Non ha retto quando...' },
+          { id: 'q-ami-3', label: "Con chi riesci a essere completamente te stessa", hint: '', placeholder: 'Con... posso...' },
+          { id: 'q-ami-4', label: "Con chi reciti ancora una versione di te che non esiste più", hint: 'Anche se è scomodo ammetterlo.', placeholder: 'Con... faccio ancora finta di...' },
+        ]
+      },
+      {
+        id: 's2', name: 'Dove hai parlato e dove hai taciuto', number: 'II', openerBg: 'beige',
+        openerIntro: 'Certe amicizie ti hanno permesso di essere. Altre no. La domanda non è perché loro, ma perché hai continuato a tornare dove non potevi parlare.',
+        intro: 'C\'è sempre un posto in cui la voce è uscita e uno in cui l\'hai tenuta dentro. Non è una questione di carattere: è una questione di sicurezza percepita. Le amicizie in cui taci dicono qualcosa su cosa hai imparato a non aspettarti dagli altri. In questa sezione lo guardiamo.',
+        quote: 'Non hai taciuto perché non avevi niente da dire. Hai taciuto perché non era sicuro dirlo.',
+        questions: [
+          { id: 'q-ami-5', label: "Un argomento che non hai mai tirato fuori con certe amiche", hint: '', placeholder: 'Con... non ho mai parlato di...' },
+          { id: 'q-ami-6', label: "Perché hai continuato a frequentarle lo stesso", hint: 'Abitudine, paura di essere sola, convenienza, affetto reale?', placeholder: 'Ho continuato perché...' },
+          { id: 'q-ami-7', label: "Con chi hai detto le cose difficili", hint: 'Chi ha ricevuto la versione non filtrata di te?', placeholder: 'L\'ho detto a...' },
+          { id: 'q-ami-8', label: "Cosa ti ha permesso di parlare con quella persona", hint: '', placeholder: 'Con lei potevo perché...' },
+        ]
+      },
+      {
+        id: 's3', name: 'Il lutto che non hai elaborato', number: 'III', openerBg: 'terracotta',
+        openerIntro: 'La fine di un\'amicizia fa male quanto una storia d\'amore. Ma non ha un nome, non ha un rito. E allora non la elabori mai.',
+        intro: 'Nessuno ti dice che puoi stare male per la fine di un\'amicizia. Non c\'è un vocabolario per questo tipo di perdita. Eppure la mancanza c\'è, il vuoto c\'è, la domanda su cosa è andato storto c\'è. In questa sezione le diamo spazio.',
+        quote: 'Non devi avere una ragione precisa per sentire la mancanza. Basta che fosse reale.',
+        questions: [
+          { id: 'q-ami-9', label: "Un\'amicizia che hai perso e che ancora senti", hint: '', placeholder: 'Ho perso... e sento ancora...' },
+          { id: 'q-ami-10', label: "Come è finita", hint: 'Con un evento preciso o lentamente, senza accorgersene?', placeholder: 'È finita...' },
+          { id: 'q-ami-11', label: "Cosa non hai mai detto a quella persona", hint: '', placeholder: 'Non le ho mai detto...' },
+          { id: 'q-ami-12', label: "Cosa hai imparato da quella perdita su quello che cerchi davvero nelle amicizie", hint: '', placeholder: 'Ho capito che cerco...' },
+        ]
+      },
+      {
+        id: 's4', name: 'Scegliere per risonanza', number: 'IV', openerBg: 'cipria',
+        openerIntro: 'L\'età, gli anni in comune, la vicinanza geografica non sono motivi sufficienti. La risonanza sì.',
+        intro: 'Scegliere le persone per risonanza richiede di sapere chi sei. Richiede di smettere di accontentarsi delle amicizie che capitano e iniziare a coltivare quelle che scegli. Non è egoismo: è rispetto per entrambe. In questa sezione costruiamo la chiarezza su cosa cerchi davvero.',
+        quote: 'Chi tieni vicino parla di chi sei adesso, non di chi eri. Guardarlo senza filtri è uno dei modi più onesti per capire dove sei arrivata.',
+        questions: [
+          { id: 'q-ami-13', label: "Cosa hanno in comune le amicizie che ti fanno stare bene", hint: '', placeholder: 'Hanno in comune...' },
+          { id: 'q-ami-14', label: "Un\'amica che ti ha vista meglio di quanto tu vedessi te stessa", hint: 'Cosa ha detto o fatto?', placeholder: 'Mi ha vista quando...' },
+          { id: 'q-ami-15', label: "Un\'amicizia che vorresti costruire e che non hai ancora", hint: 'Che tipo di persona vorresti vicino?', placeholder: 'Vorrei qualcuno che...' },
+        ],
+        synthesis: {
+          title: 'Porta qualcosa fuori da questa pagina.',
+          label: 'Quello che hai capito, in poche righe.',
+          fields: [
+            { id: 'q-sint-ami-1', label: "L'amicizia che ho smesso di tenere per abitudine è...", placeholder: '...' },
+            { id: 'q-sint-ami-2', label: "Quello che cerco davvero in una persona vicina è...", placeholder: '...' },
+            { id: 'q-sint-ami-3', label: "Una cosa che cambia da oggi nelle mie amicizie è...", placeholder: '...' },
+          ]
+        },
+        closing: {
+          title: 'Hai guardato senza filtri.',
+          text: 'Le amicizie sono una delle cose più difficili da esaminare onestamente. C\'è affetto di mezzo, ci sono anni, ci sono storie. Guardare chi tieni vicino e chiedersi perché è un atto di rispetto verso te stessa, non una critica verso gli altri. Quello che hai scritto qui è già un passo verso amicizie scelte, non subite. E le amicizie scelte pesano di più, nel senso buono.',
+          signature: '— Gilda'
+        }
+      },
+    ],
+  },
 ];
 
 /* ═══════════════════════════════════════════════
