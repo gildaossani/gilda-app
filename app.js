@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════
-   GILDA PWA — app.js v6.0
-   Il Meccanismo — struttura completa
+   GILDA PWA — app.js v6.1
+   Aggiunto flusso token da URL (acquisto Ko-fi)
 ═══════════════════════════════════════════════ */
 
 const SUPA_URL = 'https://qnhnsjqzheyiacfmmmbe.supabase.co';
@@ -602,6 +602,10 @@ let opened = [];
 let hist = [];
 let timers = {};
 
+// Token da URL — salvato prima del login se serve
+let pendingToken = null;
+let pendingProduct = null;
+
 /* ═══════════════════════════════════════════════
    DOM
 ═══════════════════════════════════════════════ */
@@ -682,9 +686,89 @@ function getProd(id) { return CATALOG.find(p => p.id === id) || null; }
 function isOpen(pid) { return opened.includes(pid); }
 
 /* ═══════════════════════════════════════════════
+   FLUSSO TOKEN DA URL
+   Gestisce ?token=UUID&product=product-id
+═══════════════════════════════════════════════ */
+function readTokenFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('token');
+  const product = params.get('product');
+  if (token && product) {
+    pendingToken = token;
+    pendingProduct = product;
+  }
+}
+
+async function handleTokenFlow() {
+  if (!pendingToken || !pendingProduct) return;
+
+  // Pulisce subito l'URL — il token non deve restare visibile
+  history.replaceState({}, document.title, window.location.pathname);
+
+  try {
+    // Verifica token: esiste e non è ancora usato
+    const { data: row, error } = await supa
+      .from('unlock_codes')
+      .select('id, token, product_id, used_at')
+      .eq('token', pendingToken)
+      .eq('product_id', pendingProduct)
+      .single();
+
+    if (error || !row) {
+      toast('Link non valido o già utilizzato.');
+      pendingToken = null;
+      pendingProduct = null;
+      return;
+    }
+
+    if (row.used_at !== null) {
+      toast('Questo link è già stato usato. Accedi normalmente alla tua libreria.');
+      pendingToken = null;
+      pendingProduct = null;
+      return;
+    }
+
+    // Sblocca il percorso per l'utente
+    await supa.from('user_products').upsert(
+      { user_id: me.id, product_id: pendingProduct, unlocked_at: new Date().toISOString() },
+      { onConflict: 'user_id,product_id' }
+    );
+
+    // Brucia il token — usato_at impostato
+    await supa
+      .from('unlock_codes')
+      .update({ used_at: new Date().toISOString() })
+      .eq('id', row.id);
+
+    if (!opened.includes(pendingProduct)) {
+      opened.push(pendingProduct);
+    }
+
+    toast('Percorso sbloccato. Benvenuta.');
+
+    // Apre direttamente il percorso appena sbloccato
+    const pid = pendingProduct;
+    pendingToken = null;
+    pendingProduct = null;
+
+    renderLibrary();
+    openProduct(pid);
+
+  } catch (e) {
+    console.error('handleTokenFlow:', e);
+    toast('Errore durante lo sblocco. Riprova o contatta il supporto.');
+    pendingToken = null;
+    pendingProduct = null;
+  }
+}
+
+/* ═══════════════════════════════════════════════
    BOOT
 ═══════════════════════════════════════════════ */
 async function boot() {
+  // Legge il token dall'URL prima di qualsiasi altra cosa
+  readTokenFromUrl();
+
   showLoading();
   try {
     supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
@@ -695,7 +779,13 @@ async function boot() {
     if (data && data.session && data.session.user) {
       await enterApp(data.session.user);
     } else {
-      showAuth();
+      // Se c'è un token pendente mostra auth con messaggio
+      if (pendingToken) {
+        showAuth();
+        setMsg('Accedi o crea un account per sbloccare il tuo percorso.', 'success');
+      } else {
+        showAuth();
+      }
     }
   } catch(e) { showAuth(); }
 }
@@ -707,11 +797,17 @@ async function enterApp(user) {
   hist = [];
   showView('view-library');
   renderLibrary();
+
+  // Se c'è un token pendente lo gestisce subito dopo l'ingresso
+  if (pendingToken) {
+    await handleTokenFlow();
+  }
 }
 
 function leaveApp() {
   me = null; ans = {}; checkedItems = {}; opened = [];
   prodId = null; secIdx = null; hist = [];
+  pendingToken = null; pendingProduct = null;
   showAuth();
 }
 
@@ -776,7 +872,6 @@ g('link-forgot').addEventListener('click', async e => {
     setMsg(xlErr(error.message));
   } else {
     setMsg('Controlla la tua email — ti abbiamo mandato un codice a 6 cifre.', 'success');
-    // Mostra form OTP
     showOtpForm(email);
   }
 });
@@ -872,7 +967,6 @@ async function loadData() {
     const { data: prods } = await supa.from('user_products').select('product_id').eq('user_id', me.id);
     opened = (prods || []).map(r => r.product_id);
 
-
   } catch(e) { console.error('loadData:', e); }
 }
 
@@ -895,7 +989,9 @@ async function saveField(key, value) {
 }
 
 /* ═══════════════════════════════════════════════
-   UNLOCK
+   UNLOCK (codice manuale — Il Meccanismo gratuito)
+   Nota: i percorsi a pagamento ora arrivano via token URL.
+   Questo form resta per GILDA-WELCOME e codici omaggio.
 ═══════════════════════════════════════════════ */
 g('btn-unlock').addEventListener('click', doUnlock);
 g('unlock-input').addEventListener('keydown', e => { if (e.key === 'Enter') doUnlock(); });
@@ -907,11 +1003,31 @@ async function doUnlock() {
   g('btn-unlock').textContent = '…';
   g('unlock-message').className = 'unlock-message hidden';
   try {
-    const { data: row, error } = await supa.from('unlock_codes').select('*').eq('code', code).single();
+    // Cerca per colonna token (rinominata da code)
+    const { data: row, error } = await supa
+      .from('unlock_codes')
+      .select('*')
+      .eq('token', code)
+      .single();
+
+    if (error || !row) { showUM('Codice non valido.', 'error'); return; }
+
     const isWelcome = code.startsWith('GILDA-WELCOME');
-    if (!isWelcome && row.used_by && row.used_by !== me.id) { showUM('Codice già usato.', 'error'); return; }
+
+    // I codici non-welcome vengono bruciati al primo uso
+    if (!isWelcome && row.used_at !== null) {
+      showUM('Codice già usato.', 'error'); return;
+    }
+
     if (isOpen(row.product_id)) { showUM('Prodotto già in libreria.', 'error'); return; }
-    if (!isWelcome) await supa.from('unlock_codes').update({ used_by: me.id, used_at: new Date().toISOString() }).eq('code', code);
+
+    if (!isWelcome) {
+      await supa
+        .from('unlock_codes')
+        .update({ used_at: new Date().toISOString() })
+        .eq('id', row.id);
+    }
+
     await supa.from('user_products').upsert(
       { user_id: me.id, product_id: row.product_id, unlocked_at: new Date().toISOString() },
       { onConflict: 'user_id,product_id' }
@@ -985,7 +1101,6 @@ function renderLibrary() {
     grid.appendChild(div);
   });
 
-  // Click su "Ho già un codice" → scroll all'input unlock
   grid.querySelectorAll('[data-unlock="true"]').forEach(el => {
     el.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -1009,7 +1124,6 @@ function renderProduct(pid) {
   const p = getProd(pid); if (!p) return;
   const pc = productProgress(pid);
 
-  // Header dark con titolo
   g('product-header').innerHTML = `
     <div class="product-header-tag">${p.tag}</div>
     <div class="product-header-title">${p.title}</div>
@@ -1021,7 +1135,6 @@ function renderProduct(pid) {
   const list = g('sections-list');
   list.innerHTML = '';
 
-  // Intro card — struttura HTML: titolo + divider + blockquote + paragrafi
   if (p.intro) {
     const introCard = document.createElement('div');
     introCard.className = 'intro-card';
@@ -1038,7 +1151,6 @@ function renderProduct(pid) {
     list.appendChild(introCard);
   }
 
-  // Istruzioni — pagina scura con 4 box bordo ocra
   if (p.instructions) {
     const instrCard = document.createElement('div');
     instrCard.className = 'instructions-card';
@@ -1057,7 +1169,6 @@ function renderProduct(pid) {
     list.appendChild(instrCard);
   }
 
-  // Section cards
   p.sections.forEach((s, i) => {
     const done = sectionComplete(pid, s.id);
     const item = document.createElement('div');
@@ -1094,7 +1205,6 @@ function renderSection(pid, idx) {
   const p = getProd(pid); if (!p) return;
   const s = p.sections[idx]; if (!s) return;
 
-  // Header sezione con numero romano grande in trasparenza
   const bgClass = openerBgClass(s.openerBg);
   const header = g('section-header');
   header.className = 'section-opener ' + bgClass;
@@ -1110,7 +1220,6 @@ function renderSection(pid, idx) {
   const list = g('questions-list');
   list.innerHTML = '';
 
-  // Checklist (solo s1 meccanismo)
   if (s.checklist) {
     const clBlock = document.createElement('div');
     clBlock.className = 'checklist-block';
@@ -1139,7 +1248,6 @@ function renderSection(pid, idx) {
     list.appendChild(clBlock);
   }
 
-  // Domande
   (s.questions || []).forEach(q => {
     const key = aKey(pid, s.id, q.id);
     const block = document.createElement('div');
@@ -1159,7 +1267,6 @@ function renderSection(pid, idx) {
     list.appendChild(block);
   });
 
-  // Sintesi
   if (s.synthesis) {
     const synBlock = document.createElement('div');
     synBlock.className = 'synthesis-block';
@@ -1183,7 +1290,6 @@ function renderSection(pid, idx) {
     list.appendChild(synBlock);
   }
 
-  // Quote — bordo sinistro terracotta
   if (s.quote) {
     const q = document.createElement('div');
     q.className = 'section-quote';
@@ -1191,7 +1297,6 @@ function renderSection(pid, idx) {
     list.appendChild(q);
   }
 
-  // Pausa editoriale tra sezioni
   if (s.editorialBreak && idx < p.sections.length - 1) {
     const nextSec = p.sections[idx + 1];
     const eb = document.createElement('div');
@@ -1207,7 +1312,6 @@ function renderSection(pid, idx) {
     list.appendChild(eb);
   }
 
-  // Closing
   if (s.closing) {
     const closing = document.createElement('div');
     closing.className = 'section-closing';
@@ -1219,7 +1323,6 @@ function renderSection(pid, idx) {
     list.appendChild(closing);
   }
 
-  // Final page
   if (s.final) {
     const final = document.createElement('div');
     final.className = 'section-final';
@@ -1233,7 +1336,6 @@ function renderSection(pid, idx) {
     list.appendChild(final);
   }
 
-  // Nav prev/next
   const btnPrev = g('btn-prev-section');
   const btnNext = g('btn-next-section');
   btnPrev.disabled = idx === 0;
@@ -1296,7 +1398,4 @@ function renderProfile() {
 /* ═══════════════════════════════════════════════
    AVVIO
 ═══════════════════════════════════════════════ */
-
-
-
 document.addEventListener('DOMContentLoaded', boot);
