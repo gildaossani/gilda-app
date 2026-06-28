@@ -1359,27 +1359,182 @@ function romanToWord(r) {
 ═══════════════════════════════════════════════ */
 g('btn-export').addEventListener('click', () => {
   const p = getProd(prodId); if (!p) return;
-  let txt = `${p.title}\nEsportato il ${new Date().toLocaleDateString('it-IT')}\n${'═'.repeat(50)}\n\n`;
-  p.sections.forEach((s, si) => {
-    txt += `${s.number || si + 1}. ${s.name}\n${'─'.repeat(30)}\n\n`;
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+  const PAGE_W = 210;
+  const PAGE_H = 297;
+  const MARGIN = 18;
+  const CONTENT_W = PAGE_W - MARGIN * 2;
+  const COLOR_INK = [45, 45, 45];
+  const COLOR_MUTED = [154, 142, 130];
+  const COLOR_RULE = [232, 226, 216];
+  const COLOR_GOLD = [180, 140, 80];
+
+  let y = MARGIN;
+
+  function checkPage(needed = 10) {
+    if (y + needed > PAGE_H - MARGIN) {
+      doc.addPage();
+      y = MARGIN;
+      drawPageFooter();
+    }
+  }
+
+  function drawPageFooter() {
+    const pageNum = doc.internal.getCurrentPageInfo().pageNumber;
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(7);
+    doc.setTextColor(...COLOR_MUTED);
+    doc.text('— Gilda', MARGIN, PAGE_H - 10);
+    doc.text(String(pageNum), PAGE_W - MARGIN, PAGE_H - 10, { align: 'right' });
+  }
+
+  function rule(color = COLOR_RULE) {
+    doc.setDrawColor(...color);
+    doc.setLineWidth(0.2);
+    doc.line(MARGIN, y, PAGE_W - MARGIN, y);
+    y += 4;
+  }
+
+  function addText(text, opts = {}) {
+    const {
+      size = 10, style = 'normal', color = COLOR_INK,
+      indent = 0, lineH = 5, maxW = CONTENT_W
+    } = opts;
+    doc.setFont('helvetica', style);
+    doc.setFontSize(size);
+    doc.setTextColor(...color);
+    const lines = doc.splitTextToSize(text, maxW - indent);
+    lines.forEach(line => {
+      checkPage(lineH + 1);
+      doc.text(line, MARGIN + indent, y);
+      y += lineH;
+    });
+  }
+
+  // ── COPERTINA ──────────────────────────────────
+  // Barra oro in cima
+  doc.setFillColor(...COLOR_GOLD);
+  doc.rect(0, 0, PAGE_W, 3, 'F');
+
+  y = 40;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(...COLOR_MUTED);
+  doc.text('PERCORSO · GILDA OSSANI', MARGIN, y);
+  y += 10;
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(26);
+  doc.setTextColor(...COLOR_INK);
+  doc.text(p.title, MARGIN, y);
+  y += 8;
+
+  doc.setFont('helvetica', 'italic');
+  doc.setFontSize(11);
+  doc.setTextColor(...COLOR_MUTED);
+  const descLines = doc.splitTextToSize(p.description, CONTENT_W);
+  descLines.forEach(l => { doc.text(l, MARGIN, y); y += 5; });
+
+  y += 6;
+  doc.setDrawColor(...COLOR_GOLD);
+  doc.setLineWidth(0.5);
+  doc.line(MARGIN, y, MARGIN + 36, y);
+  y += 10;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(...COLOR_MUTED);
+  doc.text(`Esportato il ${new Date().toLocaleDateString('it-IT')}`, MARGIN, y);
+
+  drawPageFooter();
+
+  // ── SEZIONI ────────────────────────────────────
+  p.sections.forEach((s) => {
+    doc.addPage();
+    y = MARGIN;
+
+    // Barra oro in cima ad ogni pagina sezione
+    doc.setFillColor(...COLOR_GOLD);
+    doc.rect(0, 0, PAGE_W, 2, 'F');
+    y += 4;
+
+    // Intestazione sezione
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7);
+    doc.setTextColor(...COLOR_MUTED);
+    doc.text(`SEZIONE ${s.number} — ${p.title.toUpperCase()}`, MARGIN, y);
+    y += 7;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(...COLOR_INK);
+    doc.text(s.name, MARGIN, y);
+    y += 6;
+
+    rule(COLOR_RULE);
+
+    drawPageFooter();
+
+    // Domande
     (s.questions || []).forEach(q => {
       const k = aKey(p.id, s.id, q.id);
-      txt += `${q.label}\n${ans[k] || '—'}\n\n`;
+      const risposta = (ans[k] || '').trim();
+
+      checkPage(18);
+
+      addText(q.label, { size: 7.5, style: 'normal', color: COLOR_MUTED, lineH: 4 });
+      y += 1;
+
+      if (risposta) {
+        addText(risposta, { size: 10, style: 'normal', color: COLOR_INK, indent: 0, lineH: 5 });
+      } else {
+        addText('—', { size: 10, style: 'italic', color: [200, 190, 180], lineH: 5 });
+      }
+
+      y += 3;
+      rule(COLOR_RULE);
     });
+
+    // Sintesi
     if (s.synthesis) {
-      txt += `${s.synthesis.title}\n`;
+      checkPage(14);
+      y += 2;
+      addText(s.synthesis.title, { size: 8, style: 'bold', color: COLOR_MUTED, lineH: 4.5 });
+      y += 2;
+
       s.synthesis.fields.forEach(f => {
         const k = aKey(p.id, s.id, f.id);
-        txt += `${f.label} ${ans[k] || '—'}\n`;
+        const risposta = (ans[k] || '').trim();
+        checkPage(14);
+        addText(f.label, { size: 7.5, style: 'italic', color: COLOR_MUTED, lineH: 4 });
+        y += 1;
+        if (risposta) {
+          addText(risposta, { size: 10, color: COLOR_INK, lineH: 5 });
+        } else {
+          addText('—', { size: 10, style: 'italic', color: [200, 190, 180], lineH: 5 });
+        }
+        y += 3;
+        rule(COLOR_RULE);
       });
-      txt += '\n';
     }
   });
-  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = `gilda-${p.slug}-risposte.txt`; a.click();
-  URL.revokeObjectURL(url);
-  toast('File esportato');
+
+  // Aggiorna footer su tutte le pagine
+  const totalPages = doc.internal.getNumberOfPages();
+  for (let i = 1; i <= totalPages; i++) {
+    doc.setPage(i);
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(7);
+    doc.setTextColor(...COLOR_MUTED);
+    doc.text('— Gilda', MARGIN, PAGE_H - 10);
+    doc.text(`${i} / ${totalPages}`, PAGE_W - MARGIN, PAGE_H - 10, { align: 'right' });
+  }
+
+  doc.save(`gilda-${p.slug}-risposte.pdf`);
+  toast('PDF esportato');
 });
 
 /* ═══════════════════════════════════════════════
