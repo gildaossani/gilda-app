@@ -32,7 +32,7 @@ const CATALOG = [
     instructions: {
       title: 'Come usare questo strumento.',
       items: [
-        { label: 'Il test', text: 'Prima di tutto, "Quello che fai invece": quindici domande per nominare la tua forma specifica di autosabotaggio.' },
+        { label: 'Le cinque forme', text: 'Prima di tutto, una lettura: i cinque travestimenti più comuni dell\'autosabotaggio. Ti aiuteranno a riconoscere il tuo.' },
         { label: 'Quattro sezioni', text: 'Il tuo pattern / Il momento esatto / La logica interna / Il passo piccolo. Seguono una logica. Meglio non saltare.' },
         { label: 'Salvato in automatico', text: 'Tutto quello che scrivi viene salvato nel cloud. Se chiudi e riapri, trovi le tue risposte da qualsiasi dispositivo.' },
         { label: 'Esporta', text: 'Usa il tasto Esporta per scaricare le tue risposte in formato testo. Torna a compilarlo quando il meccanismo si riattiva.' },
@@ -48,7 +48,7 @@ const CATALOG = [
         openerIntro: 'Non sei ferma. Sei occupatissima a non fare la cosa che conta.',
         intro: 'L\'autosabotaggio elegante non assomiglia all\'immobilità. Ha un\'agenda piena, ottimi motivi, un senso di responsabilità molto sviluppato. In questa sezione identifichiamo il tuo modo specifico di fare una cosa invece dell\'altra.',
         checklist: [
-          { id: 'p1', title: 'Faccio cose utili per evitare quella che conta davvero', note: 'Rispondo email, sistemo, organizzo. Tutto urgente. Niente importante.' },
+          { id: 'p1', title: 'Faccio cose utili per evitare quella che conta davvero', note: 'Rispondo alle email, metto ordine dove non serve. Tutto urgente, niente importante.' },
           { id: 'p2', title: 'Perfeziono ancora prima di agire', note: 'Non è mai abbastanza pronto. Ancora un giro. Ancora.' },
           { id: 'p3', title: 'Aiuto qualcuno invece di espormi io', note: 'Generosità strutturale. Comoda.' },
           { id: 'p4', title: 'Raccolgo informazioni invece di scegliere', note: 'Ancora un libro, ancora un corso. La decisione aspetta.' },
@@ -86,7 +86,7 @@ const CATALOG = [
           { id: 'q-conseguenza', label: 'La conseguenza concreta', hint: 'Non nel senso catastrofico. Nel senso pratico: cosa sarebbe cambiato davvero?', placeholder: 'Sarebbe accaduto concretamente...' },
           { id: 'q-micro-azione', label: 'La micro-azione di deviazione', hint: 'Cosa hai fatto esattamente invece? Il più preciso possibile.', placeholder: 'Ho fatto invece...' },
           { id: 'q-punto-deviazione', label: 'Il punto esatto della deviazione', hint: 'In quale momento preciso hai cambiato direzione? Dopo quale pensiero, sensazione, gesto?', placeholder: 'Ho deviato nel momento in cui...' },
-          { id: 'q-corpo', label: 'Cosa sentivi nel corpo', hint: 'Prima di deviare. Fisicamente.', placeholder: 'Tensione, calore, vuoto...' },
+          { id: 'q-corpo', label: 'Cosa sentivi nel corpo', hint: 'Prima di deviare. Fisicamente.', placeholder: 'Tensione allo stomaco, respiro corto...' },
           { id: 'q-pensiero', label: 'Il primo pensiero', hint: 'Il primo pensiero razionale che è arrivato.', placeholder: 'Il pensiero era...' },
           { id: 'q-storia', label: 'La storia che ti sei raccontata', hint: 'La spiegazione interna. La narrativa con cui hai chiuso la questione.', placeholder: 'Mi sono detta che...' },
         ],
@@ -592,276 +592,6 @@ const CATALOG = [
 ];
 
 /* ═══════════════════════════════════════════════
-   QUIZ — "Quello che fai invece"
-   Prima parte di Il Meccanismo (autosabotaggio)
-═══════════════════════════════════════════════ */
-const QUIZ_PATTERNS = {
-  procrastinazione: {
-    name: "Procrastinazione",
-    subtitle: "Sono troppo occupata per fare la cosa che conta",
-    descriptions: {
-      alta: `<p>La procrastinazione, quella vera, non assomiglia all'ozio. Assomiglia a una giornata pienissima. Email a cui rispondere, scrivanie da sistemare, favori da fare: tutto urgente, niente importante. Il tempo passa, la lista si svuota, e la cosa che contava davvero resta esattamente dove l'avevi lasciata.</p>
-<p>Non è pigrizia. È una strategia, e funziona: finché sei occupata, non devi misurarti con quello che succederebbe se ti fermassi davvero a fare la cosa giusta. Il rischio si rimanda insieme al compito.</p>
-<p>Il primo passo non è diventare più organizzata. È notare il momento esatto in cui scegli l'urgente al posto dell'importante, e chiederti cosa stai evitando di scoprire su te stessa fermandoti lì.</p>`,
-      media: `<p>La procrastinazione si fa sentire, ma non governa tutto. In certi periodi, davanti a certi compiti, trovi mille cose da fare prima del previsto. In altri momenti riesci ad andare dritta al punto, senza deviazioni. Non è un tratto fisso: è una risposta che si attiva in condizioni precise.</p>
-<p>Vale la pena guardare quando arriva. Di solito non compare davanti a qualsiasi compito, ma davanti a quello che ti espone di più.</p>
-<p>Riconoscerla nel momento in cui si attiva è già buona parte del lavoro.</p>`,
-      bassa: `<p>La procrastinazione è presente, ma in forma lieve. Capita, come capita a chiunque, di rimandare qualcosa di scomodo. Non sembra però un meccanismo che ti governa: nella maggior parte dei casi riesci a fare la cosa che conta senza troppe deviazioni.</p>
-<p>Vale comunque la pena osservare le rare volte in cui succede: anche un pattern leggero ha qualcosa da dire su cosa stai evitando di affrontare.</p>`
-    },
-    mantras: [
-      "Quando trovi mille cose urgenti, chiediti cosa stai rimandando davvero.",
-      "L'urgente non è sempre importante. Quasi mai, in realtà.",
-      "Il compito che eviti di più è di solito quello che conta di più."
-    ]
-  },
-  perfezionismo: {
-    name: "Perfezionismo",
-    subtitle: "Non è ancora pronto",
-    descriptions: {
-      alta: `<p>Il perfezionismo non si presenta come ambizione vaga. Si presenta come una scadenza che continua a spostarsi, un altro giro di revisione, un dettaglio che ancora non torna. Mai abbastanza pronto, mai abbastanza buono. La barra si alza ogni volta che stai per raggiungerla.</p>
-<p>Non è amore per la qualità. È un modo, molto sofisticato, per non dover mai mostrare qualcosa che possa essere giudicato. Finché lavori ancora su una cosa, nessuno può dire che non va bene: semplicemente, non l'hai ancora finita.</p>
-<p>Il primo passo non è abbassare gli standard. È notare quando la revisione smette di migliorare il lavoro e comincia solo a rimandarne l'uscita.</p>`,
-      media: `<p>Il perfezionismo si attiva in certi contesti, non in altri. Su alcune cose riesci a dire basta così, senza fatica. Su altre, quelle che contano di più o ti espongono di più, continui a rimandare l'uscita finché non è impeccabile, e impeccabile non arriva mai del tutto.</p>
-<p>Vale la pena notare la differenza tra le cose che riesci a chiudere facilmente e quelle che non chiudi mai.</p>
-<p>La differenza, di solito, dice più di quanto sembri.</p>`,
-      bassa: `<p>Il perfezionismo è presente in forma lieve. Capita di rivedere un lavoro più volte del necessario, ma raramente ti impedisce di consegnarlo, pubblicarlo, mandarlo. Riesci, nella maggior parte dei casi, a distinguere tra ancora da migliorare e abbastanza buono.</p>
-<p>Le volte in cui non riesci a farlo restano comunque un indizio utile su cosa, in quel momento, ti sembrava troppo rischioso da mostrare così com'era.</p>`
-    },
-    mantras: [
-      "Non ancora pronto è una frase che puoi dire all'infinito.",
-      "A un certo punto, finito conta più di perfetto.",
-      "Mostrare qualcosa di imperfetto fa meno male di quanto pensi."
-    ]
-  },
-  iperresponsabilita: {
-    name: "Iperresponsabilità",
-    subtitle: "Mi occupo di tutti, tranne che di me",
-    descriptions: {
-      alta: `<p>L'iperresponsabilità ha un'agenda piena, e quasi mai la tua. Rispondi prima alle richieste degli altri, sistemi i problemi che non ti competono, ti rendi disponibile prima ancora che venga chiesto. Generosità, la chiami. Ma è una generosità molto comoda: finché ti occupi degli altri, non devi occuparti di te.</p>
-<p>Aiutare non è il problema. Il problema è quando diventa il modo sistematico di evitare quello che ti riguarda da vicino: una scelta, un'esposizione, una cosa che dipende solo da te e quindi può andare storta solo per colpa tua.</p>
-<p>Il primo passo non è smettere di aiutare. È notare cosa stai evitando ogni volta che ti metti in coda dopo tutti gli altri.</p>`,
-      media: `<p>L'iperresponsabilità si attiva in certe relazioni, non in tutte. Con alcune persone riesci a tenere il tuo spazio. Con altre, finisci sempre per occuparti tu, anche di cose che non ti spettano, anche quando non te lo chiede nessuno esplicitamente.</p>
-<p>Vale la pena guardare con chi succede di più, e cosa hanno in comune quelle situazioni.</p>
-<p>Spesso non è la persona. È il ruolo che ti sei assegnata.</p>`,
-      bassa: `<p>L'iperresponsabilità è presente, ma in misura contenuta. Ti rendi disponibile, certo, ma generalmente riesci anche a riservarti spazio. Non sembra un meccanismo dominante.</p>
-<p>Quando capita comunque, è un buon punto da osservare: cosa stavi evitando di affrontare in quel momento, occupandoti di qualcun altro.</p>`
-    },
-    mantras: [
-      "Occuparsi di tutti è un modo elegante per non occuparsi di te.",
-      "La tua lista delle priorità inizia da te, non finisce con te.",
-      "Aiutare non è obbligatorio. È una scelta, anche quando sembra un dovere."
-    ]
-  },
-  indecisione: {
-    name: "Indecisione",
-    subtitle: "Ancora un'informazione, poi scelgo",
-    descriptions: {
-      alta: `<p>L'indecisione non sembra indecisione. Sembra prudenza. Un altro parere, un'altra ricerca, un'altra opzione da valutare prima di chiudere. Sempre un'informazione in più tra te e la scelta, e quell'informazione non arriva mai a essere sufficiente.</p>
-<p>Non è mancanza di criterio. È che scegliere significa chiudere tutte le altre strade, e finché non scegli, restano tutte ancora aperte. L'indecisione protegge quella sensazione di avere ancora tutto davanti.</p>
-<p>Il primo passo non è raccogliere più dati. È notare quando le informazioni servono davvero, e quando servono solo a non doversi assumere la scelta.</p>`,
-      media: `<p>L'indecisione si attiva su certe decisioni, non su tutte. Le cose piccole le chiudi senza fatica. Quelle che pesano di più, che ti espongono o ti vincolano, restano aperte più del necessario, in cerca di un'informazione che le renda definitive.</p>
-<p>Vale la pena notare cosa hanno in comune le decisioni che rimandi di più.</p>
-<p>Di solito, hanno in comune il fatto che ti riguardano da vicino.</p>`,
-      bassa: `<p>L'indecisione è presente, ma in forma lieve. Su alcune scelte ti prendi più tempo del necessario, ma nella maggior parte dei casi arrivi comunque a una decisione in tempi ragionevoli.</p>
-<p>Quando ti blocchi più del solito, vale la pena chiederti cosa rende quella scelta diversa dalle altre.</p>`
-    },
-    mantras: [
-      "Più opzioni raccogli, meno urgente sembra scegliere.",
-      "Nessuna informazione renderà la scelta priva di rischio.",
-      "Decidere male è comunque meglio che non decidere mai."
-    ]
-  },
-  overthinking: {
-    name: "Overthinking",
-    subtitle: "Ho capito tutto, non ho fatto niente",
-    descriptions: {
-      alta: `<p>L'overthinking sembra lavoro. È un pensiero dopo l'altro, un'ipotesi dopo l'altra, una versione e poi un'altra dello stesso scenario. Sembra analisi, sembra preparazione. Ma alla fine del giro, sei esattamente al punto di partenza: hai pensato tutto, e non hai fatto niente.</p>
-<p>Pensare non è il problema. Il problema è quando il pensiero smette di portare a una decisione e diventa il modo per restare in un luogo sicuro, dove nessuna azione può ancora andare storta perché nessuna azione è ancora stata fatta.</p>
-<p>Il primo passo non è pensare meno. È notare il momento esatto in cui il pensiero smette di essere utile e comincia solo a girare.</p>`,
-      media: `<p>L'overthinking si attiva in certi momenti, non in modo costante. Davanti a certe situazioni riesci a decidere e andare avanti. Davanti ad altre, quelle che pesano di più, il pensiero comincia a girare in tondo, e fatichi a fermarlo.</p>
-<p>Vale la pena guardare cosa hanno in comune i momenti in cui il pensiero si blocca su sé stesso.</p>
-<p>Spesso è lì che il rischio sembra più grande.</p>`,
-      bassa: `<p>L'overthinking è presente, ma in forma lieve. Capita di rigirare un pensiero più del necessario, ma di solito riesci ad arrivare comunque a una conclusione e a muoverti.</p>
-<p>Le volte in cui resti bloccata più a lungo restano comunque un indizio su cosa, in quel momento, sentivi più rischioso da affrontare.</p>`
-    },
-    mantras: [
-      "Pensare non è la stessa cosa che agire.",
-      "Un pensiero in più non rende la decisione più sicura.",
-      "A un certo punto, il pensiero deve fermarsi per lasciare spazio al fatto."
-    ]
-  }
-};
-
-const QUIZ_QUESTIONS = [
-  {
-    text: "Hai una cosa importante da fare oggi. Cosa succede di solito?",
-    options: [
-      { text: "La faccio, anche se mi scoccia.", pattern: null },
-      { text: "Trovo dieci cose urgenti da fare prima.", pattern: "procrastinazione" },
-      { text: "Continuo a sistemarla finché non è perfetta.", pattern: "perfezionismo" },
-      { text: "Mi metto a disposizione di qualcun altro che ha bisogno.", pattern: "iperresponsabilita" },
-      { text: "Cerco ancora informazioni prima di iniziare.", pattern: "indecisione" },
-      { text: "La giro nella testa così tante volte che si consuma da sola.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "Quando finisci un lavoro, come ti senti?",
-    options: [
-      { text: "Soddisfatta, e già con la testa al prossimo.", pattern: null },
-      { text: "Sollevata di averlo tolto di mezzo.", pattern: "procrastinazione" },
-      { text: "Convinta che potevo fare meglio.", pattern: "perfezionismo" },
-      { text: "Più concentrata su come è andata agli altri che a me.", pattern: "iperresponsabilita" },
-      { text: "Già a chiedermi se ho scelto bene.", pattern: "indecisione" },
-      { text: "A ripensare ogni dettaglio invece di lasciarlo andare.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "Una decisione importante ti aspetta. Come ti muovi?",
-    options: [
-      { text: "Valuto, decido, e se sbaglio pazienza.", pattern: null },
-      { text: "Trovo altro da fare nel frattempo.", pattern: "procrastinazione" },
-      { text: "Aspetto la condizione perfetta per deciderla.", pattern: "perfezionismo" },
-      { text: "Chiedo prima a tutti cosa ne pensano, mettendo il mio parere per ultimo.", pattern: "iperresponsabilita" },
-      { text: "Raccolgo altre opinioni, ancora una, ancora un'altra.", pattern: "indecisione" },
-      { text: "La rigiro nella testa, ipotesi su ipotesi, senza arrivare in fondo.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "Qualcuno ti chiede un favore in un momento già pieno. Cosa fai?",
-    options: [
-      { text: "Dico no se non ho tempo, anche se mi costa.", pattern: null },
-      { text: "Accetto, è più facile che spiegare perché non posso.", pattern: "procrastinazione" },
-      { text: "Rimando la mia cosa per fare bene anche questa.", pattern: "perfezionismo" },
-      { text: "Dico sì prima ancora di pensarci.", pattern: "iperresponsabilita" },
-      { text: "Chiedo tempo per pensarci, e intanto non rispondo a nessuno dei due.", pattern: "indecisione" },
-      { text: "Passo la sera a chiedermi se ho fatto la scelta giusta.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "Nel corpo, dove senti la tensione quando rimandi qualcosa?",
-    options: [
-      { text: "Sento la tensione e la lascio passare, senza farne un dramma.", pattern: null },
-      { text: "Nello stomaco, una sensazione di peso che mi fa cercare altro da fare.", pattern: "procrastinazione" },
-      { text: "Nelle spalle e nel collo, come se dovessi tenere tutto sotto controllo.", pattern: "perfezionismo" },
-      { text: "Nel petto, come se dovessi reggere anche il carico di altri.", pattern: "iperresponsabilita" },
-      { text: "Nella testa, un brusio che non si ferma.", pattern: "indecisione" },
-      { text: "Negli occhi, stanca di rigirare le stesse cose.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "C'è qualcosa che hai quasi finito e a cui tieni. Cosa ti frena dal dire che è pronto?",
-    options: [
-      { text: "Nulla, so valutare obiettivamente le cose.", pattern: null },
-      { text: "Trovo altro di urgente che richiede attenzione prima.", pattern: "procrastinazione" },
-      { text: "Manca ancora qualcosa, non è abbastanza.", pattern: "perfezionismo" },
-      { text: "Ho passato il tempo a occuparmi delle cose di altri.", pattern: "iperresponsabilita" },
-      { text: "Non riesco a scegliere la versione definitiva.", pattern: "indecisione" },
-      { text: "Ho già immaginato troppi scenari su come andrà.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "Come ti senti quando qualcuno ti chiede un parere netto?",
-    options: [
-      { text: "Lo do anche se può non piacere.", pattern: null },
-      { text: "Trovo il modo di rimandare la risposta.", pattern: "procrastinazione" },
-      { text: "Preferisco non sbagliare, quindi ci penso a lungo.", pattern: "perfezionismo" },
-      { text: "Chiedo prima cosa pensa lei o lui.", pattern: "iperresponsabilita" },
-      { text: "Mi viene difficile scegliere una sola opzione.", pattern: "indecisione" },
-      { text: "Comincio a vedere troppe sfumature per dare una risposta secca.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "Devi scrivere una mail importante e non sai bene da dove iniziare. Cosa fai?",
-    options: [
-      { text: "La scrivo, magari non perfetta, e la invio.", pattern: null },
-      { text: "Rispondo prima a tutte le altre mail, quella la lascio per dopo.", pattern: "procrastinazione" },
-      { text: "Scrivo e riscrivo la prima riga decine di volte.", pattern: "perfezionismo" },
-      { text: "Prima penso a cosa serve agli altri, la mia resta in fondo.", pattern: "iperresponsabilita" },
-      { text: "Apro una bozza, la chiudo, ne apro un'altra.", pattern: "indecisione" },
-      { text: "Penso a tutti i modi in cui potrebbe essere fraintesa, prima ancora di scriverla.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "Hai sbagliato qualcosa di piccolo. Cosa succede dopo?",
-    options: [
-      { text: "Mi scoccia, lo sistemo, chiudo lì.", pattern: null },
-      { text: "Trovo altro da fare per non doverci pensare.", pattern: "procrastinazione" },
-      { text: "Ci penso a lungo, voglio capire dove ho sbagliato esattamente.", pattern: "perfezionismo" },
-      { text: "Mi scuso anche più del necessario.", pattern: "iperresponsabilita" },
-      { text: "Mi chiedo se avrei dovuto fare diversamente fin dall'inizio.", pattern: "indecisione" },
-      { text: "Lo ripercorro più e più volte nella testa.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "Cosa ti fa più paura, davanti a una cosa nuova da iniziare?",
-    options: [
-      { text: "Mi spaventa, ma parto lo stesso.", pattern: null },
-      { text: "Che diventi un'altra cosa rimandata.", pattern: "procrastinazione" },
-      { text: "Che il risultato non sia abbastanza buono.", pattern: "perfezionismo" },
-      { text: "Che tolga tempo a chi ho intorno.", pattern: "iperresponsabilita" },
-      { text: "Che scelga la strada sbagliata.", pattern: "indecisione" },
-      { text: "Che ci pensi troppo e non parta mai.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "Quando guardi la tua lista di cose da fare, cosa provi?",
-    options: [
-      { text: "La guardo e scelgo da dove iniziare, senza farmi paralizzare.", pattern: null },
-      { text: "Mi sento sopraffatta e finisco per fare altro.", pattern: "procrastinazione" },
-      { text: "Mi concentro su quella che richiede più cura, anche se non è la priorità.", pattern: "perfezionismo" },
-      { text: "Noto soprattutto le cose che riguardano altri.", pattern: "iperresponsabilita" },
-      { text: "Fatico a scegliere da dove iniziare.", pattern: "indecisione" },
-      { text: "Comincio a pensare a tutto quello che potrebbe andare storto.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "Hai mai rinunciato a qualcosa che volevi davvero?",
-    options: [
-      { text: "Sì, ma per scelta, non per blocco.", pattern: null },
-      { text: "Sì, perché ho continuato a rimandarla.", pattern: "procrastinazione" },
-      { text: "Sì, perché non mi sembrava ancora abbastanza pronta.", pattern: "perfezionismo" },
-      { text: "Sì, perché ho dato priorità a qualcun altro.", pattern: "iperresponsabilita" },
-      { text: "Sì, perché non riuscivo a scegliere tra le opzioni.", pattern: "indecisione" },
-      { text: "Sì, perché l'ho analizzata così tanto da perdere la spinta.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "Come reagisci quando qualcosa non va come previsto?",
-    options: [
-      { text: "Mi arrabbio, lo dico, e poi vado avanti.", pattern: null },
-      { text: "Trovo altro su cui concentrarmi nel frattempo.", pattern: "procrastinazione" },
-      { text: "Voglio capire cosa ho sbagliato per non ripeterlo.", pattern: "perfezionismo" },
-      { text: "Mi chiedo se ho deluso qualcuno.", pattern: "iperresponsabilita" },
-      { text: "Mi blocco, non so più quale direzione prendere.", pattern: "indecisione" },
-      { text: "Ripenso ogni passaggio cercando dove è andato storto.", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "C'è una frase che ti dici spesso, in momenti come questi?",
-    options: [
-      { text: "\"Vabbè, pazienza.\"", pattern: null },
-      { text: "\"Lo faccio dopo, adesso ho altro.\"", pattern: "procrastinazione" },
-      { text: "\"Non è ancora abbastanza.\"", pattern: "perfezionismo" },
-      { text: "\"Tanto ci penso io.\"", pattern: "iperresponsabilita" },
-      { text: "\"Non so cosa sia meglio.\"", pattern: "indecisione" },
-      { text: "\"Devo pensarci ancora un po'.\"", pattern: "overthinking" }
-    ]
-  },
-  {
-    text: "Se potessi cambiare una sola cosa del tuo modo di funzionare, quale sarebbe?",
-    options: [
-      { text: "Niente che mi venga in mente subito.", pattern: null },
-      { text: "Smettere di rimandare le cose che contano.", pattern: "procrastinazione" },
-      { text: "Decidere che basta così, anche se non è perfetto.", pattern: "perfezionismo" },
-      { text: "Mettermi prima nella lista.", pattern: "iperresponsabilita" },
-      { text: "Fidarmi della prima scelta.", pattern: "indecisione" },
-      { text: "Smettere di girare in tondo nella testa.", pattern: "overthinking" }
-    ]
-  }
-];
-
-/* ═══════════════════════════════════════════════
    STATO
 ═══════════════════════════════════════════════ */
 let supa = null;
@@ -877,11 +607,6 @@ let timers = {};
 // Token da URL — salvato prima del login se serve
 let pendingToken = null;
 let pendingProduct = null;
-
-// Stato quiz "Quello che fai invece"
-let quizQ = 0;
-let quizAnswers = [];
-let quizShuffled = null;
 
 /* ═══════════════════════════════════════════════
    DOM
@@ -1389,198 +1114,141 @@ function renderLibrary() {
 }
 
 /* ═══════════════════════════════════════════════
-   QUIZ INLINE — "Quello che fai invece"
+   LE CINQUE FORME — lettura di apertura
    Prima parte del prodotto Il Meccanismo.
-   Stile scoped sotto .qz-*, iniettato una sola volta.
+   Stile scoped sotto .ff-*, iniettato una sola volta.
 ═══════════════════════════════════════════════ */
-function ensureQuizStyles() {
-  if (document.getElementById('qz-styles')) return;
+const FORME = [
+  {
+    name: "Procrastinazione",
+    subtitle: "Sono troppo occupata per fare la cosa che conta",
+    paras: [
+      "La procrastinazione vera non assomiglia all'ozio, anzi: assomiglia a una giornata talmente piena che la sera ti chiedi dove sia finita, tra email a cui rispondere e commissioni che sembravano non poter aspettare. Tutto urgente, niente importante. Intanto il tempo passa e la lista si svuota, mentre la cosa che contava davvero resta esattamente dove l'avevi lasciata, paziente come solo le cose rimandate sanno essere.",
+      "Chiamarla pigrizia sarebbe un errore, oltre che un'ingiustizia, perché di lavoro ne fai fin troppo; funziona piuttosto come una strategia, discretamente efficace: finché sei occupata non devi misurarti con quello che succederebbe se ti fermassi a fare la cosa giusta, così il rischio si rimanda insieme al compito, in un pacchetto unico che sembra persino ragionevole.",
+      "Il primo passo, se decidi di farlo, consiste nel notare il momento esatto in cui scegli l'urgente al posto dell'importante, per poi chiederti cosa stai evitando di scoprire su te stessa fermandoti proprio lì. Diventare più organizzata può aspettare; di corsi su quello ne trovi quanti ne vuoi."
+    ],
+    mantras: [
+      "Quando trovi mille cose urgenti, chiediti cosa stai rimandando davvero.",
+      "L'urgente quasi mai coincide con l'importante.",
+      "Il compito che eviti di più è di solito quello che conta di più."
+    ]
+  },
+  {
+    name: "Perfezionismo",
+    subtitle: "Non è ancora pronto",
+    paras: [
+      "Il perfezionismo passa per amore della qualità e per un bel po' riesce anche a farsi credere: si presenta come una scadenza che continua a spostarsi, come un dettaglio che ancora non torna, mentre la barra si alza ogni volta che stai per raggiungerla. Mai abbastanza pronto, mai abbastanza buono.",
+      "Con la qualità, in realtà, c'entra poco; somiglia piuttosto a un sistema molto sofisticato per non dover mai mostrare qualcosa che possa essere giudicato, perché finché ci stai ancora lavorando nessuno può dire che non va bene: semplicemente, non hai finito. Geniale, se non fosse che intanto niente esce mai.",
+      "Si comincia da un punto preciso, quello in cui la revisione smette di migliorare il lavoro; da lì in avanti sta solo rimandandone l'uscita, anche se continua a sembrarti cura. Gli standard possono restare dove sono, alti quanto vuoi: il problema non è mai stato lì."
+    ],
+    mantras: [
+      "Non ancora pronto è una frase che puoi dire all'infinito.",
+      "A un certo punto, finito conta più di perfetto.",
+      "Mostrare qualcosa di imperfetto fa meno male di quanto pensi."
+    ]
+  },
+  {
+    name: "Iperresponsabilità",
+    subtitle: "Mi occupo di tutti, tranne che di me",
+    paras: [
+      "L'iperresponsabilità riempie l'agenda, quasi mai con cose tue: rispondi prima alle richieste degli altri, ti rendi disponibile prima ancora che qualcuno chieda, come se il tuo tempo fosse un bene comune a cui tutti possono attingere tranne te. La chiami generosità, che in parte lo è pure; solo che risulta anche molto comoda: finché ti occupi degli altri non devi occuparti di te.",
+      "Aiutare, in sé, resta una cosa bella; diventa un meccanismo quando ti serve a evitare in modo sistematico quello che ti riguarda da vicino, cioè una scelta che dipende soltanto da te, che quindi può andare storta soltanto per causa tua. Meglio, allora, avere sempre qualcun altro di cui occuparsi prima.",
+      "Continuare ad aiutare va benissimo, nessuno ti chiede di smettere; la domanda da tenere aperta, semmai, riguarda cosa stai evitando ogni volta che ti metti in coda dopo tutti gli altri, con una puntualità che, a guardarla bene, comincia a sembrare sospetta."
+    ],
+    mantras: [
+      "Occuparsi di tutti è un modo elegante per non occuparsi di te.",
+      "La tua lista delle priorità inizia da te, non finisce con te.",
+      "Aiutare resta una scelta, anche quando sembra un dovere."
+    ]
+  },
+  {
+    name: "Indecisione",
+    subtitle: "Ancora un'informazione, poi scelgo",
+    paras: [
+      "L'indecisione parla la lingua della prudenza, la parla così bene che quasi le credi: un altro parere, un'altra opzione da valutare prima di chiudere, mentre tra te e la scelta resta sempre un'informazione in più che non arriva mai a bastare, per quanto tu continui a cercarla.",
+      "Di criterio ne hai, il punto sta altrove: scegliere significa chiudere tutte le altre strade; finché non scegli restano tutte aperte, così l'indecisione protegge quella sensazione, dolcissima, di avere ancora tutto davanti.",
+      "Raccogliere altri dati ti porterà esattamente dove sei adesso, con una cartella più piena e la stessa scelta intatta; prova invece a distinguere le informazioni che servono davvero da quelle che coprono soltanto il bisogno di non doverti esporre a una decisione tua."
+    ],
+    mantras: [
+      "Più opzioni raccogli, meno urgente sembra scegliere.",
+      "Nessuna informazione renderà la scelta priva di rischio.",
+      "Decidere male è comunque meglio che non decidere mai."
+    ]
+  },
+  {
+    name: "Overthinking",
+    subtitle: "Ho capito tutto, non ho fatto niente",
+    paras: [
+      "L'overthinking ha tutta l'aria del lavoro serio: un pensiero dopo l'altro, un'ipotesi che ne genera un'altra, come chi analizza per prepararsi meglio. Alla fine del giro, però, ti ritrovi al punto di partenza: hai pensato tutto senza avere fatto niente.",
+      "Il pensiero in sé fa il suo mestiere; smette di farlo quando non porta più a una decisione, quando diventa il posto sicuro dove nessuna azione può andare storta per il semplice motivo che nessuna azione parte. Un rifugio elegante, dove non succede mai niente.",
+      "Pensare meno sarebbe il consiglio sbagliato, oltre che inutile; il punto sta nel cogliere l'attimo in cui il pensiero smette di essere utile e comincia soltanto a girare su se stesso, come una lavatrice senza panni dentro."
+    ],
+    mantras: [
+      "Pensare non equivale ad agire.",
+      "Un pensiero in più non rende la decisione più sicura.",
+      "A un certo punto il pensiero deve fermarsi, per lasciare spazio al fatto."
+    ]
+  }
+];
+
+function ensureFormeStyles() {
+  if (document.getElementById('ff-styles')) return;
   const style = document.createElement('style');
-  style.id = 'qz-styles';
+  style.id = 'ff-styles';
   style.textContent = `
-    .qz-wrap { background: #FDFBF7; border: 1px solid rgba(200,169,110,0.35); border-radius: 10px; padding: 32px 28px; margin-bottom: 28px; position: relative; overflow: hidden; }
-    .qz-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #C8A96E; margin-bottom: 14px; }
-    .qz-title { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 26px; color: #1A1814; margin-bottom: 10px; line-height: 1.2; }
-    .qz-title em { font-style: italic; color: #C8A96E; }
-    .qz-intro-text { font-size: 14.5px; line-height: 1.6; color: #5A534C; margin-bottom: 20px; max-width: 480px; }
-    .qz-btn { display: inline-block; background: #C8A96E; color: #FDFBF7; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 12.5px; letter-spacing: 1px; text-transform: uppercase; padding: 13px 30px; border: none; border-radius: 26px; cursor: pointer; }
-    .qz-btn:hover { background: #8C7240; }
-    .qz-note { font-size: 12px; color: #9A9087; font-style: italic; font-family: 'Cormorant Garamond', serif; margin-top: 14px; }
-    .qz-progress-wrap { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; }
-    .qz-progress-track { flex: 1; height: 2px; background: #E1DDD5; border-radius: 2px; overflow: hidden; }
-    .qz-progress-fill { height: 100%; background: #C8A96E; transition: width 0.4s ease; }
-    .qz-progress-label { font-size: 11px; color: #9A9087; white-space: nowrap; font-weight: 500; }
-    .qz-q-number { font-family: 'DM Sans', sans-serif; font-size: 10.5px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #DFC898; margin-bottom: 14px; }
-    .qz-q-text { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 21px; line-height: 1.35; color: #1A1814; margin-bottom: 22px; }
-    .qz-options { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; }
-    .qz-option { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: #fff; border: 1px solid transparent; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
-    .qz-option:hover { border-color: #DFC898; background: #EDE7DC; }
-    .qz-option.qz-selected { border-color: #C8A96E; background: #EFE2D6; }
-    .qz-marker { flex-shrink: 0; width: 17px; height: 17px; border: 1px solid #DFC898; border-radius: 50%; margin-top: 1px; }
-    .qz-option.qz-selected .qz-marker { background: #C8A96E; border-color: #C8A96E; }
-    .qz-opt-text { font-size: 14px; line-height: 1.5; color: #5A534C; }
-    .qz-option.qz-selected .qz-opt-text { color: #1A1814; }
-    .qz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 26px; }
-    .qz-back { background: none; border: none; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #9A9087; cursor: pointer; }
-    .qz-back:disabled { opacity: 0; pointer-events: none; }
-    .qz-result-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #C8A96E; margin-bottom: 10px; }
-    .qz-result-name { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 32px; color: #1A1814; line-height: 1.1; }
-    .qz-result-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: #C8A96E; margin-top: 6px; }
-    .qz-result-intensity { margin-top: 10px; font-size: 12px; color: #9A9087; font-style: italic; font-family: 'Cormorant Garamond', serif; }
-    .qz-result-body { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.65; color: #1A1814; margin: 20px 0; }
-    .qz-result-body p { margin-bottom: 1.1em; }
-    .qz-mantras { background: #fff; border-left: 2px solid #DFC898; padding: 20px 20px 20px 24px; margin: 22px 0; }
-    .qz-mantra-title { font-size: 9.5px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #C8A96E; margin-bottom: 14px; font-family: 'DM Sans', sans-serif; }
-    .qz-mantra-item { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; line-height: 1.5; color: #5A534C; margin-bottom: 10px; padding-left: 16px; position: relative; }
-    .qz-mantra-item::before { content: '—'; position: absolute; left: 0; color: #DFC898; font-style: normal; }
-    .qz-restart { background: none; border: none; font-size: 10.5px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #9A9087; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 6px; }
-    .qz-loading { text-align: center; padding: 40px 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: #5A534C; }
+    .ff-wrap { background: #FDFBF7; border: 1px solid rgba(200,169,110,0.35); border-radius: 10px; padding: 32px 28px; margin-bottom: 28px; }
+    .ff-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #C8A96E; margin-bottom: 14px; }
+    .ff-title { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 26px; color: #1A1814; margin-bottom: 12px; line-height: 1.2; }
+    .ff-title em { font-style: italic; color: #C8A96E; }
+    .ff-intro { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.65; color: #1A1814; margin-bottom: 24px; }
+    .ff-item { border-top: 1px solid rgba(200,169,110,0.25); }
+    .ff-item:last-of-type { border-bottom: 1px solid rgba(200,169,110,0.25); }
+    .ff-item summary { list-style: none; cursor: pointer; padding: 16px 4px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    .ff-item summary::-webkit-details-marker { display: none; }
+    .ff-name { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 20px; color: #1A1814; }
+    .ff-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13.5px; color: #C8A96E; text-align: right; }
+    .ff-body { padding: 4px 4px 20px; }
+    .ff-body p { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.65; color: #1A1814; margin-bottom: 14px; }
+    .ff-mantras { background: #fff; border-left: 2px solid #DFC898; padding: 16px 18px 16px 22px; margin-top: 16px; }
+    .ff-mantra-title { font-family: 'DM Sans', sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #C8A96E; margin-bottom: 12px; }
+    .ff-mantra { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; line-height: 1.5; color: #5A534C; margin-bottom: 8px; padding-left: 16px; position: relative; }
+    .ff-mantra::before { content: '\u2014'; position: absolute; left: 0; color: #DFC898; font-style: normal; }
+    .ff-closing { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.65; color: #1A1814; margin-top: 24px; }
   `;
   document.head.appendChild(style);
 }
 
-function quizResultKey(pid) { return aKey(pid, 'quiztest', 'primary'); }
-
-function buildQuizBlock(pid) {
-  ensureQuizStyles();
+function buildFormeBlock() {
+  ensureFormeStyles();
   const wrap = document.createElement('div');
-  wrap.className = 'qz-wrap';
-  wrap.id = 'qz-wrap';
+  wrap.className = 'ff-wrap';
 
-  const savedPrimary = ans[quizResultKey(pid)];
-  if (savedPrimary && QUIZ_PATTERNS[savedPrimary]) {
-    renderQuizRecap(wrap, pid, savedPrimary);
-  } else {
-    renderQuizIntro(wrap, pid);
-  }
+  const intro = "L'autosabotaggio non si presenta mai col suo nome. Si traveste, con una certa eleganza pure, e ogni donna ha il suo travestimento preferito, quello che indossa così spesso da non riconoscerlo più come un abito di scena. Qui trovi i cinque più comuni. Leggili senza fretta, senza cercare subito il tuo: nessuno ti darà un responso alla fine, perché il riconoscimento, quello vero, funziona meglio di qualsiasi diagnosi. Se ti ritrovi in uno, o magari in più di uno a seconda del giorno, tienilo a mente. Ti servirà tra poco, quando dovrai descrivere il Meccanismo con parole tue.";
+
+  const closing = "Ti sei riconosciuta in una sola, o magari in tutte, a seconda del giorno? Va bene così: le forme si mescolano e si danno il cambio con una certa disinvoltura. Adesso però lascia perdere l'etichetta, perché quello che conta è l'episodio: nella prossima sezione prendi il tuo modo specifico di deviare e lo guardi da vicino, pezzo per pezzo, finché non lo riconosci al volo.";
+
+  wrap.innerHTML = `
+    <div class="ff-eyebrow">Prima di iniziare</div>
+    <div class="ff-title">Le cinque <em>forme</em></div>
+    <p class="ff-intro">${intro}</p>
+    ${FORME.map(f => `
+      <details class="ff-item">
+        <summary>
+          <span class="ff-name">${f.name}</span>
+          <span class="ff-sub">${f.subtitle}</span>
+        </summary>
+        <div class="ff-body">
+          ${f.paras.map(p => `<p>${p}</p>`).join('')}
+          <div class="ff-mantras">
+            <div class="ff-mantra-title">Tre cose da notare</div>
+            ${f.mantras.map(m => `<div class="ff-mantra">${m}</div>`).join('')}
+          </div>
+        </div>
+      </details>
+    `).join('')}
+    <p class="ff-closing">${closing}</p>
+  `;
   return wrap;
-}
-
-function renderQuizIntro(wrap, pid) {
-  wrap.innerHTML = `
-    <div class="qz-eyebrow">Prima di iniziare</div>
-    <div class="qz-title">Quello che fai <em>invece</em></div>
-    <p class="qz-intro-text">C'è sempre una cosa che conta, e un modo elegante in cui non la fai. Quindici domande per nominare la tua forma specifica di autosabotaggio, quella che usi più spesso.</p>
-    <button class="qz-btn" id="qz-btn-start">Inizia il test</button>
-    <p class="qz-note">Circa 5 minuti. Nessuna risposta giusta o sbagliata.</p>
-  `;
-  wrap.querySelector('#qz-btn-start').addEventListener('click', () => startQuizInline(wrap, pid));
-}
-
-function renderQuizRecap(wrap, pid, primaryKey) {
-  const p = QUIZ_PATTERNS[primaryKey];
-  wrap.innerHTML = `
-    <div class="qz-eyebrow">Quello che fai invece</div>
-    <div class="qz-result-label">Il tuo pattern</div>
-    <div class="qz-result-name">${p.name}</div>
-    <div class="qz-result-sub">${p.subtitle}</div>
-    <button class="qz-restart" id="qz-btn-restart">Rifai il test</button>
-  `;
-  wrap.querySelector('#qz-btn-restart').addEventListener('click', () => startQuizInline(wrap, pid));
-}
-
-function shuffleQz(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-function startQuizInline(wrap, pid) {
-  quizQ = 0;
-  quizAnswers = [];
-  quizShuffled = QUIZ_QUESTIONS.map(q => shuffleQz(q.options));
-  renderQuizQuestion(wrap, pid);
-}
-
-function renderQuizQuestion(wrap, pid) {
-  const q = QUIZ_QUESTIONS[quizQ];
-  const opts = quizShuffled[quizQ];
-  const total = QUIZ_QUESTIONS.length;
-
-  wrap.innerHTML = `
-    <div class="qz-progress-wrap">
-      <div class="qz-progress-track"><div class="qz-progress-fill" style="width:${(quizQ / total) * 100}%"></div></div>
-      <span class="qz-progress-label">${quizQ + 1} / ${total}</span>
-    </div>
-    <div class="qz-q-number">Domanda ${quizQ + 1}</div>
-    <div class="qz-q-text">${q.text}</div>
-    <ul class="qz-options">
-      ${opts.map((opt, i) => {
-        const patternVal = opt.pattern === null ? '__neutral__' : opt.pattern;
-        const isSelected = quizAnswers[quizQ] === patternVal;
-        return `<li class="qz-option ${isSelected ? 'qz-selected' : ''}" data-pattern="${patternVal}">
-          <div class="qz-marker"></div>
-          <span class="qz-opt-text">${opt.text}</span>
-        </li>`;
-      }).join('')}
-    </ul>
-    <div class="qz-nav">
-      <button class="qz-back" id="qz-btn-back" ${quizQ === 0 ? 'disabled' : ''}>Indietro</button>
-      <button class="qz-btn" id="qz-btn-next" style="${quizAnswers[quizQ] !== undefined ? '' : 'display:none'}">${quizQ === total - 1 ? 'Scopri il tuo pattern' : 'Continua'}</button>
-    </div>
-  `;
-
-  wrap.querySelectorAll('.qz-option').forEach(el => {
-    el.addEventListener('click', () => {
-      wrap.querySelectorAll('.qz-option').forEach(o => o.classList.remove('qz-selected'));
-      el.classList.add('qz-selected');
-      quizAnswers[quizQ] = el.dataset.pattern;
-      const nextBtn = wrap.querySelector('#qz-btn-next');
-      nextBtn.style.display = 'inline-block';
-    });
-  });
-
-  wrap.querySelector('#qz-btn-back').addEventListener('click', () => {
-    if (quizQ > 0) { quizQ--; renderQuizQuestion(wrap, pid); }
-  });
-
-  wrap.querySelector('#qz-btn-next').addEventListener('click', () => {
-    if (quizAnswers[quizQ] === undefined) return;
-    if (quizQ < total - 1) { quizQ++; renderQuizQuestion(wrap, pid); }
-    else { finishQuizInline(wrap, pid); }
-  });
-}
-
-function finishQuizInline(wrap, pid) {
-  wrap.innerHTML = `<div class="qz-loading">Sto leggendo il pattern…</div>`;
-  setTimeout(() => {
-    const scores = { procrastinazione: 0, perfezionismo: 0, iperresponsabilita: 0, indecisione: 0, overthinking: 0 };
-    quizAnswers.forEach(pat => { if (pat && pat !== '__neutral__' && scores[pat] !== undefined) scores[pat]++; });
-
-    const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-    const primaryKey = sorted[0][0];
-    const primaryScore = sorted[0][1];
-    const total = QUIZ_QUESTIONS.length;
-    const pct = primaryScore / total;
-
-    let intensity;
-    if (pct >= 0.4) intensity = 'alta';
-    else if (pct >= 0.2) intensity = 'media';
-    else intensity = 'bassa';
-
-    const intensityLabel = { alta: 'Molto presente', media: 'Moderatamente presente', bassa: 'Presente in forma lieve' }[intensity];
-    const primary = QUIZ_PATTERNS[primaryKey];
-
-    // Salva il risultato — persistente, come le altre risposte del prodotto
-    saveField(quizResultKey(pid), primaryKey);
-
-    wrap.innerHTML = `
-      <div class="qz-result-label">La tua forma di autosabotaggio</div>
-      <div class="qz-result-name">${primary.name}</div>
-      <div class="qz-result-sub">${primary.subtitle}</div>
-      <div class="qz-result-intensity">${intensityLabel}</div>
-      <div class="qz-result-body">${primary.descriptions[intensity]}</div>
-      <div class="qz-mantras">
-        <div class="qz-mantra-title">Tre cose da notare</div>
-        ${primary.mantras.map(m => `<div class="qz-mantra-item">${m}</div>`).join('')}
-      </div>
-      <button class="qz-restart" id="qz-btn-restart2">Rifai il test</button>
-    `;
-    wrap.querySelector('#qz-btn-restart2').addEventListener('click', () => startQuizInline(wrap, pid));
-  }, 1200);
 }
 
 /* ═══════════════════════════════════════════════
@@ -1607,9 +1275,9 @@ function renderProduct(pid) {
   const list = g('sections-list');
   list.innerHTML = '';
 
-  // Il Meccanismo apre con il test "Quello che fai invece"
+  // Il Meccanismo apre con la lettura "Le cinque forme"
   if (pid === 'autosabotaggio') {
-    list.appendChild(buildQuizBlock(pid));
+    list.appendChild(buildFormeBlock());
   }
 
   if (p.intro) {
