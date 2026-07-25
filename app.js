@@ -589,6 +589,115 @@ const CATALOG = [
       },
     ],
   },
+  {
+    id: 'lavoro',
+    slug: 'il-lavoro-e-il-denaro',
+    kofiUrl: 'https://ko-fi.com/s/59a008ab39',
+    tag: 'Percorso',
+    title: 'Il lavoro e il denaro',
+    description: 'Essere brava sul lavoro e avere abbastanza soldi non sono la stessa cosa di sentirti al posto giusto. Guardiamo cosa ti dicono davvero il lavoro che fai e i soldi che guadagni.',
+    price: '€9',
+    type: 'standard',
+    intro: {
+      title: 'Prima di iniziare.',
+      blockquote: 'Questo non è un percorso per trovare il lavoro dei sogni.\nNé per convincerti che il denaro non conta.',
+      paragraphs: [
+        'È uno strumento per guardare la differenza tra il lavoro che fai bene e quello che senti tuo. Anche per capire se il denaro che guadagni ti sta comprando scelte o solo silenzio.',
+        'Non cerchiamo il lavoro perfetto. Cerchiamo il momento preciso in cui hai smesso di chiederti se lo vuoi ancora e hai iniziato solo a farlo bene.',
+        'Il denaro ha una sezione tutta sua, doppia rispetto al resto del percorso. Per molte è il posto dove il valore di sé si gioca più silenziosamente, più di quanto sembri guardando solo il lavoro.',
+        'Puoi compilarlo in una seduta o tornare più volte. Funziona meglio se pensi al lavoro che fai adesso, non a quello che pensi di dover desiderare.'
+      ],
+      signature: '— Gilda'
+    },
+    sections: [
+      {
+        id: 's1', name: 'Brava non è lo stesso di presente', number: 'I', openerBg: 'dark',
+        openerIntro: 'Sai fare il tuo lavoro a occhi chiusi. Il problema è che li tieni chiusi anche quando conterebbe aprirli.',
+        intro: "C'è un tipo di competenza che diventa un nascondiglio. Fai bene, sei affidabile. Proprio perché funziona così bene, smetti di chiederti se è ancora quello che vuoi fare. In questa sezione guardiamo quanto del tuo lavoro va avanti da solo, senza più passare da te.",
+        quote: 'Essere brava è diventato il modo più elegante per non scegliere più niente.',
+        questions: [
+          { id: 'q1', label: 'Un compito che fai a occhi chiusi, senza più pensarci', hint: 'Qualcosa che sai fare così bene da non doverci più stare dentro.', placeholder: 'Faccio senza pensarci...' },
+          { id: 'q2', label: "L'ultima volta che ti sei chiesta se lo vuoi ancora fare", hint: 'Non se lo sai fare, se lo vuoi ancora.', placeholder: 'È stato...' },
+          { id: 'q3', label: 'Cosa succederebbe se smettessi di essere così affidabile per una settimana', hint: '', placeholder: 'Succederebbe...' },
+          { id: 'q4', label: 'Cosa ti frena dal farti quella domanda più spesso', hint: '', placeholder: 'Mi frena...' },
+        ]
+      },
+      {
+        id: 's2', name: 'Da quando lavori per tenere in piedi qualcosa', number: 'II', openerBg: 'beige',
+        openerIntro: "C'è un lavoro che scegli e un lavoro che sostiene. Non sono sempre la stessa cosa, anche se li chiami con lo stesso nome.",
+        intro: 'Il primo lavoro che hai avuto probabilmente serviva a sostenerti, non a esprimerti. Era normale essere lì per quello. Il problema è quando quella logica non si aggiorna più e continui a lavorare per tenere in piedi una sicurezza che magari hai già raggiunto. In questa sezione guardiamo se sei ancora lì per necessità o per abitudine.',
+        quote: 'Superata la soglia della sopravvivenza, restare per abitudine è comunque una scelta.',
+        questions: [
+          { id: 'q1', label: 'Perché hai iniziato a fare questo lavoro', hint: 'La ragione vera, non quella che racconti alle feste.', placeholder: 'Ho iniziato perché...' },
+          { id: 'q2', label: 'Quella ragione esiste ancora oggi', hint: '', placeholder: 'Oggi...' },
+          { id: 'q3', label: 'Cosa cambieresti se la sicurezza economica non fosse più un problema', hint: 'Se il bisogno di base fosse già coperto.', placeholder: 'Se non dovessi più preoccuparmi della sicurezza...' },
+          { id: 'q4', label: 'Stai lavorando per necessità o per abitudine', hint: 'Le due cose si assomigliano ma non sono uguali.', placeholder: 'In questo momento...' },
+        ]
+      },
+      {
+        id: 's3', name: 'Il prezzo di non lamentarti mai', number: 'III', openerBg: 'terracotta',
+        openerIntro: "Nessuno si accorge di quanto costa la donna che non si lamenta mai. Nemmeno lei, per un po'.",
+        intro: 'Essere quella su cui si può sempre contare ha un prezzo che non compare in busta paga. Non è il carico di lavoro in sé. È il fatto che nessuno pensa mai di doverti alleggerire, perché tu non lo fai notare. In questa sezione guardiamo cosa ti costa davvero reggere tutto senza mai segnalarlo.',
+        quote: 'Il carico che non nomini resta comunque un carico. Solo che lo porti da sola e in silenzio.',
+        questions: [
+          { id: 'q1', label: 'Un compito che hai in carico e che nessuno sa quanto ti costa', hint: '', placeholder: 'Nessuno sa che...' },
+          { id: 'q2', label: "L'ultima volta che hai chiesto aiuto sul lavoro", hint: '', placeholder: 'È stato...' },
+          { id: 'q3', label: 'Cosa temi che succeda se dici che sei stanca', hint: '', placeholder: 'Temo che...' },
+          { id: 'q4', label: 'Cosa hai smesso di fare per te perché nessuno te lo chiede più', hint: 'Qualcosa che facevi per te, non per il lavoro.', placeholder: 'Ho smesso di...' },
+        ]
+      },
+      {
+        id: 's4', name: 'Da dove viene il tuo rapporto con i soldi', number: 'IV', openerBg: 'cipria',
+        openerIntro: "Nessuna nasce con un rapporto neutro con il denaro. Il tuo l'hai ereditato, prima di sceglierlo.",
+        intro: 'Il modo in cui parli di soldi e quanto ti senti a tuo agio a chiederne di più non sono nati con te. Sono arrivati da qualche parte, di solito molto prima che tu potessi scegliere diversamente. In questa sezione cerchiamo l\'origine, non per giustificarla, per riconoscerla.',
+        quote: 'Hai imparato a leggere il denaro come un voto prima ancora di guadagnarlo tu stessa.',
+        questions: [
+          { id: 'q1', label: 'Come si parlava di soldi in casa tua da bambina', hint: 'Con ansia o con orgoglio.', placeholder: 'In casa si parlava di soldi...' },
+          { id: 'q2', label: 'Cosa hai imparato che significa avere soldi', hint: '', placeholder: 'Avere soldi significava...' },
+          { id: 'q3', label: 'Cosa hai imparato che significa volerne di più', hint: 'Ambizione o avidità, cosa ti hanno fatto sentire?', placeholder: 'Volerne di più significava...' },
+          { id: 'q4', label: 'Una frase sui soldi che hai sentito ripetere in famiglia', hint: '', placeholder: 'In famiglia si diceva...' },
+        ]
+      },
+      {
+        id: 's5', name: 'Cosa dicono i soldi di quanto vali', number: 'V', openerBg: 'dark',
+        openerIntro: 'Il conto in banca non misura il tuo valore. Ma tu, in certi momenti, lo lasci fare.',
+        intro: "C'è un momento preciso in cui il numero sul conto smette di essere informazione e diventa verdetto. Guadagni poco e ti senti poco. Guadagni molto e finalmente ti concedi di valere. Il cervello non sta facendo aritmetica: sta usando l'unica scorciatoia che trova per misurarsi. In questa sezione la smontiamo.",
+        quote: 'Il denaro non ti dice chi sei. Ti dice solo quanto hanno pagato per quello che hai fatto in quel momento.',
+        questions: [
+          { id: 'q1', label: "L'ultima volta che un numero sul conto ha cambiato come ti sentivi con te stessa", hint: '', placeholder: 'È successo quando...' },
+          { id: 'q2', label: 'Guadagnare poco ti ha mai fatto sentire meno', hint: 'Sii onesta, anche se ti sembra vanità ammetterlo.', placeholder: 'Mi sono sentita...' },
+          { id: 'q3', label: 'Guadagnare di più risolverebbe davvero quella sensazione o la sposterebbe altrove', hint: '', placeholder: 'Penso che...' },
+          { id: 'q4', label: 'Se il denaro non fosse un metro, con cosa misureresti il tuo valore', hint: '', placeholder: 'Mi misurerei con...' },
+        ]
+      },
+      {
+        id: 's6', name: 'Vincolo reale o abitudine mai verificata', number: 'VI', openerBg: 'beige',
+        openerIntro: 'Il denaro non misura quanto vali. Misura quanto puoi scegliere, anche quando le opzioni sono poche.',
+        intro: "Non tutte possono permettersi di lasciare un lavoro che non le rappresenta più. Questo percorso non fa finta che sia diverso. Ma c'è una differenza tra restare perché hai controllato le alternative e restare perché non hai mai guardato. La prima è una scelta, anche se dettata da vincoli reali. La seconda è un altro pilota automatico. In questa sezione cerchiamo cosa puoi effettivamente muovere, dentro i vincoli che hai adesso.",
+        quote: "Restare per un vincolo reale è una scelta. Restare senza averlo mai verificato è un'abitudine.",
+        questions: [
+          { id: 'q1', label: 'Cosa ti tiene in questo lavoro adesso, in una frase onesta', hint: "Il vincolo economico o l'abitudine.", placeholder: 'Resto perché...' },
+          { id: 'q2', label: "L'ultima volta che hai verificato se esistono alternative reali", hint: 'Non devi agire, solo sapere quando è stato.', placeholder: 'È stato...' },
+          { id: 'q3', label: 'Una cosa che potresti scoprire questo mese senza rischiare niente', hint: "Un'ora di ricerca o una conversazione, niente che ti impegni.", placeholder: 'Potrei scoprire...' },
+          { id: 'q4', label: 'Dentro il lavoro che hai adesso, cosa potresti ancora scegliere', hint: 'Un compito da rifiutare o un confine da mettere.', placeholder: 'Potrei ancora scegliere...' },
+        ],
+        synthesis: {
+          title: 'Porta qualcosa fuori da questa pagina.',
+          label: 'Quello che hai capito, in poche righe.',
+          fields: [
+            { id: 'q-sint-lavoro-1', label: 'La parte del mio lavoro che è andata in pilota automatico è...', placeholder: '...' },
+            { id: 'q-sint-lavoro-2', label: 'Il rapporto con i soldi che ho ereditato e non ho mai scelto è...', placeholder: '...' },
+            { id: 'q-sint-lavoro-3', label: 'La cosa che posso ancora scegliere, dentro quello che ho adesso, è...', placeholder: '...' },
+          ]
+        },
+        closing: {
+          title: 'Hai visto la differenza, non hai dovuto risolverla.',
+          text: 'Funzionare bene sul lavoro e misurarti con il denaro sono due modi diversi per non chiederti se ti riconosci in quello che fai. Non tutte le risposte che hai trovato qui si possono agire domani. Va bene così: alcuni vincoli sono reali, non solo mentali. Sapere se stai scegliendo o solo resistendo cambia il modo in cui porti quel peso. Il numero sul conto, nel frattempo, smette di essere un verdetto su di te. Da qui parte quello che puoi effettivamente muovere, non quello che dovresti.',
+          signature: '— Gilda'
+        }
+      },
+    ],
+  },
 ];
 
 /* ═══════════════════════════════════════════════
@@ -1495,7 +1604,7 @@ function openerBgClass(bg) {
 }
 
 function romanToWord(r) {
-  const map = { 'I': 'uno', 'II': 'due', 'III': 'tre', 'IV': 'quattro' };
+  const map = { 'I': 'uno', 'II': 'due', 'III': 'tre', 'IV': 'quattro', 'V': 'cinque', 'VI': 'sei' };
   return map[r] || r;
 }
 
