@@ -173,7 +173,7 @@ const CATALOG = [
   },
   {
     id: 'non-abbastanza',
-    slug: 'non-sentirsi-abbastanza',
+    slug: 'non-sentirsi-abbastanza', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/non-sentirsi-abbastanza-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/c8964c27d8',
     tag: 'Percorso',
     title: 'Non sentirsi abbastanza',
@@ -257,7 +257,7 @@ const CATALOG = [
   },
   {
     id: 'paura',
-    slug: 'la-paura',
+    slug: 'la-paura', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/la-paura-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/12e6f4363d',
     tag: 'Percorso',
     title: 'La paura',
@@ -341,7 +341,7 @@ const CATALOG = [
   },
   {
     id: 'confini',
-    slug: 'i-confini',
+    slug: 'i-confini', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/i-confini-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/e8c2cd9c99',
     tag: 'Percorso',
     title: 'I confini',
@@ -425,7 +425,7 @@ const CATALOG = [
   },
   {
     id: 'corpo',
-    slug: 'il-corpo-non-mente',
+    slug: 'il-corpo-non-mente', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/il-corpo-non-mente-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/8c06cb9b7c',
     tag: 'Percorso',
     title: 'Il corpo non mente',
@@ -508,7 +508,7 @@ const CATALOG = [
   },
   {
     id: 'amicizie',
-    slug: 'le-amicizie',
+    slug: 'le-amicizie', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/le-amicizie-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/c97d2674fa',
     tag: 'Percorso',
     title: 'Le amicizie',
@@ -591,7 +591,7 @@ const CATALOG = [
   },
   {
     id: 'lavoro',
-    slug: 'il-lavoro-e-il-denaro',
+    slug: 'il-lavoro-e-il-denaro', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/il-lavoro-e-il-denaro-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/59a008ab39',
     tag: 'Percorso',
     title: 'Il lavoro e il denaro',
@@ -700,7 +700,7 @@ const CATALOG = [
   },
   {
     id: 'amore',
-    slug: 'amore-dopo-le-delusioni',
+    slug: 'amore-dopo-le-delusioni', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/amore-dopo-le-delusioni-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/57001ba5de',
     tag: 'Percorso',
     title: "L'amore dopo le delusioni",
@@ -784,7 +784,7 @@ const CATALOG = [
   },
   {
     id: 'soli',
-    slug: 'stare-bene-da-soli',
+    slug: 'stare-bene-da-soli', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/stare-bene-da-soli-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/676d29c358',
     tag: 'Percorso',
     title: 'Stare bene da soli',
@@ -1571,6 +1571,18 @@ function renderProduct(pid) {
       <div class="intro-card-sig">${p.intro.signature}</div>
     `;
     list.appendChild(introCard);
+  }
+
+  if (p.pdfUrl) {
+    const pdfCard = document.createElement('div');
+    pdfCard.className = 'intro-card';
+    pdfCard.innerHTML = `
+      <div class="intro-card-eyebrow">Preferisci scrivere a mano?</div>
+      <div class="intro-card-title" style="font-size: 22px;">Scarica il quaderno</div>
+      <p class="intro-card-para">Stessa struttura di questo percorso, spazio per scrivere con la penna. Si stampa e si scrive quando vuoi.</p>
+      <a href="${p.pdfUrl}" target="_blank" rel="noopener" class="btn-unlock" style="display:inline-block; text-decoration:none; text-align:center;">Scarica il PDF</a>
+    `;
+    list.appendChild(pdfCard);
   }
 
   if (p.instructions) {
