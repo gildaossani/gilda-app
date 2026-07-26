@@ -12,7 +12,7 @@ const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsI
 const CATALOG = [
   {
     id: 'autosabotaggio',
-    slug: 'il-meccanismo',
+    slug: 'il-meccanismo', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/il-meccanismo-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/bd0aecbdaa',
     tag: 'Strumento di autoanalisi',
     title: 'Il Meccanismo',
