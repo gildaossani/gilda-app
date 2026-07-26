@@ -251,6 +251,11 @@ const CATALOG = [
           title: 'Hai fatto una cosa difficile.',
           text: 'Hai guardato quella voce senza cercare di farla tacere. Hai visto da dove viene, cosa misura, a chi apparteneva prima di diventare tua. Una voce che hai imparato a riconoscere ha già perso una parte del suo potere. E magari adesso quel sentirsi abbastanza te lo dici da sola, senza aspettare conferme esterne. Anche perché non sei abbastanza, sei molto di più.',
           signature: '— Gilda'
+        },
+        final: {
+          title: 'Il conto che continui a fare',
+          text: 'Quella voce che misura riappare ogni volta che c\'è un valore da stabilire, anche quando si parla di soldi. La ritrovi dentro Il lavoro e il denaro, con lo stesso identico tono. Se vuoi vedere la struttura intera che regge questo modo di giudicarti, quella è Il Meccanismo.',
+          signature: '— Gilda'
         }
       },
     ],
@@ -334,6 +339,11 @@ const CATALOG = [
         closing: {
           title: 'Sei arrivata fino in fondo.',
           text: 'Hai guardato qualcosa che di solito si tiene a distanza di sicurezza. Hai capito cosa dice la tua paura, da dove viene, cosa sta proteggendo. Non è poco. La maggior parte delle persone preferisce non saperlo, perché sapere implica scegliere. Ora sai. E questo cambia qualcosa, anche se adesso non lo senti ancora. La paura ci sarà ancora. Ma una paura che hai guardato in faccia non comanda più nello stesso modo.',
+          signature: '— Gilda'
+        },
+        final: {
+          title: 'Quello che la paura protegge',
+          text: 'Ogni volta che cedi un confine senza dirlo a te stessa, dietro c\'è quasi sempre una paura precisa. La trovi guardata da vicino dentro I confini. Se vuoi capire la logica comune che le lega, è Il Meccanismo.',
           signature: '— Gilda'
         }
       },
@@ -419,6 +429,11 @@ const CATALOG = [
           title: 'Sei arrivata fino in fondo.',
           text: 'Guardare dove cedi, capire da dove viene, rendendoti conto di quanto ti costa, non è un esercizio facile. È più comodo non farlo. Hai scelto la strada difficile, quella che porta a te. Io sai come la chiamo? Libertà. Quello che hai scritto qui non serve a niente se resta su questa pagina. La cosa più utile che puoi fare adesso è prendere una cosa sola, la più piccola o la più importante, sentilo e portarla fuori. Non un cambiamento di vita. Un confine. Uno. Quello che hai già individuato. Ce la fai.',
           signature: '— Gilda'
+        },
+        final: {
+          title: 'Cosa c\'è prima del sì automatico',
+          text: 'Il sì che dici quando vorresti dire no di solito protegge qualcosa di preciso, non generico. Quella paura specifica la trovi raccontata dentro La paura. Il meccanismo che le tiene insieme, quello che ti fa cedere prima ancora di scegliere, è Il Meccanismo.',
+          signature: '— Gilda'
         }
       },
     ],
@@ -502,6 +517,11 @@ const CATALOG = [
           title: 'Hai ascoltato.',
           text: 'Non è poco. Siamo abituate a mettere a tacere, a spiegare, a razionalizzare. Guardare il corpo come una fonte di informazioni invece che come un problema da gestire è un cambio di prospettiva che richiede pratica. Quello che hai scritto qui è già una risposta al segnale. Il corpo lo sa. Adesso lo sai anche tu.',
           signature: '— Gilda'
+        },
+        final: {
+          title: 'Il segnale non è isolato',
+          text: 'Il corpo raramente parla per conto suo, di solito risponde a un pattern più largo, quello che decide cosa ignori e cosa ti costa troppo ammettere. Guardarlo per intero, in ogni forma che prende, è il lavoro che fa Il Meccanismo.',
+          signature: '— Gilda'
         }
       },
     ],
@@ -584,6 +604,11 @@ const CATALOG = [
         closing: {
           title: 'Hai guardato senza filtri.',
           text: 'Le amicizie sono una delle cose più difficili da esaminare onestamente. C\'è affetto di mezzo, ci sono anni, ci sono storie. Guardare chi tieni vicino e chiedersi perché è un atto di rispetto verso te stessa, non una critica verso gli altri. Quello che hai scritto qui è già un passo verso amicizie scelte, non subite. E le amicizie scelte pesano di più, nel senso buono.',
+          signature: '— Gilda'
+        },
+        final: {
+          title: 'La stessa fiducia, un altro nome',
+          text: 'Chi tieni vicino e chi tieni a distanza rispondono quasi sempre alla stessa domanda, quanto ti fidi. La trovi posta in altri termini dentro L\'amore dopo le delusioni. Da dove parte quella misura di fiducia lo racconta Il Meccanismo.',
           signature: '— Gilda'
         }
       },
@@ -694,6 +719,11 @@ const CATALOG = [
           title: 'Hai visto la differenza, non hai dovuto risolverla.',
           text: 'Funzionare bene sul lavoro e misurarti con il denaro sono due modi diversi per non chiederti se ti riconosci in quello che fai. Non tutte le risposte che hai trovato qui si possono agire domani. Va bene così: alcuni vincoli sono reali, non solo mentali. Sapere se stai scegliendo o solo resistendo cambia il modo in cui porti quel peso. Il numero sul conto, nel frattempo, smette di essere un verdetto su di te. Da qui parte quello che puoi effettivamente muovere, non quello che dovresti.',
           signature: '— Gilda'
+        },
+        final: {
+          title: 'Un altro metro, la stessa logica',
+          text: 'Misurare il tuo valore con un numero sul conto non è diverso da farlo con una voce che dice che non sei abbastanza. Stessa logica, altro travestimento. La trovi nuda dentro Non sentirsi abbastanza. Il punto di partenza di entrambe è quello che racconta Il Meccanismo.',
+          signature: '— Gilda'
         }
       },
     ],
@@ -778,6 +808,11 @@ const CATALOG = [
           title: 'Sei arrivata fino in fondo.',
           text: 'Guardare il muro che hai costruito, capire cosa protegge davvero, non è un esercizio comodo. Hai scelto la strada difficile, quella che porta a te invece che a chi ti ha delusa. Non devi abbattere tutto in una volta. Basta un segnale, un passo piccolo verso la fiducia che scegli ad occhi aperti.',
           signature: '— Gilda'
+        },
+        final: {
+          title: 'Un muro che conosci già',
+          text: 'Il muro che alzi in amore non è una novità, lo ritrovi sotto altra forma anche nel modo in cui scegli le amicizie. Lo trovi guardato da vicino dentro Le amicizie. Da dove viene la sfiducia che li regge entrambi lo spiega Il Meccanismo.',
+          signature: '— Gilda'
         }
       },
     ],
@@ -861,6 +896,11 @@ const CATALOG = [
         closing: {
           title: 'Sei arrivata fino in fondo.',
           text: 'Guardare da dove parti quando cerchi compagnia, quanto spazio hai regalato a chi non lo meritava, non è un esercizio scontato. Hai scelto di costruire prima la casa, poi tutto il resto. Non serve una risposta definitiva oggi. Basta un gesto piccolo che ti ricordi che la pienezza parte da te.',
+          signature: '— Gilda'
+        },
+        final: {
+          title: 'Da dove parte la misura',
+          text: 'Decidere se sei completa o a metà dipende da una misura che non nasce qui, è solo una delle tante forme dello stesso meccanismo, quello che decide come ti giudichi in ogni ambito della tua vita. Guardarlo per intero è quello che fa Il Meccanismo.',
           signature: '— Gilda'
         }
       },
