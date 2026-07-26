@@ -698,6 +698,174 @@ const CATALOG = [
       },
     ],
   },
+  {
+    id: 'amore',
+    slug: 'amore-dopo-le-delusioni',
+    kofiUrl: 'https://ko-fi.com/s/57001ba5de',
+    tag: 'Percorso',
+    title: "L'amore dopo le delusioni",
+    description: "Non tutti i muri sono uguali. Guardiamo cosa protegge davvero il tuo, da dove viene la sfiducia e come si riapre senza tornare ingenue.",
+    price: '€9',
+    type: 'standard',
+    intro: {
+      title: 'Prima di iniziare.',
+      blockquote: 'Questo non è un percorso per convincerti che sono tutti uguali.\nNé per convincerti che va bene fidarsi di chiunque.',
+      paragraphs: [
+        'È uno strumento per guardare il muro che hai costruito dopo essere stata delusa e per capire se ti protegge ancora o se ha iniziato a tenerti prigioniera.',
+        "La sfiducia che ti serve ancora e quella diventata solo abitudine non sono la stessa cosa, anche se dall'interno sembrano identiche.",
+        'Puoi compilarlo pensando a una persona specifica o al tuo modo di stare nelle relazioni in generale. Funziona meglio se sei onesta anche sulle cose scomode.'
+      ],
+      signature: '— Gilda'
+    },
+    sections: [
+      {
+        id: 's1', name: 'Il muro che hai costruito', number: 'I', openerBg: 'dark',
+        openerIntro: "Non tutti i muri sono uguali. C'è chi protegge una stanza vuota e chi protegge ancora qualcosa di vivo.",
+        intro: 'Dopo una delusione, alzare un muro è una risposta normale. Il problema arriva dopo, quando il muro resta in piedi anche davanti a chi non ha ancora fatto niente per meritarselo. In questa sezione guardiamo cosa protegge oggi il tuo muro e da cosa.',
+        quote: "C'è differenza tra non fidarsi di chiunque e non fidarsi di te stessa nello scegliere.",
+        questions: [
+          { id: 'q1', label: 'Da cosa ti protegge il muro oggi', hint: 'Sii precisa, non generica.', placeholder: 'Mi protegge da...' },
+          { id: 'q2', label: "L'ultima volta che hai tenuto qualcuno a distanza senza una vera ragione", hint: '', placeholder: 'È successo con...' },
+          { id: 'q3', label: 'Cosa perdi tenendo tutti alla stessa distanza', hint: '', placeholder: 'Perdo...' },
+          { id: 'q4', label: 'Il muro protegge te o la tua idea di te che non vuoi più deludere', hint: '', placeholder: 'Protegge...' },
+        ]
+      },
+      {
+        id: 's2', name: 'Da dove viene la sfiducia', number: 'II', openerBg: 'beige',
+        openerIntro: 'La sfiducia doveva essere una fase. A un certo punto ha smesso di esserlo.',
+        intro: "La sfiducia nasce per proteggerti da chi ti ha fatto male una volta. Il rischio è che resti attiva anche con chi non c'entra niente, finché smetti di distinguere tra chi ti ha delusa e chi non lo ha ancora fatto. In questa sezione guardiamo cosa hai imparato su te stessa da quella delusione, non sull'altro.",
+        quote: 'Il problema non è diffidare. È non sapere più quando smettere.',
+        questions: [
+          { id: 'q1', label: 'La delusione che ha alzato per prima questo muro', hint: '', placeholder: 'È successo quando...' },
+          { id: 'q2', label: "Cosa hai imparato su te stessa da quella delusione, non sull'altro", hint: 'Cosa cercavi, cosa hai ignorato.', placeholder: 'Ho imparato che...' },
+          { id: 'q3', label: 'Come riconosci quando la sfiducia si attiva ancora prima di conoscere qualcuno', hint: '', placeholder: 'La riconosco quando...' },
+          { id: 'q4', label: 'Chi ha già dimostrato di essere diverso, senza che tu ci creda ancora del tutto', hint: '', placeholder: 'Fatico a crederci con...' },
+        ]
+      },
+      {
+        id: 's3', name: 'Sapere cosa non vuoi', number: 'III', openerBg: 'terracotta',
+        openerIntro: 'La lista di cosa non vuoi è scritta con le esperienze che ti hanno fatto male. È un documento prezioso, anche se è arrivato nel modo sbagliato.',
+        intro: "Ogni delusione lascia un'informazione precisa su cosa non funziona per te. Il problema è quando quella lista diventa un muro invece che una bussola, quando la usi per escludere invece che per scegliere meglio. In questa sezione guardiamo cosa hai imparato e quanto ti è costato impararlo.",
+        quote: 'Ogni no che hai imparato a dire nasce da qualcosa che hai già vissuto una volta di troppo.',
+        questions: [
+          { id: 'q1', label: 'Una cosa che ora sai di non volere in una relazione', hint: '', placeholder: 'So che non voglio...' },
+          { id: 'q2', label: 'Quanto ti è costato scoprirlo', hint: '', placeholder: 'Mi è costato...' },
+          { id: 'q3', label: 'Usi questa lista per scegliere meglio o per escludere tutti in partenza', hint: '', placeholder: 'La uso per...' },
+          { id: 'q4', label: 'Cosa cambia se guardi quella lista come informazione invece che come difesa', hint: '', placeholder: 'Cambia che...' },
+        ]
+      },
+      {
+        id: 's4', name: 'Riaprirsi senza tornare ingenue', number: 'IV', openerBg: 'cipria',
+        openerIntro: 'Fiducia è una scelta consapevole. Ingenuità è non usare quello che sai.',
+        intro: 'Riaprirsi dopo le delusioni non significa dimenticare quello che hai imparato; piuttosto è scegliere lo stesso, con più informazioni di prima. In questa sezione costruiamo un passo verso quella riapertura, non un salto nel vuoto.',
+        quote: 'Fidarsi di nuovo non cancella quello che sai. Lo porta con te nella scelta.',
+        questions: [
+          { id: 'q1', label: 'Ti innamoreresti ancora, con tutto quello che sai adesso', hint: 'Rispondi davvero, non con una scrollata di spalle.', placeholder: 'La risposta vera è...' },
+          { id: 'q2', label: 'Cosa ti direbbe che questa volta è diverso, senza che tu debba solo sperarlo', hint: '', placeholder: 'Direbbe...' },
+          { id: 'q3', label: 'Un segnale concreto a cui puoi affidarti invece che alla paura generica', hint: '', placeholder: 'Posso affidarmi a...' },
+          { id: 'q4', label: 'Un passo piccolo verso la fiducia che puoi fare questa settimana', hint: '', placeholder: 'Potrei...' },
+        ],
+        synthesis: {
+          title: 'Porta qualcosa fuori da questa pagina.',
+          label: 'Quello che hai capito, in poche righe.',
+          fields: [
+            { id: 'q-sint-amore-1', label: 'Il muro che porto fuori da questa pagina protegge davvero...', placeholder: '...' },
+            { id: 'q-sint-amore-2', label: 'La sfiducia che tengo e quella che posso lasciare andare sono...', placeholder: '...' },
+            { id: 'q-sint-amore-3', label: 'Il passo concreto verso la fiducia che faccio da qui è...', placeholder: '...' },
+          ]
+        },
+        closing: {
+          title: 'Sei arrivata fino in fondo.',
+          text: 'Guardare il muro che hai costruito, capire cosa protegge davvero, non è un esercizio comodo. Hai scelto la strada difficile, quella che porta a te invece che a chi ti ha delusa. Non devi abbattere tutto in una volta. Basta un segnale, un passo piccolo verso la fiducia che scegli ad occhi aperti.',
+          signature: '— Gilda'
+        }
+      },
+    ],
+  },
+  {
+    id: 'soli',
+    slug: 'stare-bene-da-soli',
+    kofiUrl: 'https://ko-fi.com/s/676d29c358',
+    tag: 'Percorso',
+    title: 'Stare bene da soli',
+    description: 'Stare bene da soli non è solitudine, è casa. Guardiamo se stai scegliendo o colmando. Cambia tutto, a partire da chi lasci entrare.',
+    price: '€9',
+    type: 'standard',
+    intro: {
+      title: 'Prima di iniziare.',
+      blockquote: 'Questo non è un percorso per convincerti che va bene essere sola, ti aiuta invece a capire se lo stai scegliendo o solo sopportando.',
+      paragraphs: [
+        'È uno strumento per guardare la differenza tra stare bene da sola ed essere semplicemente sola, tra scegliere la tua compagnia e non avere alternative.',
+        'La pienezza e il vuoto non dipendono da chi hai vicino, anche se sembra il contrario quando manca qualcuno.',
+        'Puoi compilarlo indipendentemente dal fatto che tu sia sola o in coppia in questo momento. Funziona meglio se sei onesta su da dove parti quando cerchi compagnia.'
+      ],
+      signature: '— Gilda'
+    },
+    sections: [
+      {
+        id: 's1', name: 'Completa, non vuota', number: 'I', openerBg: 'dark',
+        openerIntro: 'Chi cerca compagnia per riempire un vuoto trova sempre le persone sbagliate, chi lo fa partendo da una situazione di consapevolezza trova persone affini.',
+        intro: "C'è una differenza enorme tra cercare qualcuno per completarti e cercare qualcuno da aggiungere a una vita che già funziona. La prima logica parte da un buco da tappare. La seconda parte da qualcosa che vuoi condividere. In questa sezione guardiamo quale delle due logiche usi più spesso.",
+        quote: 'Non è la compagnia a mancare. È il motivo per cui la cerchi che fa la differenza.',
+        questions: [
+          { id: 'q1', label: 'Quando non sei in coppia, ti senti a metà o intera', hint: 'Sii onesta, anche se cambia a seconda del giorno.', placeholder: 'Mi sento...' },
+          { id: 'q2', label: "L'ultima volta che hai cercato compagnia per riempire qualcosa", hint: '', placeholder: 'È successo quando...' },
+          { id: 'q3', label: 'Cosa ti fa sentire appagata, indipendentemente da chi hai vicino', hint: '', placeholder: 'Mi fa sentire appagata...' },
+          { id: 'q4', label: 'Da dove parti di solito quando cerchi qualcuno', hint: 'Da un vuoto o da qualcosa che già funziona.', placeholder: 'Parto da...' },
+        ]
+      },
+      {
+        id: 's2', name: "Da dove viene l'idea di essere a metà", number: 'II', openerBg: 'beige',
+        openerIntro: "La narrazione che da soli si è incompleti è una bugia molto diffusa. Da qualche parte l'hai imparata anche tu.",
+        intro: 'Nessuna nasce pensando che una vita senza coppia sia una vita a metà. Da qualche parte, tra film e commenti ripetuti in famiglia, hai assorbito l\'idea che completa significhi accompagnata. In questa sezione cerchiamo da dove viene quella misura, per poi decidere se vale ancora.',
+        quote: "Nessuna nasce già convinta di essere a metà. Quella convinzione l'hai imparata, si può anche disimparare.",
+        questions: [
+          { id: 'q1', label: 'Chi o cosa ti ha insegnato che da sola sei a metà', hint: 'Film, famiglia, frasi ripetute.', placeholder: "L'ho imparato da..." },
+          { id: 'q2', label: 'Un momento in cui ti sei sentita completa da sola, prima di doverlo dimostrare a qualcuno', hint: '', placeholder: 'È successo quando...' },
+          { id: 'q3', label: 'Quella misura ha ancora senso oggi', hint: '', placeholder: 'Oggi...' },
+          { id: 'q4', label: 'Cosa perderesti se smettessi di misurarti così', hint: '', placeholder: 'Perderei...' },
+        ]
+      },
+      {
+        id: 's3', name: 'Quello spazio non lo regali a chiunque', number: 'III', openerBg: 'terracotta',
+        openerIntro: 'Se stai bene da sola, quello spazio alza la soglia. Non per escludere. Per scegliere.',
+        intro: 'Quando riempi lo spazio per paura del vuoto, chi entra nella tua vita occupa solo un posto, non lo guadagna. Quando lo spazio è già abitato da te, chi entra deve aggiungere qualcosa. In questa sezione guardiamo quanto ti è costato regalare quello spazio a chi non lo meritava.',
+        quote: 'Lo spazio che hai costruito da sola non è un posto libero per chiunque passi.',
+        questions: [
+          { id: 'q1', label: 'A chi hai regalato spazio che non lo meritava', hint: '', placeholder: "L'ho regalato a..." },
+          { id: 'q2', label: 'Cosa ti ha convinta a tenerlo comunque vicino', hint: '', placeholder: 'Mi ha convinta...' },
+          { id: 'q3', label: 'Cosa hai perso restando occupata da chi non aggiungeva niente', hint: '', placeholder: 'Ho perso...' },
+          { id: 'q4', label: 'Cosa alzeresti come soglia minima da qui in avanti', hint: '', placeholder: 'Alzerei...' },
+        ]
+      },
+      {
+        id: 's4', name: 'Costruire la tua casa', number: 'IV', openerBg: 'cipria',
+        openerIntro: 'Stare bene da soli non è il ripiego di chi non ha trovato nessuno. È il prerequisito per costruire relazioni vere.',
+        intro: 'Prima viene la casa che costruisci dentro di te, quella che non dipende da chi ti sta vicino in un momento specifico. Poi viene tutto il resto, che funziona meglio quando parte da lì. In questa sezione mettiamo a fuoco cosa significa concretamente per te sentirti a casa da sola.',
+        quote: "Volere qualcuno vicino è diverso dall'averne bisogno: il primo nasce dalla pienezza, il secondo dalla paura.",
+        questions: [
+          { id: 'q1', label: 'Cosa significa per te sentirti a casa, indipendentemente da chi hai vicino', hint: '', placeholder: 'Significa...' },
+          { id: 'q2', label: 'Una domenica passata bene da sola, senza doverla giustificare a nessuno', hint: '', placeholder: 'È stata quella volta che...' },
+          { id: 'q3', label: 'Cosa vuoi, non di cosa hai bisogno, nelle relazioni che costruisci da qui', hint: '', placeholder: 'Voglio...' },
+          { id: 'q4', label: 'Un gesto piccolo che ti fa sentire a casa da sola, questa settimana', hint: '', placeholder: 'Potrei...' },
+        ],
+        synthesis: {
+          title: 'Porta qualcosa fuori da questa pagina.',
+          label: 'Quello che hai capito, in poche righe.',
+          fields: [
+            { id: 'q-sint-soli-1', label: 'La differenza tra pienezza e vuoto, per me, è...', placeholder: '...' },
+            { id: 'q-sint-soli-2', label: 'La misura che smetto di usare per sentirmi completa è...', placeholder: '...' },
+            { id: 'q-sint-soli-3', label: 'La casa che costruisco da sola comincia da...', placeholder: '...' },
+          ]
+        },
+        closing: {
+          title: 'Sei arrivata fino in fondo.',
+          text: 'Guardare da dove parti quando cerchi compagnia, quanto spazio hai regalato a chi non lo meritava, non è un esercizio scontato. Hai scelto di costruire prima la casa, poi tutto il resto. Non serve una risposta definitiva oggi. Basta un gesto piccolo che ti ricordi che la pienezza parte da te.',
+          signature: '— Gilda'
+        }
+      },
+    ],
+  },
 ];
 
 /* ═══════════════════════════════════════════════
