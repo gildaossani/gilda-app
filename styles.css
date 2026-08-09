@@ -318,6 +318,14 @@ input, textarea { font-family: inherit; }
 }
 .product-card:not(.locked) .card-stripe { opacity: 1; }
 
+.card-cover {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--antracite);
+}
+
 .card-body { padding: 20px 20px 16px; }
 
 .card-tag {
