@@ -12,7 +12,7 @@ const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsI
 const CATALOG = [
   {
     id: 'autosabotaggio',
-    slug: 'il-meccanismo', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/il-meccanismo-quaderno.pdf',
+    slug: 'il-meccanismo', img: 'img/il-meccanismo.png', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/il-meccanismo-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/bd0aecbdaa',
     tag: 'Strumento di autoanalisi',
     title: 'Il Meccanismo',
@@ -173,7 +173,7 @@ const CATALOG = [
   },
   {
     id: 'non-abbastanza',
-    slug: 'non-sentirsi-abbastanza', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/non-sentirsi-abbastanza-quaderno.pdf',
+    slug: 'non-sentirsi-abbastanza', img: 'img/non-sentirsi-abbastanza.png', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/non-sentirsi-abbastanza-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/c8964c27d8',
     tag: 'Percorso',
     title: 'Non sentirsi abbastanza',
@@ -262,7 +262,7 @@ const CATALOG = [
   },
   {
     id: 'paura',
-    slug: 'la-paura', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/la-paura-quaderno.pdf',
+    slug: 'la-paura', img: 'img/la-paura.png', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/la-paura-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/12e6f4363d',
     tag: 'Percorso',
     title: 'La paura',
@@ -351,7 +351,7 @@ const CATALOG = [
   },
   {
     id: 'confini',
-    slug: 'i-confini', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/i-confini-quaderno.pdf',
+    slug: 'i-confini', img: 'img/i-confini.png', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/i-confini-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/e8c2cd9c99',
     tag: 'Percorso',
     title: 'I confini',
@@ -440,7 +440,7 @@ const CATALOG = [
   },
   {
     id: 'corpo',
-    slug: 'il-corpo-non-mente', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/il-corpo-non-mente-quaderno.pdf',
+    slug: 'il-corpo-non-mente', img: 'img/il-corpo-non-mente.png', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/il-corpo-non-mente-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/8c06cb9b7c',
     tag: 'Percorso',
     title: 'Il corpo non mente',
@@ -528,7 +528,7 @@ const CATALOG = [
   },
   {
     id: 'amicizie',
-    slug: 'le-amicizie', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/le-amicizie-quaderno.pdf',
+    slug: 'le-amicizie', img: 'img/le-amicizie.png', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/le-amicizie-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/c97d2674fa',
     tag: 'Percorso',
     title: 'Le amicizie',
@@ -616,7 +616,7 @@ const CATALOG = [
   },
   {
     id: 'lavoro',
-    slug: 'il-lavoro-e-il-denaro', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/il-lavoro-e-il-denaro-quaderno.pdf',
+    slug: 'il-lavoro-e-il-denaro', img: 'img/il-lavoro-e-il-denaro.png', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/il-lavoro-e-il-denaro-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/59a008ab39',
     tag: 'Percorso',
     title: 'Il lavoro e il denaro',
@@ -730,7 +730,7 @@ const CATALOG = [
   },
   {
     id: 'amore',
-    slug: 'amore-dopo-le-delusioni', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/amore-dopo-le-delusioni-quaderno.pdf',
+    slug: 'amore-dopo-le-delusioni', img: 'img/lamore-dopo-le-delusioni.png', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/amore-dopo-le-delusioni-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/57001ba5de',
     tag: 'Percorso',
     title: "L'amore dopo le delusioni",
@@ -819,7 +819,7 @@ const CATALOG = [
   },
   {
     id: 'soli',
-    slug: 'stare-bene-da-soli', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/stare-bene-da-soli-quaderno.pdf',
+    slug: 'stare-bene-da-soli', img: 'img/stare-bene-da-soli.png', pdfUrl: 'https://gildaossani.github.io/gilda-app/quaderni/stare-bene-da-soli-quaderno.pdf',
     kofiUrl: 'https://ko-fi.com/s/676d29c358',
     tag: 'Percorso',
     title: 'Stare bene da soli',
@@ -1402,7 +1402,7 @@ function renderLibrary() {
     if (unlk) div.addEventListener('click', () => openProduct(p.id));
     const prev = p.sections.slice(0, 3).map(s => `<div class="preview-section-item">${s.name}</div>`).join('');
     div.innerHTML = `
-      <div class="card-stripe"></div>
+      ${p.img ? `<div class="card-cover" style="background-image:url('${p.img}')"></div>` : `<div class="card-stripe"></div>`}
       <div class="card-body">
         <div class="card-tag">${p.tag}</div>
         <div class="card-title">${p.title}</div>
