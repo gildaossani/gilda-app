@@ -1513,23 +1513,23 @@ function ensureFormeStyles() {
   const style = document.createElement('style');
   style.id = 'ff-styles';
   style.textContent = `
-    .ff-wrap { background: #F5F0E8; border: 1px solid rgba(154,205,50,0.35); border-radius: 10px; padding: 32px 28px; margin-bottom: 28px; }
-    .ff-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #9ACD32; margin-bottom: 14px; }
+    .ff-wrap { background: #F5F0E8; border: 1px solid rgba(234,20,120,0.35); border-radius: 10px; padding: 32px 28px; margin-bottom: 28px; }
+    .ff-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #EA1478; margin-bottom: 14px; }
     .ff-title { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 26px; color: #14100C; margin-bottom: 12px; line-height: 1.2; }
-    .ff-title em { font-style: italic; color: #9ACD32; }
+    .ff-title em { font-style: italic; color: #EA1478; }
     .ff-intro { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.65; color: #14100C; margin-bottom: 24px; }
-    .ff-item { border-top: 1px solid rgba(154,205,50,0.25); }
-    .ff-item:last-of-type { border-bottom: 1px solid rgba(154,205,50,0.25); }
+    .ff-item { border-top: 1px solid rgba(234,20,120,0.25); }
+    .ff-item:last-of-type { border-bottom: 1px solid rgba(234,20,120,0.25); }
     .ff-item summary { list-style: none; cursor: pointer; padding: 16px 4px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
     .ff-item summary::-webkit-details-marker { display: none; }
     .ff-name { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 20px; color: #14100C; }
-    .ff-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13.5px; color: #9ACD32; text-align: right; }
+    .ff-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13.5px; color: #EA1478; text-align: right; }
     .ff-body { padding: 4px 4px 20px; }
     .ff-body p { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.65; color: #14100C; margin-bottom: 14px; }
-    .ff-mantras { background: #fff; border-left: 2px solid #A8D93A; padding: 16px 18px 16px 22px; margin-top: 16px; }
-    .ff-mantra-title { font-family: 'DM Sans', sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #9ACD32; margin-bottom: 12px; }
+    .ff-mantras { background: #fff; border-left: 2px solid #F48FB8; padding: 16px 18px 16px 22px; margin-top: 16px; }
+    .ff-mantra-title { font-family: 'DM Sans', sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #EA1478; margin-bottom: 12px; }
     .ff-mantra { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; line-height: 1.5; color: #5A534C; margin-bottom: 8px; padding-left: 16px; position: relative; }
-    .ff-mantra::before { content: '\u2014'; position: absolute; left: 0; color: #A8D93A; font-style: normal; }
+    .ff-mantra::before { content: '\u2014'; position: absolute; left: 0; color: #F48FB8; font-style: normal; }
     .ff-closing { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.65; color: #14100C; margin-top: 24px; }
   `;
   document.head.appendChild(style);

@@ -5,9 +5,9 @@
 
 :root {
   --antracite:   #14100C;
-  --terracotta:  #9ACD32;
-  --rosa-cipria: #A8D93A;
-  --ocra:        #6B8E23;
+  --terracotta:  #EA1478;
+  --rosa-cipria: #F48FB8;
+  --ocra:        #C41065;
   --beige:       #F5F0E8;
   --bianco:      #FFFFFF;
 
@@ -151,7 +151,7 @@ input, textarea { font-family: inherit; }
   transition: background var(--transition), transform var(--transition);
   margin-top: 8px;
 }
-.btn-auth-submit:hover  { background: #6B8E23; }
+.btn-auth-submit:hover  { background: #C41065; }
 .btn-auth-submit:active { transform: scale(0.98); }
 .btn-auth-submit:disabled { opacity: 0.6; cursor: default; }
 
@@ -278,7 +278,7 @@ input, textarea { font-family: inherit; }
   flex-shrink: 0;
   transition: background var(--transition);
 }
-.btn-unlock:hover { background: #6B8E23; }
+.btn-unlock:hover { background: #C41065; }
 .btn-unlock:disabled { opacity: 0.6; cursor: default; }
 
 .unlock-message {
@@ -804,7 +804,7 @@ input, textarea { font-family: inherit; }
   color: var(--bianco);
   flex: 1;
 }
-#btn-next-section:hover:not(:disabled) { background: #6B8E23; }
+#btn-next-section:hover:not(:disabled) { background: #C41065; }
 #btn-next-section:disabled { opacity: 0.3; cursor: default; }
 
 /* =============================================
@@ -1054,7 +1054,7 @@ input, textarea { font-family: inherit; }
   text-decoration: none;
   transition: background var(--transition);
 }
-.card-kofi-btn:hover { background: #6B8E23; }
+.card-kofi-btn:hover { background: #C41065; }
 
 /* RESET PASSWORD SCREEN */
 #screen-reset {
