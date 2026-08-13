@@ -432,7 +432,7 @@ const CATALOG = [
         },
         closing: {
           title: 'Sei arrivata fino in fondo.',
-          text: 'Guardare dove cedi, capire da dove viene, rendendoti conto di quanto ti costa, non è un esercizio facile. È più comodo non farlo. Hai scelto la strada difficile, quella che porta a te. Io sai come la chiamo? Libertà. Quello che hai scritto qui non serve a niente se resta su questa pagina. La cosa più utile che puoi fare adesso è prendere una cosa sola, la più piccola o la più importante, sentilo e portarla fuori. Non un cambiamento di vita. Un confine. Uno. Quello che hai già individuato. Ce la fai.',
+          text: 'Guardare dove cedi, capire da dove viene, renderti conto di quanto ti costa, non è un esercizio facile. È più comodo non farlo. Hai scelto la strada difficile, quella che porta a te. Sai come la chiamo? Libertà. Quello che hai scritto qui non serve a niente se resta su questa pagina. La cosa più utile che puoi fare adesso è prendere una cosa sola, la più piccola o la più importante e portarla fuori. Non un cambiamento di vita. Un confine. Uno. Quello che hai già individuato. Ce la fai.',
           signature: '— Gilda'
         },
         final: {
