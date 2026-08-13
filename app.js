@@ -472,7 +472,7 @@ const CATALOG = [
       },
       {
         id: 's2', name: 'Dato o interpretazione', number: 'II', openerBg: 'beige',
-        openerIntro: 'Un segnale è un fatto. Il significato che gli dai è un passo in più, e vale la pena guardarlo separatamente.',
+        openerIntro: 'Un segnale è un fatto. Il significato che gli dai è un passo in più e vale la pena guardarlo separatamente.',
         intro: 'La notte che non dormi è un dato. Dire che significa che il lavoro ti sta consumando è già un\'interpretazione, magari giusta, magari no. In questa sezione proviamo a tenerle distinte, per vedere quanto regge quello che ci hai costruito sopra.',
         quote: 'Il corpo non si sbaglia nel mandare il segnale. Puoi sbagliarti tu nel modo in cui te lo racconti.',
         questions: [
@@ -515,7 +515,7 @@ const CATALOG = [
         },
         closing: {
           title: 'Hai osservato.',
-          text: 'Separare quello che senti da quello che ci racconti sopra non è un esercizio scontato. Siamo abituate a saltare dritte alla spiegazione più familiare, senza controllare se regge davvero. Quello che hai scritto qui non è una diagnosi. È un punto di partenza più onesto: sai cosa senti, e sai anche cosa ci hai aggiunto tu.',
+          text: 'Separare quello che senti da quello che ci racconti sopra non è un esercizio scontato. Siamo abituate a saltare dritte alla spiegazione più familiare, senza controllare se regge davvero. Quello che hai scritto qui non è una diagnosi. È un punto di partenza più onesto: sai cosa senti e sai anche cosa ci hai aggiunto tu.',
           signature: '— Gilda'
         },
         final: {
