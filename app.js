@@ -828,34 +828,34 @@ const CATALOG = [
     type: 'standard',
     intro: {
       title: 'Prima di iniziare.',
-      blockquote: 'Questo non è un percorso per convincerti che va bene essere sola, ti aiuta invece a capire se lo stai scegliendo o solo sopportando.',
+      blockquote: 'Questo non è un percorso per convincerti che va bene stare sola.\nÈ per capire cosa cerchi quando cerchi compagnia e da dove parti quando scegli di restare sola.',
       paragraphs: [
-        'È uno strumento per guardare la differenza tra stare bene da sola ed essere semplicemente sola, tra scegliere la tua compagnia e non avere alternative.',
-        'La pienezza e il vuoto non dipendono da chi hai vicino, anche se sembra il contrario quando manca qualcuno.',
+        'È uno strumento per guardare la differenza tra scegliere la tua compagnia e restarci per mancanza di alternative, che si tratti di stare sola o di stare con qualcuno.',
+        'Quanto la pienezza dipenda davvero da chi hai vicino non è scontato. In questo percorso proviamo a guardarlo senza darlo già per deciso.',
         'Puoi compilarlo indipendentemente dal fatto che tu sia sola o in coppia in questo momento. Funziona meglio se sei onesta su da dove parti quando cerchi compagnia.'
       ],
       signature: '— Gilda'
     },
     sections: [
       {
-        id: 's1', name: 'Completa, non vuota', number: 'I', openerBg: 'dark',
-        openerIntro: 'Chi cerca compagnia per riempire un vuoto trova sempre le persone sbagliate, chi lo fa partendo da una situazione di consapevolezza trova persone affini.',
-        intro: "C'è una differenza enorme tra cercare qualcuno per completarti e cercare qualcuno da aggiungere a una vita che già funziona. La prima logica parte da un buco da tappare. La seconda parte da qualcosa che vuoi condividere. In questa sezione guardiamo quale delle due logiche usi più spesso.",
-        quote: 'Non è la compagnia a mancare. È il motivo per cui la cerchi che fa la differenza.',
+        id: 's1', name: 'Cosa cerchi nella compagnia', number: 'I', openerBg: 'dark',
+        openerIntro: 'Cercare compagnia non è un problema. Vale la pena sapere cosa stai cercando esattamente.',
+        intro: 'C\'è differenza tra cercare qualcuno per completarti e cercare qualcuno da aggiungere a una vita che già funziona. Spesso non è solo l\'una o solo l\'altra. In questa sezione proviamo a vedere cosa c\'è davvero dietro quello che cerchi.',
+        quote: 'Non è la compagnia a mancare. È capire cosa ne cerchi che fa la differenza.',
         questions: [
-          { id: 'q1', label: 'Quando non sei in coppia, ti senti a metà o intera', hint: 'Sii onesta, anche se cambia a seconda del giorno.', placeholder: 'Mi sento...' },
-          { id: 'q2', label: "L'ultima volta che hai cercato compagnia per riempire qualcosa", hint: '', placeholder: 'È successo quando...' },
-          { id: 'q3', label: 'Cosa ti fa sentire appagata, indipendentemente da chi hai vicino', hint: '', placeholder: 'Mi fa sentire appagata...' },
-          { id: 'q4', label: 'Da dove parti di solito quando cerchi qualcuno', hint: 'Da un vuoto o da qualcosa che già funziona.', placeholder: 'Parto da...' },
+          { id: 'q1', label: 'Cosa speri che la presenza di qualcuno aggiunga alla tua vita', hint: 'Prova a essere specifica, non "felicità" in generale.', placeholder: 'Spero che aggiunga...' },
+          { id: 'q2', label: 'Cosa di questo desiderio è tuo e cosa senti di dover desiderare', hint: 'Non sempre è facile separarli. Prova comunque.', placeholder: 'Sento che è mio...' },
+          { id: 'q3', label: 'Quando non sei in coppia, ti senti a metà o intera', hint: 'Sii onesta, anche se cambia a seconda del giorno.', placeholder: 'Mi sento...' },
+          { id: 'q4', label: 'Cosa ti fa sentire appagata, indipendentemente da chi hai vicino', hint: '', placeholder: 'Mi fa sentire appagata...' },
         ]
       },
       {
         id: 's2', name: "Da dove viene l'idea di essere a metà", number: 'II', openerBg: 'beige',
-        openerIntro: "La narrazione che da soli si è incompleti è una bugia molto diffusa. Da qualche parte l'hai imparata anche tu.",
-        intro: 'Nessuna nasce pensando che una vita senza coppia sia una vita a metà. Da qualche parte, tra film e commenti ripetuti in famiglia, hai assorbito l\'idea che completa significhi accompagnata. In questa sezione cerchiamo da dove viene quella misura, per poi decidere se vale ancora.',
-        quote: "Nessuna nasce già convinta di essere a metà. Quella convinzione l'hai imparata, si può anche disimparare.",
+        openerIntro: "L'idea che da sole si è a metà arriva da qualche parte. Vale la pena sapere da dove, prima di darla per vera.",
+        intro: 'Film, frasi ripetute in famiglia, confronti mai richiesti: l\'idea che completa significhi accompagnata arriva quasi sempre da fuori. In questa sezione cerchiamo da dove viene la tua, per poi decidere se vale ancora.',
+        quote: "Quella convinzione l'hai imparata da qualche parte. Sapere da dove aiuta a decidere se conservarla.",
         questions: [
-          { id: 'q1', label: 'Chi o cosa ti ha insegnato che da sola sei a metà', hint: 'Film, famiglia, frasi ripetute.', placeholder: "L'ho imparato da..." },
+          { id: 'q1', label: 'Da dove viene l\'idea che da sola sei a metà', hint: 'Film, famiglia, frasi ripetute: prova a risalire.', placeholder: 'Viene da...' },
           { id: 'q2', label: 'Un momento in cui ti sei sentita completa da sola, prima di doverlo dimostrare a qualcuno', hint: '', placeholder: 'È successo quando...' },
           { id: 'q3', label: 'Quella misura ha ancora senso oggi', hint: '', placeholder: 'Oggi...' },
           { id: 'q4', label: 'Cosa perderesti se smettessi di misurarti così', hint: '', placeholder: 'Perderei...' },
@@ -875,9 +875,9 @@ const CATALOG = [
       },
       {
         id: 's4', name: 'Costruire la tua casa', number: 'IV', openerBg: 'cipria',
-        openerIntro: 'Stare bene da soli non è il ripiego di chi non ha trovato nessuno. È il prerequisito per costruire relazioni vere.',
-        intro: 'Prima viene la casa che costruisci dentro di te, quella che non dipende da chi ti sta vicino in un momento specifico. Poi viene tutto il resto, che funziona meglio quando parte da lì. In questa sezione mettiamo a fuoco cosa significa concretamente per te sentirti a casa da sola.',
-        quote: "Volere qualcuno vicino è diverso dall'averne bisogno: il primo nasce dalla pienezza, il secondo dalla paura.",
+        openerIntro: 'Stare bene da soli non è il ripiego di chi non ha trovato nessuno. Per alcune è un punto di partenza, non un traguardo obbligatorio.',
+        intro: 'C\'è chi costruisce prima la propria stabilità e poi cerca compagnia e chi fa il percorso opposto. Qui guardiamo cosa significa per te sentirti a casa da sola, a prescindere da quale ordine scegli.',
+        quote: "C'è una differenza tra volere qualcuno vicino e averne bisogno. Vale la pena sapere quale delle due stai vivendo.",
         questions: [
           { id: 'q1', label: 'Cosa significa per te sentirti a casa, indipendentemente da chi hai vicino', hint: '', placeholder: 'Significa...' },
           { id: 'q2', label: 'Una domenica passata bene da sola, senza doverla giustificare a nessuno', hint: '', placeholder: 'È stata quella volta che...' },
@@ -895,7 +895,7 @@ const CATALOG = [
         },
         closing: {
           title: 'Sei arrivata fino in fondo.',
-          text: 'Guardare da dove parti quando cerchi compagnia, quanto spazio hai regalato a chi non lo meritava, non è un esercizio scontato. Hai scelto di costruire prima la casa, poi tutto il resto. Non serve una risposta definitiva oggi. Basta un gesto piccolo che ti ricordi che la pienezza parte da te.',
+          text: 'Guardare da dove parti quando cerchi compagnia non è un esercizio scontato. Che tu scelga di restare sola o di aprirti a qualcuno, quello che conta è sapere quale delle due stai scegliendo e perché. Non serve una risposta definitiva oggi. Basta partire da qui.',
           signature: '— Gilda'
         },
         final: {
