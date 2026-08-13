@@ -1025,48 +1025,30 @@ async function handleTokenFlow() {
   history.replaceState({}, document.title, window.location.pathname);
 
   try {
-    // Verifica token: esiste e non è ancora usato
-    const { data: row, error } = await supa
-      .from('unlock_codes')
-      .select('id, token, product_id, used_at')
-      .eq('token', pendingToken)
-      .eq('product_id', pendingProduct)
-      .single();
+    // Verifica, assegna e brucia il token in un'unica chiamata sicura lato server
+    const { data: result, error } = await supa.rpc('redeem_unlock_code', { p_token: pendingToken });
 
-    if (error || !row) {
-      toast('Link non valido o già utilizzato.');
+    if (error || !result || !result.ok) {
+      const reason = result && result.error;
+      if (reason === 'already_owned') {
+        toast('Percorso già nella tua libreria.');
+      } else if (reason === 'already_used') {
+        toast('Questo link è già stato usato. Accedi normalmente alla tua libreria.');
+      } else {
+        toast('Link non valido o già utilizzato.');
+      }
       pendingToken = null;
       pendingProduct = null;
       return;
     }
 
-    if (row.used_at !== null) {
-      toast('Questo link è già stato usato. Accedi normalmente alla tua libreria.');
-      pendingToken = null;
-      pendingProduct = null;
-      return;
-    }
-
-    // Sblocca il percorso per l'utente
-    await supa.from('user_products').upsert(
-      { user_id: me.id, product_id: pendingProduct, unlocked_at: new Date().toISOString() },
-      { onConflict: 'user_id,product_id' }
-    );
-
-    // Brucia il token — usato_at impostato
-    await supa
-      .from('unlock_codes')
-      .update({ used_at: new Date().toISOString() })
-      .eq('id', row.id);
-
-    if (!opened.includes(pendingProduct)) {
-      opened.push(pendingProduct);
+    const pid = result.product_id;
+    if (!opened.includes(pid)) {
+      opened.push(pid);
     }
 
     toast('Percorso sbloccato. Benvenuta.');
 
-    // Apre direttamente il percorso appena sbloccato
-    const pid = pendingProduct;
     pendingToken = null;
     pendingProduct = null;
 
@@ -1322,36 +1304,22 @@ async function doUnlock() {
   g('btn-unlock').textContent = '…';
   g('unlock-message').className = 'unlock-message hidden';
   try {
-    // Cerca per colonna token (rinominata da code)
-    const { data: row, error } = await supa
-      .from('unlock_codes')
-      .select('*')
-      .eq('token', code)
-      .single();
+    const { data: result, error } = await supa.rpc('redeem_unlock_code', { p_token: code });
 
-    if (error || !row) { showUM('Codice non valido.', 'error'); return; }
+    if (error || !result) { showUM('Errore. Riprova.', 'error'); return; }
 
-    const isWelcome = code.startsWith('GILDA-WELCOME');
-
-    // I codici non-welcome vengono bruciati al primo uso
-    if (!isWelcome && row.used_at !== null) {
-      showUM('Codice già usato.', 'error'); return;
+    if (!result.ok) {
+      const map = {
+        invalid: 'Codice non valido.',
+        already_used: 'Codice già usato.',
+        already_owned: 'Prodotto già in libreria.',
+        not_authenticated: 'Devi accedere prima di sbloccare un codice.',
+      };
+      showUM(map[result.error] || 'Codice non valido.', 'error');
+      return;
     }
 
-    if (isOpen(row.product_id)) { showUM('Prodotto già in libreria.', 'error'); return; }
-
-    if (!isWelcome) {
-      await supa
-        .from('unlock_codes')
-        .update({ used_at: new Date().toISOString() })
-        .eq('id', row.id);
-    }
-
-    await supa.from('user_products').upsert(
-      { user_id: me.id, product_id: row.product_id, unlocked_at: new Date().toISOString() },
-      { onConflict: 'user_id,product_id' }
-    );
-    opened.push(row.product_id);
+    if (!opened.includes(result.product_id)) opened.push(result.product_id);
     g('unlock-input').value = '';
     showUM('Prodotto sbloccato!', 'success');
     renderLibrary();
