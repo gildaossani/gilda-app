@@ -23,7 +23,7 @@ const CATALOG = [
       title: 'Una nota onesta.',
       blockquote: 'Questo non è un workbook per sentirti meglio.\nNon promette cambiamenti in sette giorni. Non ti chiede di credere in te stessa.',
       paragraphs: [
-        'È uno strumento per guardare da vicino qualcosa che di solito preferisci tenere leggermente sfocato: il modo preciso in cui ti metti i bastoni tra le ruote, e le ragioni impeccabili con cui giustifichi questa scelta.',
+        'È uno strumento per guardare da vicino qualcosa che di solito preferisci tenere leggermente sfocato: il modo preciso in cui ti metti i bastoni tra le ruote e le ragioni impeccabili con cui giustifichi questa scelta.',
         'Non cerchiamo colpevoli. Sarebbe comodo, quindi lo lasciamo fare ad altri. Cerchiamo il meccanismo. Il tuo, specifico, personale, probabilmente abbastanza intelligente da sembrare ragionevole la maggior parte delle volte.',
         'Puoi compilarlo in una seduta o a spezzoni. Puoi tornare indietro, cancellare, riscrivere. L\'unica cosa che non ha senso fare è rispondere quello che pensi si debba rispondere. Nessuno legge questo tranne te.'
       ],
@@ -108,7 +108,7 @@ const CATALOG = [
         number: 'III',
         openerBg: 'dark',
         openerIntro: 'L\'autosabotaggio non è stupidità. È una strategia.',
-        intro: 'Non cerchiamo cause, non risaliamo alle origini, non diagnostichiamo niente. Cerchiamo la logica: cosa stava proteggendo quella parte di te che ha deviato?',
+        intro: 'Non cerchiamo cause, non risaliamo alle origini, non diagnostichiamo niente. Cerchiamo la logica: qual è la logica che tiene in piedi quella parte di te che ha deviato?',
         questions: [
           { id: 'q-vantaggio', label: 'Il vantaggio immediato', hint: 'Cosa hai guadagnato nell\'immediato fermandoti? Anche una cosa piccola conta.', placeholder: 'Mi sono risparmiata... ho mantenuto...' },
           { id: 'q-protezione', label: 'La protezione', hint: 'Da cosa ti ha protetta quella deviazione? Sii precisa, non generica.', placeholder: 'Mi ha protetta da...' },
@@ -122,6 +122,7 @@ const CATALOG = [
           title: 'La logica in chiaro.',
           label: 'La struttura del mio meccanismo',
           fields: [
+            { id: 'q-sintesi-logica', label: 'La logica che lo tiene in piedi è...', placeholder: '...' },
             { id: 'q-sintesi-perche', label: 'Mi fermo perché...', placeholder: '...' },
             { id: 'q-sintesi-non-devo', label: 'In questo modo non devo...', placeholder: '...' },
             { id: 'q-sintesi-controllo', label: 'E mantengo il controllo su...', placeholder: '...' },
@@ -165,7 +166,7 @@ const CATALOG = [
         },
         final: {
           title: 'Se vuoi andare più a fondo.',
-          text: 'Arrivare fino in fondo a questo strumento non è scontato. Significa che sei disposta a guardare, e questo già cambia qualcosa nel modo in cui il meccanismo funziona. Il cervello impara a riconoscere i pattern ogni volta che li incontra. Hai trovato un filo. Ce ne sono altri e ogni volta che ne trovi uno e lo tiri, il meccanismo perde un po\' del suo potere. Puoi scaricare le tue risposte in qualsiasi momento e ricominciare da capo quando il meccanismo si riattiva di nuovo. Funziona meglio nel tempo, non in una sola sessione.',
+          text: 'Arrivare fino in fondo a questo strumento non è scontato. Significa che sei disposta a guardare e questo cambia già qualcosa nel modo in cui il meccanismo funziona. Il cervello impara a riconoscere i pattern ogni volta che li incontra. Hai trovato un filo. Ce ne sono altri e ogni volta che ne trovi uno e lo tiri, il meccanismo perde un po\' del suo potere. Puoi scaricare le tue risposte in qualsiasi momento e ricominciare da capo quando il meccanismo si riattiva di nuovo. Funziona meglio nel tempo, non in una sola sessione.',
           signature: '— Gilda'
         }
       },
@@ -206,7 +207,7 @@ const CATALOG = [
       {
         id: 's2', name: 'Le prove', number: 'II', openerBg: 'beige',
         openerIntro: 'Cosa fai per sentirti abbastanza? Vale la pena guardarlo senza giudicarlo.',
-        intro: 'Non per smettere di farlo. Per capire cosa stai cercando di dimostrare, e a chi. Perché a volte quello che sembra ambizione è solo un tentativo di far tacere quella voce. E quella voce, di solito, non si accontenta mai.',
+        intro: 'Non per smettere di farlo. Per capire cosa stai cercando di dimostrare e a chi. Perché a volte quello che sembra ambizione è solo un tentativo di far tacere quella voce. E quella voce, di solito, non si accontenta mai.',
         quote: 'Il problema non è quello che fai. È per chi lo fai.',
         questions: [
           { id: 'q1', label: "Cosa fai per dimostrare di valere", hint: 'Elenca anche le cose piccole.', placeholder: 'Faccio...' },
@@ -236,7 +237,9 @@ const CATALOG = [
           { id: 'q1', label: "Cosa significherebbe sentirti abbastanza", hint: 'Concretamente.', placeholder: 'Significherebbe...' },
           { id: 'q2', label: "Qualcosa che fai bene e che fai fatica ad ammettere", hint: '', placeholder: 'So fare bene...' },
           { id: 'q3', label: "Se una tua amica ti descrivesse cosa direbbe di te", hint: '', placeholder: 'Direbbe che...' },
-          { id: 'q4', label: "Una cosa che puoi fare oggi per trattarti come se fossi già abbastanza", hint: '', placeholder: 'Oggi posso...' },
+          { id: 'q4', label: "C'è qualcosa in cui, guardando i fatti, oggi non sei ancora brava o pronta", hint: 'Può anche essere sì. Non succede niente.', placeholder: 'Non sono ancora brava a...' },
+          { id: 'q5', label: "Quella cosa è un fatto su una competenza o un giudizio sul tuo valore", hint: '', placeholder: 'È...' },
+          { id: 'q6', label: "Una cosa che puoi fare oggi per trattarti come se fossi già abbastanza", hint: '', placeholder: 'Oggi posso...' },
         ],
         synthesis: {
           title: 'Porta qualcosa fuori da questa pagina.',
@@ -249,7 +252,7 @@ const CATALOG = [
         },
         closing: {
           title: 'Hai fatto una cosa difficile.',
-          text: 'Hai guardato quella voce senza cercare di farla tacere. Hai visto da dove viene, cosa misura, a chi apparteneva prima di diventare tua. Una voce che hai imparato a riconoscere ha già perso una parte del suo potere. E magari adesso quel sentirsi abbastanza te lo dici da sola, senza aspettare conferme esterne. Anche perché non sei abbastanza, sei molto di più.',
+          text: 'Hai guardato quella voce senza cercare di farla tacere. Hai visto da dove viene, cosa misura, a chi apparteneva prima di diventare tua. Una voce che hai imparato a riconoscere ha già perso una parte del suo potere. Forse non si tratta di stabilire se sei abbastanza. Si tratta di sapere con quale metro ti misuri e se vuoi ancora usarlo.',
           signature: '— Gilda'
         },
         final: {
@@ -294,8 +297,8 @@ const CATALOG = [
       },
       {
         id: 's2', name: 'Cosa protegge', number: 'II', openerBg: 'beige',
-        openerIntro: 'Ogni paura protegge qualcosa. Non è debolezza, ma una strategia che ad un certo punto aveva senso.',
-        intro: 'Evitare funziona, nell\'immediato. Togli il disagio, torni a respirare. Ma ogni volta che eviti, la paura prende nota e la prossima volta arriva prima. Non è una questione di forza. È che l\'evitamento insegna al cervello che c\'era davvero qualcosa da cui scappare. In questa sezione guardiamo cosa stai proteggendo, e se vale ancora quello che ti costa.',
+        openerIntro: 'Una paura spesso protegge qualcosa, anche se non è sempre facile vedere cosa. Vale la pena guardarci comunque.',
+        intro: 'Evitare funziona, nell\'immediato. Togli il disagio, torni a respirare. Ma ogni volta che eviti, la paura prende nota e la prossima volta arriva prima. Non è detto che sia sempre così, ma quando succede il cervello impara che c\'era davvero qualcosa da cui scappare. In questa sezione guardiamo cosa potrebbe stare proteggendo e se vale ancora quello che ti costa.',
         quote: 'La paura non comanda perché è forte. Comanda perché non le abbiamo mai chiesto cosa vuole.',
         questions: [
           { id: 'q1', label: "Da cosa ti sta proteggendo questa paura", hint: 'Sii precisa, non generica.', placeholder: 'Mi sta proteggendo da...' },
@@ -306,7 +309,7 @@ const CATALOG = [
       },
       {
         id: 's3', name: 'Cosa dice', number: 'III', openerBg: 'terracotta',
-        openerIntro: 'La paura parla. Il punto non è darle torto, ma capire cosa dice esattamente prima di obbedirle.',
+        openerIntro: 'La paura contiene informazioni. Non tutte le informazioni sono fatti.',
         intro: 'Quasi tutti i messaggi della paura suonano più grandi di quello che sono. Non vuol dire che ha torto su tutto. Vuol dire che merita un\'analisi seria, non solo obbedienza cieca. Quando sai cosa dice esattamente, puoi scegliere cosa fartene.',
         quote: 'Non devi eliminare la paura. Devi smettere di lasciarle decidere per te.',
         questions: [
@@ -326,6 +329,7 @@ const CATALOG = [
           { id: 'q2', label: "Qual è il passo più piccolo possibile in quella direzione", hint: 'Quello che puoi fare anche con la paura addosso.', placeholder: 'Potrei...' },
           { id: 'q3', label: "Chi o cosa ti ha già aiutata a muoverti nonostante la paura", hint: '', placeholder: 'Mi ha aiutata...' },
           { id: 'q4', label: "Cosa vorresti dirti quando la paura si riattiva", hint: '', placeholder: 'Voglio ricordarmi che...' },
+          { id: 'q5', label: "Se dopo aver verificato tutto decidessi comunque di non fare quella cosa, sarebbe la paura a decidere o una tua scelta", hint: '', placeholder: 'Sarebbe...' },
         ],
         synthesis: {
           title: 'Porta qualcosa fuori da questa pagina.',
@@ -363,7 +367,7 @@ const CATALOG = [
       blockquote: 'Questo non è un percorso per diventare più dure.\nO più egoiste. O più difficili da amare.',
       paragraphs: [
         'È uno strumento per capire dove finisci tu e dove inizia il bisogno degli altri. Perché spesso non lo sappiamo. Abbiamo ceduto così tante volte che il confine è diventato irriconoscibile.',
-        'Non cerchiamo colpevoli. Cerchiamo il meccanismo: cosa ti ha insegnato a cedere, cosa ti costa dirlo, e come si costruisce qualcosa che regge davvero.',
+        'Non cerchiamo colpevoli. Cerchiamo il meccanismo: da dove viene la tendenza a cedere, cosa ti costa dirlo e come si costruisce qualcosa che regge davvero.',
         'Puoi compilarlo in una seduta o tornare più volte. Funziona meglio se pensi a una relazione concreta, non al tuo modo di essere in generale.'
       ],
       signature: '— Gilda'
@@ -384,7 +388,7 @@ const CATALOG = [
       {
         id: 's2', name: 'Quando hai smesso di averli', number: 'II', openerBg: 'beige',
         openerIntro: 'I confini si imparano da piccoli. O non si imparano. E quello che non si impara si eredita come normalità.',
-        intro: 'Le prime persone che ci hanno detto no, o che non l\'hanno mai fatto, hanno disegnato la mappa di quello che abbiamo creduto possibile nelle relazioni. Non per colpa, ma per trasmissione. In questa sezione guardiamo da dove viene il tuo modo di cedere, e quando ha iniziato a sembrare l\'unica opzione.',
+        intro: 'Le prime persone che ci hanno detto no, o che non l\'hanno mai fatto, hanno disegnato la mappa di quello che abbiamo creduto possibile nelle relazioni. Non per colpa, ma per trasmissione. In questa sezione guardiamo da dove viene il tuo modo di cedere e quando ha iniziato a sembrare l\'unica opzione.',
         quote: 'Non hai smesso di avere confini per scelta. Li hai persi per sopravvivenza.',
         questions: [
           { id: 'q1', label: "Ricordi un momento in cui avevi confini chiari", hint: 'Cosa è cambiato?', placeholder: 'Avevo confini quando...' },
@@ -415,6 +419,7 @@ const CATALOG = [
           { id: 'q2', label: "Con chi è più difficile e perché", hint: '', placeholder: 'Con... perché...' },
           { id: 'q3', label: "Cosa cambierebbe nella tua vita se dicessi no più spesso", hint: '', placeholder: 'Cambierebbe...' },
           { id: 'q4', label: "Una frase che potresti usare la prossima volta", hint: '', placeholder: 'Potrei dire...' },
+          { id: 'q5', label: "C'è qualche sì che, dopo averlo guardato bene, sceglieresti comunque di continuare a dire", hint: '', placeholder: 'Continuerei a dire sì a...' },
         ],
         synthesis: {
           title: 'Porta qualcosa fuori da questa pagina.',
@@ -539,8 +544,8 @@ const CATALOG = [
       title: 'Prima di iniziare.',
       blockquote: 'Questo non è un percorso per capire se le tue amiche sono buone amiche.\nÈ un percorso per capire cosa dicono di te le persone che hai scelto di tenere vicino.',
       paragraphs: [
-        'Le amicizie sono uno specchio. Non nel senso romantico: nel senso che chi tieni vicino parla di chi sei adesso, di cosa cerchi, di dove hai ancora bisogno di crescere.',
-        'Non cerchiamo colpevoli. Non giudichiamo nessuna. Guardiamo il meccanismo: perché hai continuato a tornare dove non potevi essere te stessa, e cosa hai guadagnato dall\'amicizia che ti ha permesso di esserlo.',
+        'Le amicizie raccontano anche qualcosa di te. Non tutto: ma chi tieni vicino parla spesso di cosa cerchi e di cosa continui a scegliere.',
+        'Non cerchiamo colpevoli. Non giudichiamo nessuna. Guardiamo il meccanismo: perché hai continuato a tornare dove non potevi essere te stessa e cosa hai guadagnato dall\'amicizia che ti ha permesso di esserlo.',
         'Puoi compilarlo pensando a una persona specifica o alle tue amicizie in generale. Funziona meglio se sei onesta anche sulle cose scomode.'
       ],
       signature: '— Gilda'
@@ -598,7 +603,7 @@ const CATALOG = [
           fields: [
             { id: 'q-sint-ami-1', label: "L'amicizia che ho smesso di tenere per abitudine è...", placeholder: '...' },
             { id: 'q-sint-ami-2', label: "Quello che cerco davvero in una persona vicina è...", placeholder: '...' },
-            { id: 'q-sint-ami-3', label: "Una cosa che cambia da oggi nelle mie amicizie è...", placeholder: '...' },
+            { id: 'q-sint-ami-3', label: "Dopo quello che hai visto, c'è qualcosa che vuoi cambiare e perché", placeholder: 'Sì, perché... / No, perché... / Non ancora, perché...' },
           ]
         },
         closing: {
@@ -705,6 +710,8 @@ const CATALOG = [
           { id: 'q2', label: "L'ultima volta che hai verificato se esistono alternative reali", hint: 'Non devi agire, solo sapere quando è stato.', placeholder: 'È stato...' },
           { id: 'q3', label: 'Una cosa che potresti scoprire questo mese senza rischiare niente', hint: "Un'ora di ricerca o una conversazione, niente che ti impegni.", placeholder: 'Potrei scoprire...' },
           { id: 'q4', label: 'Dentro il lavoro che hai adesso, cosa potresti ancora scegliere', hint: 'Un compito da rifiutare o un confine da mettere.', placeholder: 'Potrei ancora scegliere...' },
+          { id: 'q5', label: 'Se decidessi consapevolmente di non cambiare nulla per i prossimi dodici mesi, quali sarebbero le ragioni', hint: 'Non le scuse. Le ragioni vere per cui lo sceglieresti.', placeholder: 'Lo sceglierei perché...' },
+          { id: 'q6', label: 'Quale prezzo sei consapevolmente disposta a pagare per questa scelta', hint: '', placeholder: 'Sono disposta a pagare...' },
         ],
         synthesis: {
           title: 'Porta qualcosa fuori da questa pagina.',
@@ -787,13 +794,14 @@ const CATALOG = [
       {
         id: 's4', name: 'Riaprirsi senza tornare ingenue', number: 'IV', openerBg: 'cipria',
         openerIntro: 'Fiducia è una scelta consapevole. Ingenuità è non usare quello che sai.',
-        intro: 'Riaprirsi dopo le delusioni non significa dimenticare quello che hai imparato; piuttosto è scegliere lo stesso, con più informazioni di prima. In questa sezione costruiamo un passo verso quella riapertura, non un salto nel vuoto.',
+        intro: 'Riaprirsi dopo le delusioni non significa dimenticare quello che hai imparato; piuttosto è scegliere lo stesso, con più informazioni di prima. Ma potresti anche scoprire che oggi non vuoi riaprirti: la domanda è se l\'hai scelto o se hai solo smesso di chiedertelo. In questa sezione costruiamo un passo verso quella riapertura, se è quello che vuoi, non un salto nel vuoto.',
         quote: 'Fidarsi di nuovo non cancella quello che sai. Lo porta con te nella scelta.',
         questions: [
           { id: 'q1', label: 'Ti innamoreresti ancora, con tutto quello che sai adesso', hint: 'Rispondi davvero, non con una scrollata di spalle.', placeholder: 'La risposta vera è...' },
           { id: 'q2', label: 'Cosa ti direbbe che questa volta è diverso, senza che tu debba solo sperarlo', hint: '', placeholder: 'Direbbe...' },
           { id: 'q3', label: 'Un segnale concreto a cui puoi affidarti invece che alla paura generica', hint: '', placeholder: 'Posso affidarmi a...' },
           { id: 'q4', label: 'Un passo piccolo verso la fiducia che puoi fare questa settimana', hint: '', placeholder: 'Potrei...' },
+          { id: 'q5', label: "Se oggi scegliessi di non riaprirti ancora, sarebbe una scelta tua o l'abitudine a decidere per te", hint: '', placeholder: 'Sarebbe...' },
         ],
         synthesis: {
           title: 'Porta qualcosa fuori da questa pagina.',
@@ -1508,7 +1516,7 @@ function buildFormeBlock() {
   const wrap = document.createElement('div');
   wrap.className = 'ff-wrap';
 
-  const intro = "L'autosabotaggio non si presenta mai col suo nome. Si traveste, con una certa eleganza pure, e ogni donna ha il suo travestimento preferito, quello che indossa così spesso da non riconoscerlo più come un abito di scena. Qui trovi i cinque più comuni. Leggili senza fretta, senza cercare subito il tuo: nessuno ti darà un responso alla fine, perché il riconoscimento, quello vero, funziona meglio di qualsiasi diagnosi. Se ti ritrovi in uno, o magari in più di uno a seconda del giorno, tienilo a mente. Ti servirà tra poco, quando dovrai descrivere il Meccanismo con parole tue.";
+  const intro = "L'autosabotaggio non si presenta mai col suo nome. Si traveste con una certa eleganza e ogni donna ha il suo travestimento preferito, quello che indossa così spesso da non riconoscerlo più come un abito di scena. Qui trovi i cinque più comuni. Leggili senza fretta, senza cercare subito il tuo: nessuno ti darà un responso alla fine, perché il riconoscimento, quello vero, funziona meglio di qualsiasi diagnosi. Se ti ritrovi in uno, o magari in più di uno a seconda del giorno, tienilo a mente. Ti servirà tra poco, quando dovrai descrivere il Meccanismo con parole tue.";
 
   const closing = "Ti sei riconosciuta in una sola, o magari in tutte, a seconda del giorno? Va bene così: le forme si mescolano e si danno il cambio con una certa disinvoltura. Adesso però lascia perdere l'etichetta, perché quello che conta è l'episodio: nella prossima sezione prendi il tuo modo specifico di deviare e lo guardi da vicino, pezzo per pezzo, finché non lo riconosci al volo.";
 
