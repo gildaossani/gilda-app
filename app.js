@@ -484,8 +484,8 @@ const CATALOG = [
       },
       {
         id: 's3', name: 'Il costo di non guardare', number: 'III', openerBg: 'terracotta',
-        openerIntro: 'Ignorare un segnale non lo fa sparire. Spesso lo fa solo tornare più spesso.',
-        intro: 'Se un segnale resta lì abbastanza a lungo senza che tu ci guardi dentro, tende a farsi notare in modo più insistente. Non è una regola fissa, ma succede abbastanza spesso da valerne conto. In questa sezione guardiamo quanto ti sta costando non guardarlo.',
+        openerIntro: 'Ignorare un segnale non lo fa sparire. Spesso lo fa solo tornare più di frequente.',
+        intro: 'Se un segnale resta lì abbastanza a lungo senza che tu ci guardi dentro, tende a farsi notare in modo più insistente. Non è una regola fissa, ma capita abbastanza spesso da meritare attenzione. In questa sezione guardiamo quanto ti sta costando non guardarlo.',
         quote: 'Non guardare un segnale non lo elimina. Sposta solo il momento in cui dovrai farlo.',
         questions: [
           { id: 'q-corpo-9', label: 'Cosa hai continuato a fare nonostante il segnale', hint: 'Cosa hai portato avanti lo stesso, mettendo a tacere quello che sentivi?', placeholder: 'Ho continuato a...' },
@@ -830,7 +830,7 @@ const CATALOG = [
       title: 'Prima di iniziare.',
       blockquote: 'Questo non è un percorso per convincerti che va bene stare sola.\nÈ per capire cosa cerchi quando cerchi compagnia e da dove parti quando scegli di restare sola.',
       paragraphs: [
-        'È uno strumento per guardare la differenza tra scegliere la tua compagnia e restarci per mancanza di alternative, che si tratti di stare sola o di stare con qualcuno.',
+        'È uno strumento per guardare la differenza tra scegliere la tua compagnia e restarci per mancanza di alternative, che si tratti di restare sola o di stare con qualcuno.',
         'Quanto la pienezza dipenda davvero da chi hai vicino non è scontato. In questo percorso proviamo a guardarlo senza darlo già per deciso.',
         'Puoi compilarlo indipendentemente dal fatto che tu sia sola o in coppia in questo momento. Funziona meglio se sei onesta su da dove parti quando cerchi compagnia.'
       ],
@@ -839,12 +839,12 @@ const CATALOG = [
     sections: [
       {
         id: 's1', name: 'Cosa cerchi nella compagnia', number: 'I', openerBg: 'dark',
-        openerIntro: 'Cercare compagnia non è un problema. Vale la pena sapere cosa stai cercando esattamente.',
-        intro: 'C\'è differenza tra cercare qualcuno per completarti e cercare qualcuno da aggiungere a una vita che già funziona. Spesso non è solo l\'una o solo l\'altra. In questa sezione proviamo a vedere cosa c\'è davvero dietro quello che cerchi.',
+        openerIntro: 'Cercare compagnia non è un problema. Vale la pena sapere cosa desideri davvero.',
+        intro: 'C\'è differenza tra cercare chi ti completi e cercare chi si aggiunga a una vita che già funziona. Spesso non è solo l\'una o solo l\'altra. In questa sezione proviamo a vedere cosa c\'è davvero dietro quello che cerchi.',
         quote: 'Non è la compagnia a mancare. È capire cosa ne cerchi che fa la differenza.',
         questions: [
           { id: 'q1', label: 'Cosa speri che la presenza di qualcuno aggiunga alla tua vita', hint: 'Prova a essere specifica, non "felicità" in generale.', placeholder: 'Spero che aggiunga...' },
-          { id: 'q2', label: 'Cosa di questo desiderio è tuo e cosa senti di dover desiderare', hint: 'Non sempre è facile separarli. Prova comunque.', placeholder: 'Sento che è mio...' },
+          { id: 'q2', label: 'Quanto di questo desiderio hai scelto tu e quanto lo hai solo assorbito', hint: 'Non sempre è facile separarli. Prova comunque.', placeholder: 'Ho scelto io...' },
           { id: 'q3', label: 'Quando non sei in coppia, ti senti a metà o intera', hint: 'Sii onesta, anche se cambia a seconda del giorno.', placeholder: 'Mi sento...' },
           { id: 'q4', label: 'Cosa ti fa sentire appagata, indipendentemente da chi hai vicino', hint: '', placeholder: 'Mi fa sentire appagata...' },
         ]
