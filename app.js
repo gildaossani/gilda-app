@@ -458,6 +458,7 @@ const CATALOG = [
       paragraphs: [
         'Il corpo manda segnali continui: tensione, insonnia, fame fuori posto, un respiro che resta trattenuto senza che te ne accorga. Questo è un dato. Quello che ci costruisci sopra, la storia che gli dai, è un\'altra cosa.',
         'In questo percorso proviamo a separare le due parti. Non per arrivare a una diagnosi, ma per vedere con più chiarezza cosa stai osservando davvero e cosa stai già interpretando.',
+        'Se un segnale fisico è nuovo o persistente, il posto giusto per capirne la causa è una valutazione medica, non queste pagine: qui lavoriamo sull\'interpretazione che gli dai, non sull\'origine clinica.',
         'Puoi compilarlo in una seduta o tornare più volte. Funziona meglio se pensi a qualcosa di specifico che senti adesso, non al tuo modo di essere in generale.'
       ],
       signature: '— Gilda'
@@ -495,19 +496,19 @@ const CATALOG = [
         questions: [
           { id: 'q-corpo-9', label: 'Cosa hai continuato a fare nonostante il segnale', hint: 'Cosa hai portato avanti lo stesso, mettendo a tacere quello che sentivi?', placeholder: 'Ho continuato a...' },
           { id: 'q-corpo-10', label: 'Cosa ti è costato non ascoltare', hint: 'In energia, in salute, in qualità di vita.', placeholder: 'Mi è costato...' },
-          { id: 'q-corpo-11', label: 'C\'è stato un momento in cui il corpo ha alzato la voce', hint: 'Un episodio in cui non potevi più ignorarlo.', placeholder: 'È successo quando...' },
-          { id: 'q-corpo-12', label: 'Cosa ti ha detto quella volta', hint: '', placeholder: 'Mi ha detto che...' },
+          { id: 'q-corpo-11', label: 'C\'è stato un momento in cui il segnale è diventato troppo forte per essere ignorato', hint: 'Un episodio in cui non potevi più ignorarlo.', placeholder: 'È successo quando...' },
+          { id: 'q-corpo-12', label: 'Cosa hai dovuto affrontare quella volta', hint: '', placeholder: 'Ho dovuto affrontare...' },
         ]
       },
       {
         id: 's4', name: 'Ascoltare senza obbedire', number: 'IV', openerBg: 'cipria',
-        openerIntro: 'Ascoltare il corpo non significa lasciarlo comandare. Significa usarlo come bussola.',
+        openerIntro: 'Notare un segnale non significa doverlo seguire alla lettera. Significa averne tenuto conto.',
         intro: 'C\'è una differenza tra ascoltare un segnale e farsene travolgere. Il punto non è smettere di fare tutto quello che genera tensione: alcune tensioni sono parte della vita che vuoi. Il punto è saper distinguere il segnale di allarme da quello di adattamento. E rispondere con consapevolezza invece di ignorare o cedere.',
-        quote: 'Il corpo non ti chiede di fermarti. Ti chiede di sapere dove stai andando.',
+        quote: 'Un segnale non decide per te. Ti dà un\'informazione in più prima di scegliere.',
         questions: [
-          { id: 'q-corpo-13', label: 'Una cosa che il tuo corpo ti sta chiedendo da tempo', hint: 'Non la versione idealizzata. Quella concreta, quella che sai già.', placeholder: 'Mi sta chiedendo...' },
-          { id: 'q-corpo-14', label: 'Perché non l\'hai ancora ascoltata', hint: '', placeholder: 'Non l\'ho ascoltata perché...' },
-          { id: 'q-corpo-15', label: 'La risposta più piccola che potresti dargli domani', hint: 'Non una soluzione completa. Un gesto concreto nella direzione giusta.', placeholder: 'Potrei...' },
+          { id: 'q-corpo-13', label: 'Un segnale che senti da tempo e non hai ancora affrontato', hint: 'Non la versione idealizzata. Quella concreta, quella che sai già.', placeholder: 'Il segnale è...' },
+          { id: 'q-corpo-14', label: 'Perché non ci hai ancora dato seguito', hint: '', placeholder: 'Non l\'ho ancora affrontato perché...' },
+          { id: 'q-corpo-15', label: 'La risposta più piccola che potresti dare domani', hint: 'Non una soluzione completa. Un gesto concreto nella direzione giusta.', placeholder: 'Potrei...' },
         ],
         synthesis: {
           title: 'Porta qualcosa fuori da questa pagina.',
