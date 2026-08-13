@@ -136,7 +136,7 @@ const CATALOG = [
         name: 'Il passo piccolo',
         number: 'IV',
         openerBg: 'cipria',
-        openerIntro: 'Non devi diventare un\'altra persona. Devi rendere più difficile mentirti.',
+        openerIntro: 'Un passo piccolo non ti cambia radicalmente. Rende solo più difficile continuare a mentirti.',
         intro: 'Non si tratta di superare la resistenza con la forza. Si tratta di aggirarla. Un\'azione così piccola da sembrare quasi ridicola. Concreta. Reale. Domani.',
         questions: [
           { id: 'q-opzione-1', label: 'Prima opzione di passo piccolo', hint: 'Un\'azione che si fa in meno di 10 minuti, specifica e verificabile, nella direzione della cosa che stai evitando.', placeholder: 'Potrei...' },
@@ -155,7 +155,7 @@ const CATALOG = [
           fields: [
             { id: 'q-riepilogo-pattern', label: 'Il mio pattern principale', placeholder: '...' },
             { id: 'q-riepilogo-momento', label: 'Il momento in cui si attiva', placeholder: '...' },
-            { id: 'q-riepilogo-logica', label: 'Cosa sta proteggendo', placeholder: '...' },
+            { id: 'q-riepilogo-logica', label: 'La logica che lo tiene in piedi', placeholder: '...' },
             { id: 'q-riepilogo-passo', label: 'Il passo che faccio', placeholder: '...' },
           ]
         },
@@ -246,7 +246,7 @@ const CATALOG = [
           label: 'Quello che hai capito, in poche righe.',
           fields: [
             { id: 'q-sint-nonsa-1', label: 'Da quello che ho scritto, la cosa che non sapevo di sapere è...', placeholder: '...' },
-            { id: 'q-sint-nonsa-2', label: 'La misura che smetto di usare è...', placeholder: '...' },
+            { id: 'q-sint-nonsa-2', label: 'Il metro che uso oggi per giudicarmi è...', placeholder: '...' },
             { id: 'q-sint-nonsa-3', label: 'Una cosa concreta che cambia da oggi è...', placeholder: '...' },
           ]
         },
@@ -311,7 +311,7 @@ const CATALOG = [
         id: 's3', name: 'Cosa dice', number: 'III', openerBg: 'terracotta',
         openerIntro: 'La paura contiene informazioni. Non tutte le informazioni sono fatti.',
         intro: 'Quasi tutti i messaggi della paura suonano più grandi di quello che sono. Non vuol dire che ha torto su tutto. Vuol dire che merita un\'analisi seria, non solo obbedienza cieca. Quando sai cosa dice esattamente, puoi scegliere cosa fartene.',
-        quote: 'Non devi eliminare la paura. Devi smettere di lasciarle decidere per te.',
+        quote: 'La paura resta. Quello che puoi scegliere è quanto le lasci decidere per te.',
         questions: [
           { id: 'q1', label: "Se la paura potesse parlare cosa ti direbbe", hint: '', placeholder: 'Mi direbbe...' },
           { id: 'q2', label: "Quanto di quello che dice è vero", hint: 'Sii onesta.', placeholder: 'È vero che...' },
@@ -763,7 +763,7 @@ const CATALOG = [
         quote: "C'è differenza tra non fidarsi di chiunque e non fidarsi di te stessa nello scegliere.",
         questions: [
           { id: 'q1', label: 'Da cosa ti protegge il muro oggi', hint: 'Sii precisa, non generica.', placeholder: 'Mi protegge da...' },
-          { id: 'q2', label: "L'ultima volta che hai tenuto qualcuno a distanza senza una vera ragione", hint: '', placeholder: 'È successo con...' },
+          { id: 'q2', label: "L'ultima volta che hai tenuto qualcuno a distanza: cosa avevi osservato davvero e cosa stavi solo prevedendo", hint: '', placeholder: 'Avevo osservato... avevo previsto...' },
           { id: 'q3', label: 'Cosa perdi tenendo tutti alla stessa distanza', hint: '', placeholder: 'Perdo...' },
           { id: 'q4', label: 'Il muro protegge te o la tua idea di te che non vuoi più deludere', hint: '', placeholder: 'Protegge...' },
         ]
@@ -865,7 +865,7 @@ const CATALOG = [
         quote: "Quella convinzione l'hai imparata da qualche parte. Sapere da dove aiuta a decidere se conservarla.",
         questions: [
           { id: 'q1', label: 'Da dove viene l\'idea che da sola sei a metà', hint: 'Film, famiglia, frasi ripetute: prova a risalire.', placeholder: 'Viene da...' },
-          { id: 'q2', label: 'Un momento in cui ti sei sentita completa da sola, prima di doverlo dimostrare a qualcuno', hint: '', placeholder: 'È successo quando...' },
+          { id: 'q2', label: 'Ti è mai capitato di sentirti completa da sola, prima di doverlo dimostrare a qualcuno', hint: 'Se sì, quando. Se non ti è mai capitato, è comunque un\'informazione.', placeholder: 'È capitato quando... / Non mi è mai capitato, perché...' },
           { id: 'q3', label: 'Quella misura ha ancora senso oggi', hint: '', placeholder: 'Oggi...' },
           { id: 'q4', label: 'Cosa perderesti se smettessi di misurarti così', hint: '', placeholder: 'Perderei...' },
         ]
@@ -898,7 +898,7 @@ const CATALOG = [
           label: 'Quello che hai capito, in poche righe.',
           fields: [
             { id: 'q-sint-soli-1', label: 'La differenza tra pienezza e vuoto, per me, è...', placeholder: '...' },
-            { id: 'q-sint-soli-2', label: 'La misura che smetto di usare per sentirmi completa è...', placeholder: '...' },
+            { id: 'q-sint-soli-2', label: 'Il metro che uso oggi per giudicare se sono completa è...', placeholder: '...' },
             { id: 'q-sint-soli-3', label: 'La casa che costruisco da sola comincia da...', placeholder: '...' },
           ]
         },
